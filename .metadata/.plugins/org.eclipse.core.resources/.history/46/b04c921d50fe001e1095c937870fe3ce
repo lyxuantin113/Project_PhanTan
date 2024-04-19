@@ -1,0 +1,36 @@
+package entity;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import jakarta.persistence.*;
+import lombok.ToString;
+
+@Entity
+@Table(name = "HoaDon")
+public class HoaDon {
+	private static final String PREFIX = "HD";
+
+	@Id
+	@Column(name = "maHoaDon")
+	private String maHoaDon;
+
+	@ManyToOne
+	@JoinColumn(name = "maKhachHang")
+	private KhachHang maKhachHang;
+
+	@ManyToOne
+	@JoinColumn(name = "maNhanVien")
+	private NhanVien maNhanVien;
+
+	@Column(name = "ngayLap")
+	private LocalDate ngayLap;
+
+	@Column(name = "ngayNhan")
+	private LocalDate ngayNhan;
+
+	@ToString.Exclude
+	@OneToMany(mappedBy = "maHoaDon", fetch = FetchType.LAZY)
+	private List<ChiTietHoaDon> listChiTiet;
+
+}

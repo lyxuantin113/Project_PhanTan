@@ -1,0 +1,31 @@
+package entity;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "DonDat")
+public class DonDat {
+	private static final String PREFIX = "DD";
+
+	@Id
+	@Column(name = "maDonDat")
+	private String maDonDat;
+
+	@ManyToOne
+	@JoinColumn(name = "maKhachHang")
+	private KhachHang maKhachHang;
+
+	@ManyToOne
+	@JoinColumn(name = "maNhanVien")
+	private NhanVien maNhanVien;
+
+	@Column(name = "ngayLap")
+	private LocalDate ngayLap;
+
+	@Column(name = "ngayNhan")
+	private LocalDate ngayNhan;
+	
+	
+}

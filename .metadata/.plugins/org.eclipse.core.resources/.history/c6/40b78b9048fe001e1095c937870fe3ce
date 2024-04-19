@@ -1,0 +1,21 @@
+package entity;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "NhaCungCap")
+public class NhaCungCap {
+
+	@Id
+	@Column(name = "maNCC")
+	private String maNCC;
+	
+	@Column(name = "tenNCC")
+	private String tenNCC;
+	
+	@Column(name = "soDienThoai")
+	private String soDienThoai;
+	
+	@Column(name = "diaChiNCC")
+	private String diaChiNCC;
+}

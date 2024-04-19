@@ -1,0 +1,41 @@
+package entity;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Thuoc")
+public class Thuoc {
+
+	@Id
+	@Column(name = "maThuoc")
+	private String maThuoc;
+	
+	@Column(name = "tenThuoc")
+	private String tenThuoc;
+	
+	@Column(name = "loaiThuoc")
+	private String loaiThuoc;
+	
+	@Column(name = "donVi")
+	private String donVi;
+	
+	@Column(name = "hanSuDung")
+	private LocalDate hanSuDung;
+	
+	@Column(name = "giaNhap")
+	private double giaNhap;
+	
+	@Column(name = "giaBan")
+	private double giaBan;
+	
+	@Column(name = "soLuongTon")
+	private int soLuongTon;
+	
+	@Column(name = "nuocSanXuat")
+	private String nuocSanXuat;
+	
+	@Column(name = "maThuoc")
+	private String maNCC;
+}

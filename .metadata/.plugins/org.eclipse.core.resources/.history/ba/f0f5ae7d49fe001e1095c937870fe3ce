@@ -1,0 +1,13 @@
+package entity;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "ChiTietHoaDon")
+public class ChiTietHoaDon {
+	
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "maThuoc")
+	private Thuoc maThuoc;
+}
