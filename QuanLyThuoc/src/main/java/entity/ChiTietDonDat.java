@@ -6,11 +6,12 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ChiTietDonDat")
-@NamedQueries({ @NamedQuery(name = "ChiTietDonDat.findAll", query = "SELECT ctd FROM ChiTietDonDat ctd"),
-		@NamedQuery(name = "ChiTietDonDat.findByMaDonDat", query = "SELECT ctd FROM ChiTietDonDat ctd WHERE ctd.maDonDat = :maDonDat"),
-		@NamedQuery(name = "ChiTietDonDat.findByMaThuoc", query = "SELECT ctd FROM ChiTietDonDat ctd WHERE ctd.maThuoc = :maThuoc"),
-		@NamedQuery(name = "ChiTietDonDat.findBySoLuong", query = "SELECT ctd FROM ChiTietDonDat ctd WHERE ctd.soLuong = :soLuong") })
-public class ChiTietDonDat implements Serializable{
+
+@NamedQueries({
+		@NamedQuery(name = "ChiTietDonDat.findByID", query = "SELECT ctdd FROM ChiTietDonDat cthd WHERE ctdd.maHoaDon = :maHoaDon"),
+		@NamedQuery(name = "ChiTietDonDat.deleteOne", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maThuoc = :maThuoc"),
+		@NamedQuery(name = "", query = ""), })
+public class ChiTietDonDat implements Serializable {
 
 	private static final long serialVersionUID = 1254786925698547852L;
 	
@@ -33,6 +34,12 @@ public class ChiTietDonDat implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
+	public ChiTietDonDat(Thuoc maThuoc, int soLuong) {
+		super();
+		this.maThuoc = maThuoc;
+		this.soLuong = soLuong;
+	}
+
 	public ChiTietDonDat(DonDat maDonDat, Thuoc maThuoc, int soLuong) {
 		super();
 		this.maDonDat = maDonDat;
@@ -42,6 +49,10 @@ public class ChiTietDonDat implements Serializable{
 
 	public DonDat getMaDonDat() {
 		return maDonDat;
+	}
+
+	public void setMaDonDat(DonDat maDonDat) {
+		this.maDonDat = maDonDat;
 	}
 
 	public Thuoc getMaThuoc() {

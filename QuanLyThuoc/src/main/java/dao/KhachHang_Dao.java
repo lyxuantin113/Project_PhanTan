@@ -6,7 +6,12 @@ import java.util.List;
 import entity.KhachHang;
 
 public interface KhachHang_Dao extends Remote {
-	public KhachHang findKhachHangByID(String maKhachHang);
-	public List<KhachHang> findKhachHangByName(String tenKhachHang);
-	public KhachHang findKhachHangBySDT(String sdt);
+
+	public void addKhachHang(KhachHang kh);
+
+	public KhachHang findById(String maKH);
+
+	public KhachHang findBySDT(String sdtKH);
+
+	public List<KhachHang> getDSKH();
 }

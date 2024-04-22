@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Random;
 
 import jakarta.persistence.*;
 
@@ -13,6 +14,7 @@ import jakarta.persistence.*;
 public class KhachHang implements Serializable{
 
 	private static final long serialVersionUID = 965874523652145877L;
+	private static final String PREFIX = "KH";
 	
 	@Id
 	@Column(name = "maKhachHang")
@@ -27,6 +29,13 @@ public class KhachHang implements Serializable{
 	public KhachHang() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public KhachHang(String soDienThoai, String tenKhachHang) {
+		super();
+		this.maKhachHang = PREFIX + generateRandomCode(5);
+		this.soDienThoai = soDienThoai;
+		this.tenKhachHang = tenKhachHang;
+	}
 
 	public KhachHang(String maKhachHang, String soDienThoai, String tenKhachHang) {
 		super();
@@ -39,8 +48,8 @@ public class KhachHang implements Serializable{
 		return maKhachHang;
 	}
 
-	public void setMaKhachHang(String maKhachHang) {
-		this.maKhachHang = maKhachHang;
+	public void setMaKhachHang() {
+		this.maKhachHang = PREFIX + generateRandomCode(5);
 	}
 
 	public String getSoDienThoai() {
@@ -59,6 +68,17 @@ public class KhachHang implements Serializable{
 		this.tenKhachHang = tenKhachHang;
 	}
 
+	public static String generateRandomCode(int length) {
+		String characters = "0123456789"; // Các ký tự được chấp nhận
+		StringBuilder sb = new StringBuilder();
+		Random random = new Random();
+		for (int i = 0; i < length; i++) {
+			int index = random.nextInt(characters.length());
+			sb.append(characters.charAt(index));
+		}
+		return sb.toString();
+	}
+	
 	@Override
 	public String toString() {
 		return "KhachHang [maKhachHang=" + maKhachHang + ", soDienThoai=" + soDienThoai + ", tenKhachHang="
