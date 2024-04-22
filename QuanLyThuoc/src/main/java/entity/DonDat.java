@@ -9,6 +9,14 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "DonDat")
+@NamedQueries({ @NamedQuery(name = "DonDat.findAll", query = "SELECT dd FROM DonDat dd"),
+		@NamedQuery(name = "DonDat.findByMaDonDat", query = "SELECT dd FROM DonDat dd WHERE dd.maDonDat = :maDonDat"),
+		@NamedQuery(name = "DonDat.findByMaKhachHang", query = "SELECT dd FROM DonDat dd WHERE dd.maKhachHang = :maKhachHang"),
+		@NamedQuery(name = "DonDat.findByMaNhanVien", query = "SELECT dd FROM DonDat dd WHERE dd.maNhanVien = :maNhanVien"),
+		@NamedQuery(name = "DonDat.findByNgayLap", query = "SELECT dd FROM DonDat dd WHERE dd.ngayLap = :ngayLap"),
+		@NamedQuery(name = "DonDat.findByNgayNhan", query = "SELECT dd FROM DonDat dd WHERE dd.ngayNhan = :ngayNhan"),
+		@NamedQuery(name = "DonDat.addDonDat", query = "INSERT INTO DonDat (maDonDat, maKhachHang, maNhanVien, ngayLap, ngayNhan) VALUES (:maDonDat, :maKhachHang, :maNhanVien, :ngayLap, :ngayNhan)"
+)})
 public class DonDat {
 	private static final String PREFIX = "DD";
 

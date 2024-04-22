@@ -9,6 +9,12 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "HoaDon")
+@NamedQueries({ @NamedQuery(name = "HoaDon.findAll", query = "SELECT hd FROM HoaDon hd"),
+		@NamedQuery(name = "HoaDon.findByMaHoaDon", query = "SELECT hd FROM HoaDon hd WHERE hd.maHoaDon = :maHoaDon"),
+		@NamedQuery(name = "HoaDon.findByMaKhachHang", query = "SELECT hd FROM HoaDon hd WHERE hd.maKhachHang = :maKhachHang"),
+		@NamedQuery(name = "HoaDon.findByMaNhanVien", query = "SELECT hd FROM HoaDon hd WHERE hd.maNhanVien = :maNhanVien"),
+		@NamedQuery(name = "HoaDon.findByNgayLap", query = "SELECT hd FROM HoaDon hd WHERE hd.ngayLap = :ngayLap"),
+		@NamedQuery(name = "HoaDon.findByNgayNhan", query = "SELECT hd FROM HoaDon hd WHERE hd.ngayNhan = :ngayNhan") })
 public class HoaDon {
 	private static final String PREFIX = "HD";
 
