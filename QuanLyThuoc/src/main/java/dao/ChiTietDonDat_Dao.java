@@ -11,4 +11,5 @@ public interface ChiTietDonDat_Dao extends Remote {
 	public List<ChiTietDonDat> findByID(String maHoaDon);
 	public void addChiTietDonDat(DonDat donDat);
 	public boolean deleteOne(ChiTietDonDat chiTietDonDat);
+	public boolean deleteByID(String maDonDat);
 }

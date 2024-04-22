@@ -53,4 +53,12 @@ public class ChiTietDonDat_Impl extends UnicastRemoteObject implements ChiTietDo
 				.executeUpdate();
 		return checkUpdate > 0;
 	}
+
+	@Override
+	public boolean deleteByID(String maDonDat) {
+		// TODO Auto-generated method stub
+		int checkUpdate = em.createNamedQuery("ChiTietDonDat.deleteByID", ChiTietDonDat.class)
+				.setParameter("maDonDat", maDonDat).executeUpdate();
+		return checkUpdate > 0;
+	}
 }

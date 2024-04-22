@@ -16,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.NhanVien_Dao;
 import dao.TaiKhoan_Dao;
+import dao.impl.NhanVien_Impl;
+import dao.impl.TaiKhoan_Impl;
 import db.ConnectDB;
 import entity.NhanVien;
 import entity.TaiKhoan;
@@ -34,11 +36,11 @@ public class DSNhanVien_Gui extends JPanel implements ActionListener, MouseListe
 	private JTextField txtTenNV;
 	private JTextField txtMaNV;
 	private JTextField txtEmail;
-	private NhanVien_Dao dsNV = new NhanVien_Dao();
+	private NhanVien_Dao dsNV = new NhanVien_Impl();
 	private DefaultTableModel modelNhanVien;
 	private JTable tableNhanVien;
 
-	private TaiKhoan_Dao dsTK = new TaiKhoan_Dao();
+	private TaiKhoan_Dao dsTK = new TaiKhoan_Impl();
 	public DSNhanVien_Gui() {
 //				JPANEL
 		JPanel pnMain = new JPanel();
