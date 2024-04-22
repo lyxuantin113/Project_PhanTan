@@ -1,0 +1,107 @@
+package entity;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "PhieuNhapThuoc")
+
+public class PhieuNhapThuoc {
+	@Id
+	@Column(name = "maPhieuNhap")
+	private String maPhieuNhap;
+	
+	@ManyToOne
+	@JoinColumn(name = "maNCC")
+	private String maNhaCungCap;
+	
+	@Column(name = "maNV")
+	private String maNhanVien;
+	
+	@Column(name = "ngayNhap")
+	private LocalDate ngayNhap;
+	
+	@Column(name = "tongTien")
+	private double tongTien;
+	
+	@Column(name = "trangThai")
+	private boolean trangThai;
+	
+	public PhieuNhapThuoc() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public PhieuNhapThuoc(String maPhieuNhap, String maNCC, String maNV, LocalDate ngayNhap, double tongTien, boolean trangThai) {
+        super();
+        this.maPhieuNhap = maPhieuNhap;
+        this.maNhaCungCap = maNCC;
+        this.maNhanVien = maNV;
+        this.ngayNhap = ngayNhap;
+        this.tongTien = tongTien;
+        this.trangThai = trangThai;
+	}
+
+	public String getMaPhieuNhap() {
+		return maPhieuNhap;
+	}
+
+	public void setMaPhieuNhap(String maPhieuNhap) {
+		this.maPhieuNhap = maPhieuNhap;
+	}
+
+	public String getMaNhaCungCap() {
+		return maNhaCungCap;
+	}
+
+	public void setMaNhaCungCap(String maNhaCungCap) {
+		this.maNhaCungCap = maNhaCungCap;
+	}
+
+	public String getMaNhanVien() {
+		return maNhanVien;
+	}
+
+	public void setMaNhanVien(String maNhanVien) {
+		this.maNhanVien = maNhanVien;
+	}
+
+	public LocalDate getNgayNhap() {
+		return ngayNhap;
+	}
+
+	public void setNgayNhap(LocalDate ngayNhap) {
+		this.ngayNhap = ngayNhap;
+	}
+
+	public double getTongTien() {
+		return tongTien;
+	}
+
+	public void setTongTien(double tongTien) {
+		this.tongTien = tongTien;
+	}
+
+	public boolean isTrangThai() {
+		return trangThai;
+	}
+
+	public void setTrangThai(boolean trangThai) {
+		this.trangThai = trangThai;
+	}
+
+	@Override
+	public String toString() {
+		return "PhieuNhapThuoc [maPhieuNhap=" + maPhieuNhap + ", maNhaCungCap=" + maNhaCungCap + ", maNhanVien="
+				+ maNhanVien + ", ngayNhap=" + ngayNhap + ", tongTien=" + tongTien + ", trangThai=" + trangThai + "]";
+	}
+	
+	
+	
+	
+}

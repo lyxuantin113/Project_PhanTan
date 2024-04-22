@@ -15,8 +15,9 @@ public class mainTest {
 
 		try {
 			tr.begin();
-			KhachHang khach = new KhachHang("KH00000", "0912644361", "Ly Xuan Tin");
-			em.persist(khach);
+//			KhachHang khach = new KhachHang("KH00000", "0912644361", "Ly Xuan Tin");
+			System.out.println("Hello World");
+//			em.persist(khach);
 			tr.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
