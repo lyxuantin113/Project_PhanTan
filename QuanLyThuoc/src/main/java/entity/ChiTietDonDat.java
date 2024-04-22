@@ -1,15 +1,20 @@
 package entity;
 
+import java.io.Serializable;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ChiTietDonDat")
+
 @NamedQueries({
 		@NamedQuery(name = "ChiTietDonDat.findByID", query = "SELECT ctdd FROM ChiTietDonDat cthd WHERE ctdd.maHoaDon = :maHoaDon"),
 		@NamedQuery(name = "ChiTietDonDat.deleteOne", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maThuoc = :maThuoc"),
 		@NamedQuery(name = "", query = ""), })
-public class ChiTietDonDat {
+public class ChiTietDonDat implements Serializable {
 
+	private static final long serialVersionUID = 1254786925698547852L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

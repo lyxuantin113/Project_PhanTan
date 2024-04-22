@@ -35,7 +35,8 @@ public class ChiTietPhieuNhapThuoc_Impl extends UnicastRemoteObject implements C
 				.setParameter("soLuong", ct.getSoLuong())
 				.setParameter("giaNhap", ct.getGiaNhap())
 				.setParameter("hsd", ct.getHsd())
-				.setParameter("thanhTien", ct.getThanhTien()).executeUpdate() > 0;
+				.setParameter("thanhTien", ct.getThanhTien())
+				.executeUpdate() > 0;
     
 	}
 
@@ -48,6 +49,18 @@ public class ChiTietPhieuNhapThuoc_Impl extends UnicastRemoteObject implements C
 	public boolean findMaPhieuNhap(String maCTPNT, String ma) {
 		return em.createNamedQuery("ChiTietPhieuNhapThuoc.findByMaPhieuNhap", ChiTietPhieuNhapThuoc.class).setParameter("maCTPNT", maCTPNT).setParameter("ma", ma).executeUpdate() > 0;
     }
+
+	@Override
+	public boolean create(ChiTietPhieuNhapThuoc ct) {
+		return em.createNamedQuery("ChiTietPhieuNhapThuoc.create", ChiTietPhieuNhapThuoc.class)
+				.setParameter("maPhieuNhap", ct.getMaPhieuNhap())
+				.setParameter("maThuoc", ct.getMaThuoc())
+				.setParameter("soLuong", ct.getSoLuong())
+				.setParameter("giaNhap", ct.getGiaNhap())
+				.setParameter("hsd", ct.getHsd())
+				.setParameter("thanhTien", ct.getThanhTien())
+				.executeUpdate() > 0;
+	}
 	
 
 }

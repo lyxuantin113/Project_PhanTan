@@ -16,4 +16,16 @@
     <fullyQualifiedTypeName name="jakarta.persistence.OneToMany"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="jakarta.persistence.FetchType"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.NamedQueries"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.NamedQuery"/>
+    <fullyQualifiedTypeName name="dao.PhieuNhapThuoc_Dao"/>
+    <fullyQualifiedTypeName name="java.rmi.RemoteException"/>
+    <fullyQualifiedTypeName name="dao.impl.KhachHang_Impl"/>
+    <fullyQualifiedTypeName name="dao.impl.DonDat_Impl"/>
+    <fullyQualifiedTypeName name="dao.impl.HoaDon_Ipml"/>
+    <fullyQualifiedTypeName name="dao.impl.NhaCungCap_Impl"/>
+    <fullyQualifiedTypeName name="dao.impl.ChiTietPhieuNhapThuoc_Impl"/>
+    <fullyQualifiedTypeName name="dao.impl.PhieuNhapThuoc_Impl"/>
+    <fullyQualifiedTypeName name="dao.impl.NhanVien_Impl"/>
+    <fullyQualifiedTypeName name="dao.impl.Thuoc_Impl"/>
 </qualifiedTypeNameHistroy>

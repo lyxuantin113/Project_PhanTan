@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
@@ -25,8 +26,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import dao.HoaDon_Dao;
 import dao.KhachHang_Dao;
 import dao.NhanVien_Dao;
+import dao.impl.ChiTietHoaDon_Ipml;
+import dao.impl.HoaDon_Impl;
 //import dao.ThongKe_Dao;
-import db.ConnectDB;
 import entity.HoaDon;
 import entity.KhachHang;
 import entity.NhanVien;
@@ -68,8 +70,8 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	private Box boxBtn;
 	private JButton btnXemThongKe;
 
-//	private ThongKe_Dao dsTK = new ThongKe_Dao();
-	private HoaDon_Dao dsHD = new HoaDon_Dao();
+//	private ThongKe_Dao dsTK = new ThongKe_Ipml();
+	private HoaDon_Dao dsHD = new HoaDon_Impl();
 	private Box boxBoLocBtn;
 	private JLabel lblKhachHang;
 	private JLabel lblNhanVien;
@@ -269,7 +271,6 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 		btnXemThongKe.addActionListener(this);
 		btnIn.addActionListener(this);
 		
-		ConnectDB.connect();
 		hienTable();
 		cbbThang.addActionListener(new ActionListener() {
 			@Override
@@ -312,8 +313,8 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 			// Lấy năm từ ngày lập hóa đơn
 			int nam = hoaDon.getNgayLap().getYear();
 			// Lấy mã khách hàng và mã nhân viên từ hóa đơn
-			String maKhachHang = hoaDon.getMaKH().getMaKH();
-			String maNhanVien = hoaDon.getMaNV().getMaNV();
+			String maKhachHang = hoaDon.getMaKhachHang().getMaKhachHang();
+			String maNhanVien = hoaDon.getMaNhanVien().getMaNhanVien();
 
 			// Thêm năm vào Set
 			namSet.add(nam);
@@ -326,7 +327,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 			double loiNhuan = dsHD.tinhLoiNhuanChoHoaDon(hoaDon);
 
 			// Tạo một mảng chứa các giá trị của hàng
-			Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+			Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 					hoaDon.getNgayLap().toString(), hoaDon.getNgayNhan().toString(), doanhThu, loiNhuan };
 
 			// Thêm hàng vào bảng
@@ -581,15 +582,15 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Top 3 Khách có số đơn nhiều nhất
-	private void thongKeKHTiemNang() {
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+	private void thongKeKHTiemNang() throws RemoteException{
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.thongKeKHTiemNang();
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -608,15 +609,15 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Top 3 Nhân viên lập số đơn nhiều nhất
-	private void thongKeNVChamChi() {
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+	private void thongKeNVChamChi() throws RemoteException {
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.thongKeNVChamChi();
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -636,14 +637,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 
 //	Top 3 Đơn hàng có lợi nhuận cao nhất
 	private void thongKeLoiNhuanCaoNhat() {
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.thongKeLoiNhuanCaoNhat();
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -673,14 +674,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 
 		LocalDate date = LocalDate.of(nam, thang, ngay);
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findTKFullField(date, maNV, maKH);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -707,14 +708,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 
 		LocalDate date = LocalDate.of(nam, thang, 1);
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findXYinMonth(date, maNV, maKH);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -740,14 +741,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 
 		LocalDate date = LocalDate.of(nam, 1, 1);
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findXYinYear(date, maNV, maKH);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -770,14 +771,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 		String maNV = cbbNhanVien.getSelectedItem().toString();
 		String maKH = cbbKhachHang.getSelectedItem().toString();
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findXByY(maNV, maKH);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -806,14 +807,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 
 		LocalDate date = LocalDate.of(nam, thang, ngay);
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findKHinDay(date, maKH);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -840,14 +841,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 
 		LocalDate date = LocalDate.of(nam, thang, 1);
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findKHinMonth(date, maKH);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -873,14 +874,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 
 		LocalDate date = LocalDate.of(nam, 1, 1);
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findKHinYear(date, maKH);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -902,14 +903,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	private void thongKeKH() {
 		String maKH = cbbKhachHang.getSelectedItem().toString();
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findKH(maKH);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -939,14 +940,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 
 		LocalDate date = LocalDate.of(nam, thang, ngay);
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findNVinDay(date, maNV);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -973,14 +974,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 
 		LocalDate date = LocalDate.of(nam, thang, 1);
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findNVinMonth(date, maNV);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -1006,14 +1007,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 
 		LocalDate date = LocalDate.of(nam, 1, 1);
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findNVinYear(date, maNV);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -1036,14 +1037,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	private void thongKeNV() {
 		String maNV = cbbNhanVien.getSelectedItem().toString();
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findNV(maNV);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -1072,14 +1073,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 
 		LocalDate date = LocalDate.of(nam, thang, ngay);
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findinDay(date);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -1105,14 +1106,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 
 		LocalDate date = LocalDate.of(nam, thang, 1);
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findinMonth(date);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -1132,19 +1133,19 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Thống kê đơn theo năm
-	private void thongKeDonInYear() {
+	private void thongKeDonInYear() throws RemoteException {
 		int nam = Integer.parseInt(cbbNam.getSelectedItem().toString());
 
 		LocalDate date = LocalDate.of(nam, 1, 1);
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.findinYear(date);
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);
@@ -1166,14 +1167,14 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 //	Thống kê tất cả các đơn
 	private void thongKeDon() {
 
-		HoaDon_Dao hdDao = new HoaDon_Dao();
+		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.readFromTable();
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.setRowCount(0);
 			for (HoaDon hoaDon : listHD) {
-				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKH().getMaKH(), hoaDon.getMaNV().getMaNV(),
+				Object[] rowData = { hoaDon.getMaHoaDon(), hoaDon.getMaKhachHang().getMaKhachHang(), hoaDon.getMaNhanVien().getMaNhanVien(),
 						hoaDon.getNgayLap(), hoaDon.getNgayNhan(), hdDao.tinhTongTien(hoaDon),
 						hdDao.tinhLoiNhuanChoHoaDon(hoaDon) };
 				model.addRow(rowData);

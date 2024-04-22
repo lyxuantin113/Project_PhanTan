@@ -13,5 +13,7 @@ public interface PhieuNhapThuoc_Dao extends Remote {
 	boolean delete(String maPNT);
 	boolean findMaPhieuNhap(String maPNT);
 	boolean create(PhieuNhapThuoc pnt);
+	PhieuNhapThuoc timTheoMa(String maCTPNT);
+	void updateTongTien(PhieuNhapThuoc pnt);
 	
 }

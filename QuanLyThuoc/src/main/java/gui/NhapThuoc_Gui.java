@@ -21,7 +21,7 @@ import dao.impl.NhaCungCap_Impl;
 import dao.impl.NhanVien_Impl;
 import dao.impl.PhieuNhapThuoc_Impl;
 import dao.impl.Thuoc_Impl;
-import db.ConnectDB;
+//import db.ConnectDB;
 import entity.ChiTietPhieuNhapThuoc;
 import entity.NhaCungCap;
 import entity.PhieuNhapThuoc;
@@ -426,13 +426,23 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 			xoaTrang();
 		}
 		if (o.equals(btnXoa)) {
-			xoa();
+			try {
+				xoa();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnSua)) {
 			sua();
 		}
 		if (o.equals(btnHuy)) {
-			huy();
+			try {
+				huy();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnXacNhan)) {
 			xacNhan();
@@ -710,11 +720,13 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 			if (ctDao.create(ct)) {
 				JOptionPane.showMessageDialog(this, "Thêm thành công.");
 				// Cập nhật tổng tiền
-				PhieuNhapThuoc_Dao pntDao = new PhieuNhapThuoc_Dao();
+				PhieuNhapThuoc_Dao pntDao = new PhieuNhapThuoc_Impl();
 				PhieuNhapThuoc pnt = pntDao.timTheoMa(maCTPNT);
 				pnt.setTongTien(pnt.getTongTien() + thanhTien);
 				pntDao.updateTongTien(pnt);
-				txtTongTien.setText(pnt.getTongTien().toString());
+				
+				String tongTien = String.valueOf(pnt.getTongTien());
+				txtTongTien.setText(tongTien);
 				// Cập nhật lại table
 				hienTable(maCTPNT);
 			} else {

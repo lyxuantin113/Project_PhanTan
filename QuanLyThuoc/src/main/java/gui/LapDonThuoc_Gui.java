@@ -29,7 +29,7 @@ import dao.NhanVien_Dao;
 import dao.Thuoc_Dao;
 import dao.impl.ChiTietHoaDon_Impl;
 import dao.impl.DonDat_Impl;
-import dao.impl.HoaDon_Ipml;
+import dao.impl.HoaDon_Impl;
 import dao.impl.KhachHang_Impl;
 import dao.impl.NhanVien_Impl;
 import dao.impl.Thuoc_Impl;
@@ -707,7 +707,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 			LocalDate ngayLapHD = LocalDate.parse(txtNgayLap.getText());
 			LocalDate ngayNhanHD = ngayLapHD;
 
-			HoaDon_Dao hoaDonDao = new HoaDon_Ipml();
+			HoaDon_Dao hoaDonDao = new HoaDon_Impl();
 			HoaDon hoaDon = new HoaDon(kh, nv, ngayLapHD, ngayNhanHD, null);
 
 //			GÁN HÓA ĐƠN CHO CHI TIẾT

@@ -210,8 +210,19 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 				for (Thuoc thuoc : dsThuoc) {
 					thuocDao.updateTTThuoc(thuoc);
 				}
-				DSThuoc_Gui thuocGui = new DSThuoc_Gui();
-				thuocGui.hienTable();
+				DSThuoc_Gui thuocGui = null;
+				try {
+					thuocGui = new DSThuoc_Gui();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					thuocGui.hienTable();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 				try {
 					hienTable();

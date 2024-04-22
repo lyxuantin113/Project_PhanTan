@@ -64,6 +64,24 @@ public class PhieuNhapThuoc_Impl extends UnicastRemoteObject implements PhieuNha
 		}
 		return false;
 	}
+
+	@Override
+	public PhieuNhapThuoc timTheoMa(String maCTPNT) {
+		return em.find(PhieuNhapThuoc.class, maCTPNT);
+	}
+
+	@Override
+	public void updateTongTien(PhieuNhapThuoc pnt) {
+		em.getTransaction().begin();
+		try {
+			em.merge(pnt);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			em.getTransaction().rollback();
+		}
+		
+	}
 	
 
 }

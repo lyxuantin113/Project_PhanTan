@@ -12,6 +12,7 @@ import jakarta.persistence.*;
 		@NamedQuery(name = "ChiTietPhieuNhapThuoc.update", query = "UPDATE ChiTietPhieuNhapThuoc SET soLuong = :soLuong, giaNhap = :giaNhap, hsd = :hsd, donVi = :donVi, thanhTien = :thanhTien WHERE maThuoc = :maThuoc AND maPhieuNhap = :maPhieuNhap"),
 		@NamedQuery(name = "ChiTietPhieuNhapThuoc.delete", query = "DELETE FROM ChiTietPhieuNhapThuoc WHERE maThuoc = :maThuoc AND maPhieuNhap = :maPhieuNhap"),
 		@NamedQuery(name = "ChiTietPhieuNhapThuoc.findMaPhieuNhap" , query = "SELECT ct FROM ChiTietPhieuNhapThuoc ct WHERE ct.maPhieuNhap = :maPhieuNhap"),
+		@NamedQuery(name = "ChiTietPhieuNhapThuoc.create", query = "INSERT INTO ChiTietPhieuNhapThuoc(maThuoc, maPhieuNhap, soLuong, giaNhap, hsd, donVi, thanhTien) VALUES(:maThuoc, :maPhieuNhap, :soLuong, :giaNhap, :hsd, :donVi, :thanhTien)")
 })
 public class ChiTietPhieuNhapThuoc {
 	@Id

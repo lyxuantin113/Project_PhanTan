@@ -15,4 +15,6 @@ public interface ChiTietPhieuNhapThuoc_Dao extends Remote {
 
 	boolean findMaPhieuNhap(String maCTPNT, String ma);
 
+	boolean create(ChiTietPhieuNhapThuoc ct);
+
 }

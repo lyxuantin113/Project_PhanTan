@@ -1,20 +1,28 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Random;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "KhachHang")
+
 @NamedQueries({ 
 		@NamedQuery(name = "KhachHang.readFromTable", query = "SELECT kh FROM KhachHang kh"),
 		@NamedQuery(name = "KhachHang.findAll", query = "SELECT kh FROM KhachHang kh"),
 		@NamedQuery(name = "KhachHang.findByMaKhachHang", query = "SELECT kh FROM KhachHang kh WHERE kh.maKhachHang = :maKhachHang"),
 		@NamedQuery(name = "KhachHang.findBySoDienThoai", query = "SELECT kh FROM KhachHang kh WHERE kh.soDienThoai = :soDienThoai"),
-		@NamedQuery(name = "KhachHang.findByTenKhachHang", query = "SELECT kh FROM KhachHang kh WHERE kh.tenKhachHang = :tenKhachHang") 
+		@NamedQuery(name = "KhachHang.findByTenKhachHang", query = "SELECT kh FROM KhachHang kh WHERE kh.tenKhachHang = :tenKhachHang"),
+		@NamedQuery(name = "KhachHang.findKhachHangByName", query = "SELECT kh FROM KhachHang kh WHERE kh.tenKhachHang like :tenKhachHang"),
+		@NamedQuery(name = "KhachHang.findKhachHangBySDT", query = "SELECT kh FROM KhachHang kh WHERE kh.soDienThoai = :soDienThoai"),
 })
 
-public class KhachHang {
+
+public class KhachHang implements Serializable{
+
+	private static final long serialVersionUID = 965874523652145877L;
+
 	private static final String PREFIX = "KH";
 	
 	@Id

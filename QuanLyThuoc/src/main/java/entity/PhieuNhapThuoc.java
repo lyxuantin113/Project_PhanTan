@@ -25,7 +25,8 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "PhieuNhapThuoc.findByNgayNhap", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.ngayNhap = :ngayNhap"),
     @NamedQuery(name = "PhieuNhapThuoc.findByTongTien", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.tongTien = :tongTien"),
     @NamedQuery(name= "PhieuNhapThuoc.checkThuoc", query = "SELECT pnt FROM PhieuNhapThuoc pnt JOIN pnt.listChiTiet ct WHERE ct.maThuoc = :maThuoc AND pnt.trangThai = 0"),
-    @NamedQuery(name = "PhieuNhapThuoc.delete", query = "DELETE FROM PhieuNhapThuoc pnt WHERE pnt.maPhieuNhap = :maPhieuNhap")
+    @NamedQuery(name = "PhieuNhapThuoc.delete", query = "DELETE FROM PhieuNhapThuoc pnt WHERE pnt.maPhieuNhap = :maPhieuNhap"),
+    
 })
 public class PhieuNhapThuoc {
 	@Id

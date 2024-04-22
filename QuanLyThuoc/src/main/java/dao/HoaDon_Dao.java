@@ -84,4 +84,5 @@ public interface HoaDon_Dao extends Remote {
 
 	public boolean checkThuoc(String maThuoc);
 	
+
 }

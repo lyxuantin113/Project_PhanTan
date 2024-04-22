@@ -58,6 +58,7 @@ public class KhachHang_Impl extends UnicastRemoteObject implements KhachHang_Dao
 		return ds;
 	}
 
+
 	@Override
 	public List<KhachHang> readFromTable() {
 		return em.createNamedQuery("KhachHang.readFromTable", KhachHang.class).getResultList();
@@ -88,5 +89,6 @@ public class KhachHang_Impl extends UnicastRemoteObject implements KhachHang_Dao
 		return false;
         }
 	}
+
 
 }
