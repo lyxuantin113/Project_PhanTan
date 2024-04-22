@@ -216,4 +216,10 @@ public class HoaDon_Ipml extends UnicastRemoteObject implements HoaDon_Dao {
 			return 0;
 		return loiNhuan;
 	}
+
+	@Override
+	public boolean checkThuoc(String maThuoc) {
+		return em.createNamedQuery("HoaDon.checkThuoc", HoaDon.class).setParameter("maThuoc", maThuoc).getResultList().size() > 0;
+		
+	}
 }

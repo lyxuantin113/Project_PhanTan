@@ -14,4 +14,11 @@ public interface KhachHang_Dao extends Remote {
 	public KhachHang findBySDT(String sdtKH);
 
 	public List<KhachHang> getDSKH();
+
+	public List<KhachHang> readFromTable();
+
+	public boolean updateKhachHang(KhachHang kh);
+
+	public boolean deleteKhachHang(KhachHang kh);
+
 }

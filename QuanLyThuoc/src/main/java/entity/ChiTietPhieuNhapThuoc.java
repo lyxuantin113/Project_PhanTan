@@ -1,10 +1,18 @@
 package entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "ChiTietPhieuNhapThuoc")
+@NamedQueries({
+		@NamedQuery(name = "ChiTietPhieuNhapThuoc.readFromTable", query = "SELECT * FROM ChiTietPhieuNhapThuoc"),
+		@NamedQuery(name = "ChiTietPhieuNhapThuoc.update", query = "UPDATE ChiTietPhieuNhapThuoc SET soLuong = :soLuong, giaNhap = :giaNhap, hsd = :hsd, donVi = :donVi, thanhTien = :thanhTien WHERE maThuoc = :maThuoc AND maPhieuNhap = :maPhieuNhap"),
+		@NamedQuery(name = "ChiTietPhieuNhapThuoc.delete", query = "DELETE FROM ChiTietPhieuNhapThuoc WHERE maThuoc = :maThuoc AND maPhieuNhap = :maPhieuNhap"),
+		@NamedQuery(name = "ChiTietPhieuNhapThuoc.findMaPhieuNhap" , query = "SELECT ct FROM ChiTietPhieuNhapThuoc ct WHERE ct.maPhieuNhap = :maPhieuNhap"),
+})
 public class ChiTietPhieuNhapThuoc {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,17 +45,18 @@ public class ChiTietPhieuNhapThuoc {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ChiTietPhieuNhapThuoc(Thuoc maThuoc, PhieuNhapThuoc maPhieuNhap, int soLuong, double giaNhap, String hsd,
+	public ChiTietPhieuNhapThuoc(PhieuNhapThuoc maPhieuNhap,Thuoc maThuoc,  int soLuong, double giaNhap, String hsd,
 			String donVi, double thanhTien) {
 		super();
-		this.maThuoc = maThuoc;
 		this.maPhieuNhap = maPhieuNhap;
+		this.maThuoc = maThuoc;
 		this.soLuong = soLuong;
 		this.giaNhap = giaNhap;
 		this.hsd = hsd;
 		this.donVi = donVi;
 		this.thanhTien = thanhTien;
 	}
+
 
 	public Long getId() {
 		return id;

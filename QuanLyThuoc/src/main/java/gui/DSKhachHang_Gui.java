@@ -6,13 +6,15 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import dao.KhachHang_Dao;
-import db.ConnectDB;
+import dao.impl.KhachHang_Impl;
+//import db.ConnectDB;
 import entity.KhachHang;
 
 public class DSKhachHang_Gui extends JPanel implements ActionListener {
@@ -152,7 +154,7 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 				txtTen.setText((String) table.getValueAt(row, 2));
 			}
 		});
-		ConnectDB.connect();
+
 		hienTable();
 	}
 
@@ -161,9 +163,16 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		// Lấy dữ liệu từ database
-		 List<KhachHang> dsKH = new KhachHang_Dao().readFromTable();
+		KhachHang_Dao khachHangDao = null;
+		try {
+			khachHangDao = new KhachHang_Impl();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 List<KhachHang> dsKH = khachHangDao.readFromTable();
 		 for (KhachHang kh : dsKH) {
-		 model.addRow(new Object[] { kh.getMaKH(), kh.getSoDienThoai(), kh.getHoTen() });
+		 model.addRow(new Object[] { kh.getMaKhachHang(), kh.getSoDienThoai(), kh.getTenKhachHang() });
 		 }
 	}
        
@@ -176,16 +185,36 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 			
 		}
 		if (o.equals(btnTim)) {
-			timKiem();
+			try {
+				timKiem();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnThem)) {
-			themKhachHang();
+			try {
+				themKhachHang();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnXoa)) {
-			xoaKhachHang();
+			try {
+				xoaKhachHang();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnSua)) {
-			suaKhachHang();
+			try {
+				suaKhachHang();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnLamMoi)) {
 			txtTimKiem.setText("");
@@ -195,20 +224,21 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 
 	}
 
-	private void timKiem() {
+	private void timKiem() throws RemoteException {
 		String tim = txtTimKiem.getText();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
-		List<KhachHang> dsKH = new KhachHang_Dao().readFromTable();
+		KhachHang_Dao khachHangDao = new KhachHang_Impl();
+		List<KhachHang> dsKH = khachHangDao.readFromTable();
 		for (KhachHang kh : dsKH) {
-			if (kh.getMaKH().contains(tim) || kh.getSoDienThoai().contains(tim) || kh.getHoTen().contains(tim)) {
-				model.addRow(new Object[] { kh.getMaKH(), kh.getSoDienThoai(), kh.getHoTen() });
+			if (kh.getMaKhachHang().contains(tim) || kh.getSoDienThoai().contains(tim) || kh.getTenKhachHang().contains(tim)) {
+				model.addRow(new Object[] { kh.getMaKhachHang(), kh.getSoDienThoai(), kh.getTenKhachHang() });
 			}
 		}
 		
 	}
 
-	private void suaKhachHang() {
+	private void suaKhachHang() throws RemoteException {
 		
 		String ma = txtMaKH.getText();
 		String sdt = txtSDT.getText();
@@ -219,7 +249,8 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 		} else {
 			// Sửa trong database
 			KhachHang kh = new KhachHang(ma, sdt, ten);
-			KhachHang_Dao khachHangDao = new KhachHang_Dao();
+			KhachHang_Dao khachHangDao = new KhachHang_Impl();
+			
 			boolean suaThanhCong = khachHangDao.updateKhachHang(kh);
 			if (suaThanhCong) {
 				// Sửa trong table
@@ -246,7 +277,7 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 		
 	}
 
-	private void themKhachHang() {
+	private void themKhachHang() throws RemoteException {
 		String ma = txtMaKH.getText();
 		String sdt = txtSDT.getText();
 		String ten = txtTen.getText();
@@ -255,7 +286,7 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 		} else {
 			// Thêm vào database
 			KhachHang kh = new KhachHang(ma, sdt, ten);
-			KhachHang_Dao khachHangDao = new KhachHang_Dao();
+			KhachHang_Dao khachHangDao = new KhachHang_Impl();
 			khachHangDao.addKhachHang(kh);
 			
 			// thêm vào table
@@ -267,7 +298,7 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 		}
 
 	}
-	private void xoaKhachHang() {
+	private void xoaKhachHang() throws RemoteException {
 		
 	    int row = table.getSelectedRow();
 	    
@@ -280,7 +311,7 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 	        
 	        // Xóa khách hàng trong database
 	        KhachHang kh = new KhachHang(maKH, sdt, ten);
-	        KhachHang_Dao khachHangDao = new KhachHang_Dao();
+	        KhachHang_Dao khachHangDao = new KhachHang_Impl();
 	        boolean xoaThanhCong = khachHangDao.deleteKhachHang(kh); // Kiểm tra kết quả xóa từ cơ sở dữ liệu
 	        if (xoaThanhCong) {
 	            // Xóa khách hàng trong table

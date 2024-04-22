@@ -9,12 +9,24 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "PhieuNhapThuoc")
-
+@NamedQueries({ 
+    @NamedQuery(name = "PhieuNhapThuoc.readFromTableSort", query = "SELECT pnt FROM PhieuNhapThuoc pnt ORDER BY pnt.trangThai DESC, pnt.ngayNhap ASC"),
+    @NamedQuery(name = "PhieuNhapThuoc.updateTrangThai", query = "UPDATE PhieuNhapThuoc pnt SET pnt.trangThai = 1 WHERE pnt.maPhieuNhap = :maPhieuNhap"),
+    @NamedQuery(name = "PhieuNhapThuoc.findByMaPhieuNhap", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.maPhieuNhap = :maPhieuNhap"),
+    @NamedQuery(name = "PhieuNhapThuoc.findByMaNCC", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.maNCC = :maNCC"),
+    @NamedQuery(name = "PhieuNhapThuoc.findByMaNV", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.maNV = :maNV"),
+    @NamedQuery(name = "PhieuNhapThuoc.findByNgayNhap", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.ngayNhap = :ngayNhap"),
+    @NamedQuery(name = "PhieuNhapThuoc.findByTongTien", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.tongTien = :tongTien"),
+    @NamedQuery(name= "PhieuNhapThuoc.checkThuoc", query = "SELECT pnt FROM PhieuNhapThuoc pnt JOIN pnt.listChiTiet ct WHERE ct.maThuoc = :maThuoc AND pnt.trangThai = 0"),
+    @NamedQuery(name = "PhieuNhapThuoc.delete", query = "DELETE FROM PhieuNhapThuoc pnt WHERE pnt.maPhieuNhap = :maPhieuNhap")
+})
 public class PhieuNhapThuoc {
 	@Id
 	@Column(name = "maPhieuNhap")
@@ -79,7 +91,7 @@ public class PhieuNhapThuoc {
 	
 	
 
-	public NhaCungCap getMaNhaCungCap() {
+	public NhaCungCap getMaNCC() {
 		return maNhaCungCap;
 	}
 
@@ -91,7 +103,7 @@ public class PhieuNhapThuoc {
 
 
 
-	public NhanVien getMaNhanVien() {
+	public NhanVien getMaNV() {
 		return maNhanVien;
 	}
 
@@ -119,7 +131,7 @@ public class PhieuNhapThuoc {
 		this.tongTien = tongTien;
 	}
 
-	public boolean isTrangThai() {
+	public boolean getTrangThai() {
 		return trangThai;
 	}
 

@@ -20,4 +20,20 @@ public interface Thuoc_Dao extends Remote {
 
 	public void updateThuocQuatity(String maThuoc, int soLuong);
 
+	public void updateTTThuoc(Thuoc thuoc);
+
+	public void updateThuoc(Thuoc thuoc);
+
+	public void deleteThuoc(String maThuoc);
+
+	public boolean checkThuoc(String maThuoc);
+
+	public void addThuoc(Thuoc thuoc);
+
+	public Thuoc[] getDSTByNCC(String maNCC);
+
+	public Thuoc readFromTable(String string);
+
+	
+
 }

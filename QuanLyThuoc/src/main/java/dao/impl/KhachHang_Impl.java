@@ -58,4 +58,35 @@ public class KhachHang_Impl extends UnicastRemoteObject implements KhachHang_Dao
 		return ds;
 	}
 
+	@Override
+	public List<KhachHang> readFromTable() {
+		return em.createNamedQuery("KhachHang.readFromTable", KhachHang.class).getResultList();
+	}
+
+	@Override
+	public boolean updateKhachHang(KhachHang kh) {
+		EntityTransaction tx = em.getTransaction();
+		try {
+            tx.begin();
+            em.merge(kh);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+		return false;
+		}
+	}
+
+	@Override
+	public boolean deleteKhachHang(KhachHang kh) {
+		EntityTransaction tx = em.getTransaction();
+		try {
+            tx.begin();
+            em.remove(kh);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+		return false;
+        }
+	}
+
 }

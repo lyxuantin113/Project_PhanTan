@@ -6,6 +6,14 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "KhachHang")
+@NamedQueries({ 
+		@NamedQuery(name = "KhachHang.readFromTable", query = "SELECT kh FROM KhachHang kh"),
+		@NamedQuery(name = "KhachHang.findAll", query = "SELECT kh FROM KhachHang kh"),
+		@NamedQuery(name = "KhachHang.findByMaKhachHang", query = "SELECT kh FROM KhachHang kh WHERE kh.maKhachHang = :maKhachHang"),
+		@NamedQuery(name = "KhachHang.findBySoDienThoai", query = "SELECT kh FROM KhachHang kh WHERE kh.soDienThoai = :soDienThoai"),
+		@NamedQuery(name = "KhachHang.findByTenKhachHang", query = "SELECT kh FROM KhachHang kh WHERE kh.tenKhachHang = :tenKhachHang") 
+})
+
 public class KhachHang {
 	private static final String PREFIX = "KH";
 	

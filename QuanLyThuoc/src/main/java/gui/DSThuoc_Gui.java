@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -21,7 +22,12 @@ import dao.KhachHang_Dao;
 import dao.NhaCungCap_Dao;
 import dao.PhieuNhapThuoc_Dao;
 import dao.Thuoc_Dao;
-import db.ConnectDB;
+import dao.impl.DonDat_Impl;
+import dao.impl.HoaDon_Ipml;
+import dao.impl.NhaCungCap_Impl;
+import dao.impl.PhieuNhapThuoc_Impl;
+import dao.impl.Thuoc_Impl;
+//import db.ConnectDB;
 import entity.KhachHang;
 import entity.NhaCungCap;
 import entity.Thuoc;
@@ -45,7 +51,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 	private JButton btnSua;
 	private JButton btnLamMoi;
 
-	public DSThuoc_Gui() {
+	public DSThuoc_Gui() throws RemoteException {
 		setSize(1070, 600);
 		setVisible(true);
 
@@ -287,24 +293,24 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 			}
 		});
 		hienTable();
-		ConnectDB.connect();
+//		ConnectDB.connect();
 	}
 
-	void hienTable() {
+	void hienTable() throws RemoteException {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		// Lấy danh sách thuốc từ database
-		Thuoc_Dao thuocDao = new Thuoc_Dao();
+		Thuoc_Dao thuocDao = new Thuoc_Impl();
 		
-		List<Thuoc> dsThuoc = thuocDao.readFromTable();
+		List<Thuoc> dsThuoc = thuocDao.findAll();
 		for (Thuoc thuoc : dsThuoc) {
 			Object[] rowData = { thuoc.getMaNCC(), thuoc.getMaThuoc(), thuoc.getTenThuoc(),
-					thuoc.getLoaiThuoc(), thuoc.getDonVi(), thuoc.getHSD(), thuoc.getGiaNhap(), thuoc.getGiaBan(),
+					thuoc.getLoaiThuoc(), thuoc.getDonVi(), thuoc.getHanSuDung(), thuoc.getGiaNhap(), thuoc.getGiaBan(),
 					thuoc.getSoLuongTon(), thuoc.getNuocSanXuat() };
 			model.addRow(rowData);
 		}
 		// add combobox
-		NhaCungCap_Dao nccDao = new NhaCungCap_Dao();
+		NhaCungCap_Dao nccDao = new NhaCungCap_Impl();
 		List<NhaCungCap> dsNCC = nccDao.readFromTable();
 		for (NhaCungCap ncc : dsNCC) {
 			cbbNCC.addItem(ncc.getMaNCC());
@@ -315,7 +321,12 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnAdd)) {
-			addThuoc();
+			try {
+				addThuoc();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnXoaTrang)) {
 			xoaTrang();
@@ -324,19 +335,34 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 			
 		}
 		if (o.equals(btnXoa)) {
-			deleteThuoc();
+			try {
+				deleteThuoc();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnSua)) {
-			updateThuoc();
+			try {
+				updateThuoc();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnLamMoi)) {
-			hienTable();
+			try {
+				hienTable();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			xoaTrang();
 		}
 
 	}
 
-	private void updateThuoc() {
+	private void updateThuoc() throws RemoteException {
 		
 		if (!xuLyDuLieu()) {
 			return;
@@ -356,7 +382,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 
 		
 		Thuoc thuoc = new Thuoc(maThuoc, tenThuoc, loaiThuoc, donVi, hsd, giaNhap, giaBan, soLuongTon, nuocSX, maNCC);
-		Thuoc_Dao thuocDao = new Thuoc_Dao();
+		Thuoc_Dao thuocDao = new Thuoc_Impl();
 		int hoi = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn sửa không?", "Chú ý",
 				JOptionPane.YES_NO_OPTION);
 		if (hoi == JOptionPane.YES_OPTION) {
@@ -383,7 +409,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 		
 	}
 
-	private void deleteThuoc() {
+	private void deleteThuoc() throws RemoteException {
 		int row = table.getSelectedRow();
 		if (row == -1) {
 			JOptionPane.showMessageDialog(this, "Vui lòng chọn thuốc cần xóa");
@@ -394,7 +420,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 		if (hoi == JOptionPane.YES_OPTION) {
 			if (!checkTonTai()) {
 				String maThuoc = txtMa.getText();
-				Thuoc_Dao thuocDao = new Thuoc_Dao();
+				Thuoc_Dao thuocDao = new Thuoc_Impl();
 				thuocDao.deleteThuoc(maThuoc);
 				xoaTrang();
 				hienTable();
@@ -403,12 +429,12 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 		}
 	}
 
-	private boolean checkTonTai() {
+	private boolean checkTonTai() throws RemoteException {
 		String maThuoc = txtMa.getText();
-		Thuoc_Dao thuocDao = new Thuoc_Dao();
-		HoaDon_Dao hoaDonDao = new HoaDon_Dao();
-		DonDat_Dao donDatDao = new DonDat_Dao();
-		PhieuNhapThuoc_Dao phieuNhapThuocDao = new PhieuNhapThuoc_Dao();
+		Thuoc_Dao thuocDao = new Thuoc_Impl();
+		HoaDon_Dao hoaDonDao = new HoaDon_Ipml();
+		DonDat_Dao donDatDao = new DonDat_Impl();
+		PhieuNhapThuoc_Dao phieuNhapThuocDao = new PhieuNhapThuoc_Impl();
 		
 		if (phieuNhapThuocDao.checkThuoc(maThuoc)) {
 			JOptionPane.showMessageDialog(this, "Không thể xóa thuốc này vì có phiếu nhập thuốc chưa nhận tồn tại thuốc này");
@@ -431,7 +457,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 		return false;
 	}
 
-	private void addThuoc() {
+	private void addThuoc() throws RemoteException {
 		if (!xuLyDuLieu()) {
 			return;
 		}
@@ -449,7 +475,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 		String maNCC = cbbNCC.getSelectedItem().toString();
 		
 		Thuoc thuoc = new Thuoc(maThuoc, tenThuoc, loaiThuoc, donVi, hsd, giaNhap, giaBan, soLuongTon, nuocSX, maNCC);
-		Thuoc_Dao thuocDao = new Thuoc_Dao();
+		Thuoc_Dao thuocDao = new Thuoc_Impl();
 		if (thuocDao.checkThuoc(maThuoc)) {
 			JOptionPane.showMessageDialog(this, "Mã thuốc đã tồn tại");
 			return;

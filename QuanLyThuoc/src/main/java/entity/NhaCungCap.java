@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "NhaCungCap")
+@NamedQueries({ 
+	@NamedQuery(name = "NhaCungCap.readFromTable", query = "SELECT ncc FROM NhaCungCap ncc")
+})
 public class NhaCungCap {
 
 	@Id

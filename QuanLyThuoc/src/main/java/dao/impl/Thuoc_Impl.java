@@ -70,4 +70,92 @@ public class Thuoc_Impl extends UnicastRemoteObject implements Thuoc_Dao {
 		}
 	}
 
+	@Override
+	public void updateTTThuoc(Thuoc thuoc) {
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			em.merge(thuoc);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		
+		
+	}
+
+	@Override
+	public void updateThuoc(Thuoc thuoc) {
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			em.merge(thuoc);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		
+	}
+
+	@Override
+	public void deleteThuoc(String maThuoc) {
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			em.remove(em.find(Thuoc.class, maThuoc));
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		
+	}
+
+	@Override
+	public boolean checkThuoc(String maThuoc) {
+		return em.createQuery("Select t FROM Thuoc t WHERE t.maThuoc = :maThuoc", Thuoc.class)
+				.setParameter("maThuoc", maThuoc).executeUpdate() > 0;
+	}
+
+	@Override
+	public void addThuoc(Thuoc thuoc) {
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			em.persist(thuoc);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		
+	}
+
+	@Override
+	public Thuoc[] getDSTByNCC(String maNCC) {
+		
+		return em.createQuery("Select t FROM Thuoc t WHERE t.maNCC = :maNCC", Thuoc.class).setParameter("maNCC", maNCC)
+				.getResultList().toArray(new Thuoc[0]);
+		
+	}
+
+	@Override
+	public Thuoc readFromTable(String string) {
+		return em.createQuery("Select t FROM Thuoc t WHERE t.maThuoc = :maThuoc", Thuoc.class)
+				.setParameter("maThuoc", string).getSingleResult();
+	}
+	
+
+	
+
 }

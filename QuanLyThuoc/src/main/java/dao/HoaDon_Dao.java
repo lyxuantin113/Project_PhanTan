@@ -81,5 +81,7 @@ public interface HoaDon_Dao extends Remote {
 	public double tinhTongTien(HoaDon hoaDon);
 
 	public double tinhLoiNhuanChoHoaDon(HoaDon hoaDon);
+
+	public boolean checkThuoc(String maThuoc);
 	
 }

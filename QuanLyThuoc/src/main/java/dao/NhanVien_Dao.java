@@ -8,4 +8,6 @@ public interface NhanVien_Dao extends Remote {
 
 	public NhanVien getNhanVien(String maNV);
 
+	public boolean maNhanVienDaTonTai(String maNV);
+
 }
