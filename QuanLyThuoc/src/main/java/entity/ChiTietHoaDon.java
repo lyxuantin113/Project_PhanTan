@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ChiTietHoaDon")
+@NamedQueries({
+	@NamedQuery(name = "ChiTietHoaDon.findByID", query = "SELECT cthd FROM ChiTietHoaDon cthd WHERE cthd.maHoaDon = :maHoaDon"),
+	@NamedQuery(name = "ChiTietHoaDon.deleteOne", query = "DELETE FROM ChiTietHoaDon cthd WHERE cthd.maThuoc = :maThuoc"),
+	@NamedQuery(name = "", query = ""),
+})
 public class ChiTietHoaDon {
 
 	@Id
@@ -32,8 +37,18 @@ public class ChiTietHoaDon {
 		this.soLuong = soLuong;
 	}
 
+	public ChiTietHoaDon(Thuoc maThuoc, int soLuong) {
+		super();
+		this.maThuoc = maThuoc;
+		this.soLuong = soLuong;
+	}
+
 	public HoaDon getMaHoaDon() {
 		return maHoaDon;
+	}
+	
+	public void setMaHoaDon(HoaDon maHoaDon) {
+		this.maHoaDon = maHoaDon;
 	}
 
 	public Thuoc getMaThuoc() {

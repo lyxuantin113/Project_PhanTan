@@ -10,11 +10,17 @@ import lombok.ToString;
 @Entity
 @Table(name = "HoaDon")
 @NamedQueries({ @NamedQuery(name = "HoaDon.findAll", query = "SELECT hd FROM HoaDon hd"),
-		@NamedQuery(name = "HoaDon.findByMaHoaDon", query = "SELECT hd FROM HoaDon hd WHERE hd.maHoaDon = :maHoaDon"),
-		@NamedQuery(name = "HoaDon.findByMaKhachHang", query = "SELECT hd FROM HoaDon hd WHERE hd.maKhachHang = :maKhachHang"),
 		@NamedQuery(name = "HoaDon.findByMaNhanVien", query = "SELECT hd FROM HoaDon hd WHERE hd.maNhanVien = :maNhanVien"),
 		@NamedQuery(name = "HoaDon.findByNgayLap", query = "SELECT hd FROM HoaDon hd WHERE hd.ngayLap = :ngayLap"),
-		@NamedQuery(name = "HoaDon.findByNgayNhan", query = "SELECT hd FROM HoaDon hd WHERE hd.ngayNhan = :ngayNhan") })
+		@NamedQuery(name = "HoaDon.findByMaKhachHang", query = "SELECT hd FROM HoaDon hd WHERE hd.maKhachHang = :maKhachHang"),
+		@NamedQuery(name = "HoaDon.findByNgayNhan", query = "SELECT hd FROM HoaDon hd WHERE hd.ngayNhan = :ngayNhan"), 
+		@NamedQuery(name = "HoaDon.findTKFullField", query = "SELECT hd FROM HoaDon hd WHERE hd.maNhanVien = :maNhanVien AND hd.maKhachHang = :maKhachHang AND hd.ngayLap = :ngayLap"),
+		@NamedQuery(name = "HoaDon.findXYinMonth", query = "SELECT hd FROM HoaDon hd WHERE FUNCTION('YEAR', hd.ngayLap) = :year AND FUNCTION('MONTH', hd.ngayLap) = :month AND hd.maNhanVien = :maNhanVien AND hd.maKhachHang = :maKhachHang"),
+		@NamedQuery(name = "HoaDon.findXYinYear", query = "SELECT hd FROM HoaDon hd WHERE FUNCTION('YEAR', hd.ngayLap) = :year AND hd.maNhanVien = :maNhanVien AND hd.maKhachHang = :maKhachHang"),
+		@NamedQuery(name = "HoaDon.findXByY", query = "SELECT hd FROM HoaDon hd WHERE hd.maNhanVien = :maNhanVien AND hd.maKhachHang = :maKhachHang"),
+		@NamedQuery(name = "HoaDon.", query = ""),
+})
+
 public class HoaDon {
 	private static final String PREFIX = "HD";
 

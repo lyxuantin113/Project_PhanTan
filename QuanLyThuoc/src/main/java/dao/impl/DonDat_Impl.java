@@ -3,6 +3,7 @@ package dao.impl;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import dao.ChiTietDonDat_Dao;
 import dao.DonDat_Dao;
 import entity.DonDat;
 import jakarta.persistence.EntityManager;
@@ -25,6 +26,8 @@ public class DonDat_Impl extends UnicastRemoteObject implements DonDat_Dao {
 		try {
 			tr.begin();
 			em.persist(donDat);
+			ChiTietDonDat_Dao ctddDao = new ChiTietDonDat_Impl();
+			ctddDao.addChiTietDonDat(donDat);
 			tr.commit();
 			return true;
 		} catch (Exception e) {

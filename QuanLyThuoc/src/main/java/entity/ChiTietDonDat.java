@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ChiTietDonDat")
+@NamedQueries({
+		@NamedQuery(name = "ChiTietDonDat.findByID", query = "SELECT ctdd FROM ChiTietDonDat cthd WHERE ctdd.maHoaDon = :maHoaDon"),
+		@NamedQuery(name = "ChiTietDonDat.deleteOne", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maThuoc = :maThuoc"),
+		@NamedQuery(name = "", query = ""), })
 public class ChiTietDonDat {
 
 	@Id
@@ -25,6 +29,12 @@ public class ChiTietDonDat {
 		// TODO Auto-generated constructor stub
 	}
 
+	public ChiTietDonDat(Thuoc maThuoc, int soLuong) {
+		super();
+		this.maThuoc = maThuoc;
+		this.soLuong = soLuong;
+	}
+
 	public ChiTietDonDat(DonDat maDonDat, Thuoc maThuoc, int soLuong) {
 		super();
 		this.maDonDat = maDonDat;
@@ -34,6 +44,10 @@ public class ChiTietDonDat {
 
 	public DonDat getMaDonDat() {
 		return maDonDat;
+	}
+
+	public void setMaDonDat(DonDat maDonDat) {
+		this.maDonDat = maDonDat;
 	}
 
 	public Thuoc getMaThuoc() {

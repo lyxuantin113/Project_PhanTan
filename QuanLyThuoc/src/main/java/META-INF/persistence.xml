@@ -3,17 +3,6 @@
 	<persistence-unit name="QuanLyThuoc MSSQL">
 	
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>entity.ChiTietDonDat</class>
-		<class>entity.ChiTietHoaDon</class>
-		<class>entity.DonDat</class>
-		<class>entity.HoaDon</class>
-		<class>entity.KhachHang</class>
-		<class>entity.Thuoc</class>
-		<class>entity.NhanVien</class>
-		<class>entity.NhaCungCap</class>
-		<class>entity.PhieuNhapThuoc</class>
-		<class>entity.ChiTietPhieuNhapThuoc</class>
-		<class>entity.TaiKhoan</class>
 		
 		
 		<properties>

@@ -14,9 +14,8 @@ import lombok.ToString;
 		@NamedQuery(name = "DonDat.findByMaKhachHang", query = "SELECT dd FROM DonDat dd WHERE dd.maKhachHang = :maKhachHang"),
 		@NamedQuery(name = "DonDat.findByMaNhanVien", query = "SELECT dd FROM DonDat dd WHERE dd.maNhanVien = :maNhanVien"),
 		@NamedQuery(name = "DonDat.findByNgayLap", query = "SELECT dd FROM DonDat dd WHERE dd.ngayLap = :ngayLap"),
-		@NamedQuery(name = "DonDat.findByNgayNhan", query = "SELECT dd FROM DonDat dd WHERE dd.ngayNhan = :ngayNhan"),
-		@NamedQuery(name = "DonDat.addDonDat", query = "INSERT INTO DonDat (maDonDat, maKhachHang, maNhanVien, ngayLap, ngayNhan) VALUES (:maDonDat, :maKhachHang, :maNhanVien, :ngayLap, :ngayNhan)"
-)})
+		@NamedQuery(name = "DonDat.findByNgayNhan", query = "SELECT dd FROM DonDat dd WHERE dd.ngayNhan = :ngayNhan")
+})
 public class DonDat {
 	private static final String PREFIX = "DD";
 
