@@ -1,30 +1,29 @@
 package dao.impl;
 
-import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import dao.HoaDon_Dao;
-import entity.HoaDon;
+import dao.ChiTietHoaDon_Dao;
+import entity.ChiTietHoaDon;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
-public class HoaDon_Ipml extends UnicastRemoteObject implements HoaDon_Dao{
+public class ChiTietHoaDon_Impl extends UnicastRemoteObject implements ChiTietHoaDon_Dao {
 	
-	private static final long serialVersionUID = 9223372036854775807L;
+	private static final long serialVersionUID = 968547856325896547L;
 	private static final String PERSISTENCE_UNIT_NAME = "QuanLyThuoc MSSQL";
 	private EntityManager em;
 	
-	public HoaDon_Ipml() throws RemoteException{
+	public ChiTietHoaDon_Impl() throws Exception {
 		em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
 	}
 	
 	@Override
-	public boolean themHoaDon(HoaDon hoaDon) {
+	public boolean themChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
 		EntityTransaction tr = em.getTransaction();
 		try {
 			tr.begin();
-			em.persist(hoaDon);
+			em.persist(chiTietHoaDon);
 			tr.commit();
 			return true;
 		} catch (Exception e) {
@@ -33,5 +32,4 @@ public class HoaDon_Ipml extends UnicastRemoteObject implements HoaDon_Dao{
 			return false;
 		}
 	}
-	
 }

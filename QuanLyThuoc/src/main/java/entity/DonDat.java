@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
@@ -17,7 +18,9 @@ import lombok.ToString;
 		@NamedQuery(name = "DonDat.findByNgayNhan", query = "SELECT dd FROM DonDat dd WHERE dd.ngayNhan = :ngayNhan"),
 		@NamedQuery(name = "DonDat.addDonDat", query = "INSERT INTO DonDat (maDonDat, maKhachHang, maNhanVien, ngayLap, ngayNhan) VALUES (:maDonDat, :maKhachHang, :maNhanVien, :ngayLap, :ngayNhan)"
 )})
-public class DonDat {
+public class DonDat implements Serializable {
+	
+	private static final long serialVersionUID = 2587963258745698547L;
 	private static final String PREFIX = "DD";
 
 	@Id
