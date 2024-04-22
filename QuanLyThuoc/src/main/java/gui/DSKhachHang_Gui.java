@@ -14,10 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.KhachHang_Dao;
 import dao.impl.KhachHang_Impl;
-<<<<<<< HEAD
-//import db.ConnectDB;
-=======
->>>>>>> f5fc8eb66d7dc828db501e96c006236b79555a37
+
 import entity.KhachHang;
 
 public class DSKhachHang_Gui extends JPanel implements ActionListener {

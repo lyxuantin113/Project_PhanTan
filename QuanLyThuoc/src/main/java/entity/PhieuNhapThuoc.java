@@ -77,10 +77,6 @@ public class PhieuNhapThuoc {
 
 
 
-
-
-
-
 	public String getMaPhieuNhap() {
 		return maPhieuNhap;
 	}
@@ -160,11 +156,6 @@ public class PhieuNhapThuoc {
 				+ ", listChiTiet=" + listChiTiet + "]";
 	}
 
-
-
-	
-	
-	
 	
 	
 }

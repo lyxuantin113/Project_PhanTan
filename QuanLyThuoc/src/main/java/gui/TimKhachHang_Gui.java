@@ -3,13 +3,15 @@ package gui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import dao.KhachHang_Dao;
-import db.ConnectDB;
+import dao.impl.KhachHang_Impl;
+//import db.ConnectDB;
 import entity.KhachHang;
 
 public class TimKhachHang_Gui extends JPanel implements ActionListener{
@@ -18,7 +20,7 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener{
 	private JTable tbl;
 	private JButton btnLamMoi;
 
-	public TimKhachHang_Gui() {
+	public TimKhachHang_Gui() throws RemoteException {
 		setSize(1070, 600);
 		setVisible(true);
 		
@@ -93,17 +95,18 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener{
 		btnTim.addActionListener(this);
 		btnLamMoi.addActionListener(this);
 		
-		ConnectDB.connect();
+//		ConnectDB.connect();
 		hienTable();
 	}
 
-	private void hienTable() {
+	private void hienTable() throws RemoteException {
 		DefaultTableModel model = (DefaultTableModel) tbl.getModel();
 		model.setRowCount(0);
 		// Lấy dữ liệu từ database
-		 List<KhachHang> dsKH = new KhachHang_Dao().readFromTable();
+		KhachHang_Dao khachHang_Dao = new KhachHang_Impl();
+		 List<KhachHang> dsKH = khachHang_Dao.readFromTable();
 		 for (KhachHang kh : dsKH) {
-		 model.addRow(new Object[] { kh.getMaKH(), kh.getSoDienThoai(), kh.getHoTen() });
+		 model.addRow(new Object[] { kh.getMaKhachHang(), kh.getSoDienThoai(), kh.getTenKhachHang() });
 		 }
 		
 	}
@@ -112,7 +115,12 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnTim)) {
-			timKH();
+			try {
+				timKH();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnLamMoi)) {
 			txtSDT.setText("");
@@ -121,7 +129,7 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener{
 		
 	}
 
-	private void timKH() {
+	private void timKH() throws RemoteException {
 		String sdt = txtSDT.getText();
 		if (sdt.equals("") || sdt == null) {
 			JOptionPane.showMessageDialog(null, "Vui lòng nhập số điện thoại khách hàng");
@@ -135,7 +143,8 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener{
 			return;
 		} else {
 			// Tìm trong database
-			KhachHang kh = new KhachHang_Dao().findKhachHangBySDT(sdt);
+			KhachHang_Dao khachHang_Dao = new KhachHang_Impl();
+			KhachHang kh = khachHang_Dao.findBySDT(sdt);
 			if (kh == null) {
 				JOptionPane.showMessageDialog(null, "Không tìm thấy khách hàng");
 				txtSDT.requestFocus();

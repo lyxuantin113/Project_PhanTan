@@ -5,7 +5,11 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "NhaCungCap")
 @NamedQueries({ 
-	@NamedQuery(name = "NhaCungCap.readFromTable", query = "SELECT ncc FROM NhaCungCap ncc")
+	@NamedQuery(name = "NhaCungCap.readFromTable", query = "SELECT ncc FROM NhaCungCap ncc"),
+	@NamedQuery(name = "NhaCungCap.findAll", query = "SELECT ncc FROM NhaCungCap ncc"),
+	@NamedQuery(name = "NhaCungCap.searchNCC", query = "SELECT ncc FROM NhaCungCap ncc WHERE  maNCC = :maNCC"),
+	@NamedQuery(name = "NhaCungCap.deleteNCC", query = "DELETE FROM NhaCungCap ncc WHERE maNCC = :maNCC"),
+	@NamedQuery(name = "NhaCungCap.getNCC", query = "SELECT ncc FROM NhaCungCap ncc WHERE maNCC = :maNCC"),
 })
 public class NhaCungCap {
 

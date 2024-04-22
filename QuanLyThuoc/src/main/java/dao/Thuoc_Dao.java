@@ -34,6 +34,12 @@ public interface Thuoc_Dao extends Remote {
 
 	public Thuoc readFromTable(String string);
 
+	public boolean searchNCC(String maNCC);
+
+	public boolean timTheoMaTuyetDoi(String thongTin);
+
+	public boolean timTheoNCC(String thongTin);
+
 	
 
 }

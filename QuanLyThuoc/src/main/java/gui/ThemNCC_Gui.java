@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -23,7 +24,9 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.NhaCungCap_Dao;
 import dao.Thuoc_Dao;
-import db.ConnectDB;
+import dao.impl.NhaCungCap_Impl;
+import dao.impl.Thuoc_Impl;
+//import db.ConnectDB;
 import entity.NhaCungCap;
 
 public class ThemNCC_Gui extends JPanel implements ActionListener {
@@ -38,7 +41,7 @@ public class ThemNCC_Gui extends JPanel implements ActionListener {
 	private JButton btnXoa;
 	private JTextField txtTimKiem;
 
-	public ThemNCC_Gui() {
+	public ThemNCC_Gui() throws RemoteException {
 		setSize(1070, 600);
 		setVisible(true);
 
@@ -158,17 +161,18 @@ public class ThemNCC_Gui extends JPanel implements ActionListener {
 				txtSDT.setText(table.getValueAt(row, 3).toString());
 			}
 		});
-		ConnectDB.connect();
+//		ConnectDB.connect();
 		hienThiDanhSachNCC();
 
 	}
 
-	private void hienThiDanhSachNCC() {
+	private void hienThiDanhSachNCC() throws RemoteException {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
-		List<NhaCungCap> dsNCC = new NhaCungCap_Dao().readFromTable();
+		NhaCungCap_Dao nccDao = new NhaCungCap_Impl();
+		List<NhaCungCap> dsNCC = nccDao.readFromTable();
 		for (NhaCungCap ncc : dsNCC) {
-			model.addRow(new Object[] { ncc.getMaNCC(), ncc.getTenNCC(), ncc.getDiaChiNCC(), ncc.getSdtNCC() });
+			model.addRow(new Object[] { ncc.getMaNCC(), ncc.getTenNCC(), ncc.getDiaChiNCC(), ncc.getSoDienThoai() });
 		}
 
 	}
@@ -177,7 +181,12 @@ public class ThemNCC_Gui extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnThem)) {
-			themNCC();
+			try {
+				themNCC();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnXoaTrang)) {
 			xoaTrang();
@@ -186,15 +195,20 @@ public class ThemNCC_Gui extends JPanel implements ActionListener {
 			tim();
 		}
 		if (o.equals(btnXoa)) {
-			xoa();
+			try {
+				xoa();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 	}
 
-	private void xoa() {
+	private void xoa() throws RemoteException {
 		String maNCC = txtMa.getText();
-		NhaCungCap_Dao nccDao = new NhaCungCap_Dao();
-		Thuoc_Dao thuocDao = new Thuoc_Dao();
+		NhaCungCap_Dao nccDao = new NhaCungCap_Impl();
+		Thuoc_Dao thuocDao = new Thuoc_Impl();
 		if (maNCC.equals("")) {
 			JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp cần xóa");
 			return;
@@ -249,7 +263,7 @@ public class ThemNCC_Gui extends JPanel implements ActionListener {
 
 	}
 
-	private void themNCC() {
+	private void themNCC() throws RemoteException {
 		if (!xuLyDuLieu())
 			return;
 
@@ -258,7 +272,7 @@ public class ThemNCC_Gui extends JPanel implements ActionListener {
 		String diaChi = txtDiaChi.getText();
 		String sdt = txtSDT.getText();
 		NhaCungCap ncc = new NhaCungCap(ma, ten, diaChi, sdt);
-		NhaCungCap_Dao nccDao = new NhaCungCap_Dao();
+		NhaCungCap_Dao nccDao = new NhaCungCap_Impl();
 		if (ma.equals("") || ten.equals("") || diaChi.equals("") || sdt.equals("")) {
 			JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin");
 			return;

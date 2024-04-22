@@ -4,13 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import dao.Thuoc_Dao;
-import db.ConnectDB;
+import dao.impl.Thuoc_Impl;
 import entity.Thuoc;
 
 public class TimThuoc_Gui extends JPanel implements ActionListener {
@@ -20,7 +21,7 @@ public class TimThuoc_Gui extends JPanel implements ActionListener {
 	private JComboBox<String> cbbCachTim;
 	private JButton btnReset;
 
-	public TimThuoc_Gui() {
+	public TimThuoc_Gui() throws RemoteException {
 		setSize(1070, 600);
 		setVisible(true);
 
@@ -107,21 +108,21 @@ public class TimThuoc_Gui extends JPanel implements ActionListener {
 		btnReset.addActionListener(this);
 		txtThongTin.addActionListener(this);
 
-		ConnectDB.connect();
+//		ConnectDB.connect();
 		hienTable();
 
 	}
 
-	private void hienTable() {
+	private void hienTable() throws RemoteException {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		// Lấy danh sách thuốc từ database
-		Thuoc_Dao thuocDao = new Thuoc_Dao();
+		Thuoc_Dao thuocDao = new Thuoc_Impl();
 
-		List<Thuoc> dsThuoc = thuocDao.readFromTable();
+		List<Thuoc> dsThuoc = thuocDao.findAll();
 		for (Thuoc thuoc : dsThuoc) {
 			Object[] rowData = { thuoc.getMaNCC(), thuoc.getMaThuoc(), thuoc.getTenThuoc(), thuoc.getLoaiThuoc(),
-					thuoc.getDonVi(), thuoc.getHSD(), thuoc.getGiaNhap(), thuoc.getGiaBan(), thuoc.getSoLuongTon(),
+					thuoc.getDonVi(), thuoc.getHanSuDung(), thuoc.getGiaNhap(), thuoc.getGiaBan(), thuoc.getSoLuongTon(),
 					thuoc.getNuocSanXuat() };
 			model.addRow(rowData);
 		}
@@ -132,22 +133,32 @@ public class TimThuoc_Gui extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnTim)) {
-			timThuoc();
+			try {
+				timThuoc();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnReset)) {
 			txtThongTin.setText("");
-			hienTable();
+			try {
+				hienTable();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
-	private void timThuoc() {
+	private void timThuoc() throws RemoteException {
 		// Lấy thông tin tìm kiếm
 		String thongTin = txtThongTin.getText();
 		
 		// Lấy cách tìm kiếm
 		String cachTim = (String) cbbCachTim.getSelectedItem();
-		Thuoc_Dao thuocDao = new Thuoc_Dao();
-		List<Thuoc> dsThuoc = thuocDao.readFromTable();
+		Thuoc_Dao thuocDao = new Thuoc_Impl();
+		List<Thuoc> dsThuoc = thuocDao.findAll();
 		if (thongTin.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin tìm kiếm.");
 			return;
@@ -160,7 +171,7 @@ public class TimThuoc_Gui extends JPanel implements ActionListener {
 					for (Thuoc thuoc : dsThuoc) {						
 						if (thuoc.getMaThuoc().contains(thongTin)) {
 							Object[] rowData = { thuoc.getMaNCC(), thuoc.getMaThuoc(), thuoc.getTenThuoc(),
-									thuoc.getLoaiThuoc(), thuoc.getDonVi(), thuoc.getHSD(), thuoc.getGiaNhap(),
+									thuoc.getLoaiThuoc(), thuoc.getDonVi(), thuoc.getHanSuDung(), thuoc.getGiaNhap(),
 									thuoc.getGiaBan(), thuoc.getSoLuongTon(), thuoc.getNuocSanXuat() };
 							model.addRow(rowData);
 						}
@@ -179,7 +190,7 @@ public class TimThuoc_Gui extends JPanel implements ActionListener {
 					for (Thuoc thuoc : dsThuoc) {
 						if (thuoc.getTenThuoc().contains(thongTin)) {
 							Object[] rowData = { thuoc.getMaNCC(), thuoc.getMaThuoc(), thuoc.getTenThuoc(),
-									thuoc.getLoaiThuoc(), thuoc.getDonVi(), thuoc.getHSD(), thuoc.getGiaNhap(),
+									thuoc.getLoaiThuoc(), thuoc.getDonVi(), thuoc.getHanSuDung(), thuoc.getGiaNhap(),
 									thuoc.getGiaBan(), thuoc.getSoLuongTon(), thuoc.getNuocSanXuat() };
 							model.addRow(rowData);
 						}
@@ -197,7 +208,7 @@ public class TimThuoc_Gui extends JPanel implements ActionListener {
 					for (Thuoc thuoc : dsThuoc) {
 						if (thuoc.getLoaiThuoc().contains(thongTin)) {
 							Object[] rowData = { thuoc.getMaNCC(), thuoc.getMaThuoc(), thuoc.getTenThuoc(),
-									thuoc.getLoaiThuoc(), thuoc.getDonVi(), thuoc.getHSD(), thuoc.getGiaNhap(),
+									thuoc.getLoaiThuoc(), thuoc.getDonVi(), thuoc.getHanSuDung(), thuoc.getGiaNhap(),
 									thuoc.getGiaBan(), thuoc.getSoLuongTon(), thuoc.getNuocSanXuat() };
 							model.addRow(rowData);
 						}
@@ -215,7 +226,7 @@ public class TimThuoc_Gui extends JPanel implements ActionListener {
 					for (Thuoc thuoc : dsThuoc) {
 						if (thuoc.getMaNCC().contains(thongTin)) {
 							Object[] rowData = { thuoc.getMaNCC(), thuoc.getMaThuoc(), thuoc.getTenThuoc(),
-									thuoc.getLoaiThuoc(), thuoc.getDonVi(), thuoc.getHSD(), thuoc.getGiaNhap(),
+									thuoc.getLoaiThuoc(), thuoc.getDonVi(), thuoc.getHanSuDung(), thuoc.getGiaNhap(),
 									thuoc.getGiaBan(), thuoc.getSoLuongTon(), thuoc.getNuocSanXuat() };
 							model.addRow(rowData);
 						}

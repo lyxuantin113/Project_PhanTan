@@ -23,7 +23,8 @@ import dao.NhaCungCap_Dao;
 import dao.PhieuNhapThuoc_Dao;
 import dao.Thuoc_Dao;
 import dao.impl.DonDat_Impl;
-import dao.impl.HoaDon_Ipml;
+import dao.impl.HoaDon_Impl;
+
 import dao.impl.NhaCungCap_Impl;
 import dao.impl.PhieuNhapThuoc_Impl;
 import dao.impl.Thuoc_Impl;
@@ -432,7 +433,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 	private boolean checkTonTai() throws RemoteException {
 		String maThuoc = txtMa.getText();
 		Thuoc_Dao thuocDao = new Thuoc_Impl();
-		HoaDon_Dao hoaDonDao = new HoaDon_Ipml();
+		HoaDon_Dao hoaDonDao = new HoaDon_Impl();
 		DonDat_Dao donDatDao = new DonDat_Impl();
 		PhieuNhapThuoc_Dao phieuNhapThuocDao = new PhieuNhapThuoc_Impl();
 		

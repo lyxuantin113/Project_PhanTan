@@ -154,6 +154,25 @@ public class Thuoc_Impl extends UnicastRemoteObject implements Thuoc_Dao {
 		return em.createQuery("Select t FROM Thuoc t WHERE t.maThuoc = :maThuoc", Thuoc.class)
 				.setParameter("maThuoc", string).getSingleResult();
 	}
+
+	@Override
+	public boolean searchNCC(String maNCC) {
+		return em.createQuery("Select t FROM Thuoc t WHERE t.maNCC = :maNCC", Thuoc.class).setParameter("maNCC", maNCC)
+				.executeUpdate() > 0;
+	}
+
+	@Override
+	public boolean timTheoMaTuyetDoi(String thongTin) {
+		return em.createQuery("Select t FROM Thuoc t WHERE t.maThuoc = :maThuoc", Thuoc.class)
+				.setParameter("maThuoc", thongTin).executeUpdate() > 0;
+	
+	}
+
+	@Override
+	public boolean timTheoNCC(String thongTin) {
+		return em.createQuery("Select t FROM Thuoc t WHERE t.maNCC = :maNCC", Thuoc.class)
+				.setParameter("maNCC", thongTin).executeUpdate() > 0;
+	}
 	
 
 	

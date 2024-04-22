@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.*;
@@ -24,9 +25,10 @@ import dao.impl.Thuoc_Impl;
 //import db.ConnectDB;
 import entity.ChiTietPhieuNhapThuoc;
 import entity.NhaCungCap;
+import entity.NhanVien;
 import entity.PhieuNhapThuoc;
 import entity.Thuoc;
-
+import java.util.List;
 public class NhapThuoc_Gui extends JPanel implements ActionListener {
 	private JButton btnAdd;
 	private JButton btnXoaTrang;
@@ -52,6 +54,8 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 	private JButton btnSua;
 	private JButton btnXacNhan;
 	private JButton btnLamMoi;
+	// List
+	List<ChiTietPhieuNhapThuoc> listCTPNT = new ArrayList<ChiTietPhieuNhapThuoc>();
 
 	public NhapThuoc_Gui() throws RemoteException {
 		setSize(1070, 600);
@@ -416,10 +420,20 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnTao)) {
-			taoPhieu();
+			try {
+				taoPhieu();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnAdd)) {
-			addThuocDat();
+			try {
+				addThuocDat();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			txtMaCTPNT.setEnabled(false);
 		}
 		if (o.equals(btnXoaTrang)) {
@@ -434,7 +448,12 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 			}
 		}
 		if (o.equals(btnSua)) {
-			sua();
+			try {
+				sua();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnHuy)) {
 			try {
@@ -526,7 +545,7 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 
 	}
 
-	private void sua() {
+	private void sua() throws RemoteException {
 		String giaNhap = txtGiaNhap.getText();
 		String soLuong = txtSoLuong.getText();
 		String hsd = txtHSD.getText();
@@ -538,7 +557,14 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 		Integer sl = Integer.parseInt(soLuong);
 		String donVi = cbbDonVi.getSelectedItem().toString();
 		Double thanhTien = gia * sl;
-		ChiTietPhieuNhapThuoc ct = new ChiTietPhieuNhapThuoc(maCTPNT, maThuoc, sl, gia, LocalDate.parse(hsd), donVi,thanhTien);
+		
+		Thuoc_Dao thuocDao = new Thuoc_Impl();
+		Thuoc thuoc = thuocDao.timTheoMa(maThuoc);
+		
+		PhieuNhapThuoc_Dao pntDao = new PhieuNhapThuoc_Impl();
+		PhieuNhapThuoc pnt = pntDao.timTheoMa(txtMaPNT.getText());
+		
+		ChiTietPhieuNhapThuoc ct = new ChiTietPhieuNhapThuoc(pnt, thuoc, sl, gia, LocalDate.parse(hsd), donVi,thanhTien);
 		ChiTietPhieuNhapThuoc_Dao ctDao = new ChiTietPhieuNhapThuoc_Impl();
 		if (ctDao.update(ct)) {
 			JOptionPane.showMessageDialog(this, "Sửa thành công.");
@@ -575,7 +601,7 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 
 	}
 
-	private void taoPhieu() {
+	private void taoPhieu() throws RemoteException {
 		if (checkDataPhieuNhap()) {
 			String maPNT = txtMaPNT.getText();
 			String maNV = txtMaNV.getText();
@@ -589,8 +615,22 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(this, "Mã nhân viên không tồn tại.");
 				return;
 			}
+			NhanVien nv = nvDao.getNhanVien(maNV);
+			
+			NhaCungCap_Dao nccDao = new NhaCungCap_Impl();
+			NhaCungCap ncc = nccDao.getNhaCungCap(maNCC);
+			
+			List<ChiTietPhieuNhapThuoc> list = new ArrayList<ChiTietPhieuNhapThuoc>();
+			for (ChiTietPhieuNhapThuoc ct : listCTPNT) {
+				tongTien += ct.getThanhTien();
+				list.add(ct);
+			}
+			
+			
+			
 
-			PhieuNhapThuoc pnt = new PhieuNhapThuoc(maPNT, maNCC, maNV, ngayNhap, tongTien, trangThai);
+			PhieuNhapThuoc pnt = new PhieuNhapThuoc(maPNT, ncc, nv, ngayNhap, tongTien, trangThai,null);
+			pnt.setListChiTiet(list);
 			PhieuNhapThuoc_Dao pntDao = new PhieuNhapThuoc_Impl();
 
 			if (pntDao.findMaPhieuNhap(maPNT)) {
@@ -700,7 +740,7 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 
 	}
 
-	private void addThuocDat() {
+	private void addThuocDat() throws RemoteException {
 
 		if (checkData()) {
 			String ma = cbbMaThuoc.getSelectedItem().toString();
@@ -711,8 +751,14 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 			String maCTPNT = txtMaCTPNT.getText();
 			Double thanhTien = giaNhap * soLuong;
 			// Thêm vào database
-			ChiTietPhieuNhapThuoc ct = new ChiTietPhieuNhapThuoc(maCTPNT, ma, soLuong, giaNhap, hsd, donVi, thanhTien);
-			ChiTietPhieuNhapThuoc_Dao ctDao = new ChiTietPhieuNhapThuoc_Dao();
+			Thuoc_Dao thuocDao = new Thuoc_Impl();
+			Thuoc thuoc = thuocDao.timTheoMa(ma);
+			
+			PhieuNhapThuoc_Dao pntDao = new PhieuNhapThuoc_Impl();
+			PhieuNhapThuoc pnt = pntDao.timTheoMa(txtMaPNT.getText());
+			
+			ChiTietPhieuNhapThuoc ct = new ChiTietPhieuNhapThuoc(pnt, thuoc, soLuong, giaNhap, hsd, donVi, thanhTien);
+			ChiTietPhieuNhapThuoc_Dao ctDao = new ChiTietPhieuNhapThuoc_Impl();
 			if (ctDao.findMaPhieuNhap(maCTPNT, ma)) {
 				JOptionPane.showMessageDialog(this, "Mã thuốc nhập đã tồn tại.");
 				return;
@@ -720,12 +766,12 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 			if (ctDao.create(ct)) {
 				JOptionPane.showMessageDialog(this, "Thêm thành công.");
 				// Cập nhật tổng tiền
-				PhieuNhapThuoc_Dao pntDao = new PhieuNhapThuoc_Impl();
-				PhieuNhapThuoc pnt = pntDao.timTheoMa(maCTPNT);
-				pnt.setTongTien(pnt.getTongTien() + thanhTien);
-				pntDao.updateTongTien(pnt);
+	
+				PhieuNhapThuoc p = pntDao.timTheoMa(maCTPNT);
+				pnt.setTongTien(p.getTongTien() + thanhTien);
+				pntDao.updateTongTien(p);
 				
-				String tongTien = String.valueOf(pnt.getTongTien());
+				String tongTien = String.valueOf(p.getTongTien());
 				txtTongTien.setText(tongTien);
 				// Cập nhật lại table
 				hienTable(maCTPNT);

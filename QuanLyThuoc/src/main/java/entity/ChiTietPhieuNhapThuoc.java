@@ -34,7 +34,7 @@ public class ChiTietPhieuNhapThuoc {
 	private double giaNhap;
 	
 	@Column(name = "hsd")
-	private String hsd;
+	private LocalDate hsd;
 	
 	@Column(name = "donVi")
 	private String donVi;
@@ -46,8 +46,11 @@ public class ChiTietPhieuNhapThuoc {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ChiTietPhieuNhapThuoc(PhieuNhapThuoc maPhieuNhap,Thuoc maThuoc,  int soLuong, double giaNhap, String hsd,
-			String donVi, double thanhTien) {
+	
+
+
+	public ChiTietPhieuNhapThuoc(PhieuNhapThuoc maPhieuNhap,Thuoc maThuoc,  int soLuong, double giaNhap,
+			LocalDate hsd, String donVi, double thanhTien) {
 		super();
 		this.maPhieuNhap = maPhieuNhap;
 		this.maThuoc = maThuoc;
@@ -101,11 +104,13 @@ public class ChiTietPhieuNhapThuoc {
 		this.giaNhap = giaNhap;
 	}
 
-	public String getHsd() {
+	
+
+	public LocalDate getHsd() {
 		return hsd;
 	}
 
-	public void setHsd(String hsd) {
+	public void setHsd(LocalDate hsd) {
 		this.hsd = hsd;
 	}
 

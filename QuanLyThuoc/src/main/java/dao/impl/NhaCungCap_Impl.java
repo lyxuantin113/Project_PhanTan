@@ -26,6 +26,31 @@ public class NhaCungCap_Impl extends UnicastRemoteObject implements NhaCungCap_D
 	public List<NhaCungCap> readFromTable() {
 		return em.createNamedQuery("NhaCungCap.readFromTable", NhaCungCap.class).getResultList();
     }
+
+	@Override
+	public boolean searchNCC(String maNCC) {
+		return em.createNamedQuery("NhaCungCap.searchNCC", NhaCungCap.class).setParameter("maNCC", maNCC).executeUpdate() > 0;
+	}
+
+	@Override
+	public void deleteNCC(String maNCC) {
+		em.getTransaction().begin();
+        em.createNamedQuery("NhaCungCap.deleteNCC", NhaCungCap.class).setParameter("maNCC", maNCC).executeUpdate();
+		
+	}
+
+	@Override
+	public void addNCC(NhaCungCap ncc) {
+		em.getTransaction().begin();
+		em.persist(ncc);
+		em.getTransaction().commit();
+		
+	}
+
+	@Override
+	public NhaCungCap getNhaCungCap(String maNCC) {
+		return em.createNamedQuery("NhaCungCap.getNhaCungCap", NhaCungCap.class).setParameter("maNCC", maNCC).getSingleResult();
+	}
 	
 
 }

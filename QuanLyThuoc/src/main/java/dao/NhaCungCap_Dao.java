@@ -9,4 +9,12 @@ public interface NhaCungCap_Dao extends Remote {
 
 	List<NhaCungCap> readFromTable();
 
+	boolean searchNCC(String maNCC);
+
+	void deleteNCC(String maNCC);
+
+	void addNCC(NhaCungCap ncc);
+
+	NhaCungCap getNhaCungCap(String maNCC);
+
 }
