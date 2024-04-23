@@ -131,6 +131,7 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener{
 
 	private void timKH() throws RemoteException {
 		String sdt = txtSDT.getText();
+		DefaultTableModel model = (DefaultTableModel) tbl.getModel();
 		if (sdt.equals("") || sdt == null) {
 			JOptionPane.showMessageDialog(null, "Vui lòng nhập số điện thoại khách hàng");
 			txtSDT.requestFocus();
@@ -142,22 +143,16 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener{
 			txtSDT.selectAll();
 			return;
 		} else {
-			// Tìm trong database
-			KhachHang_Dao khachHang_Dao = new KhachHang_Impl();
-			KhachHang kh = khachHang_Dao.findBySDT(sdt);
-			if (kh == null) {
-				JOptionPane.showMessageDialog(null, "Không tìm thấy khách hàng");
-				txtSDT.requestFocus();
-				txtSDT.selectAll();
-				return;
+			KhachHang_Dao khachHangDao = new KhachHang_Impl();
+			List<KhachHang> dsKH = khachHangDao.findBySDT2(sdt);
+			
+			if (dsKH.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Không tìm thấy khách hàng");
 			} else {
-				JOptionPane.showMessageDialog(null, "Tìm thấy khách hàng");
-				DefaultTableModel model = (DefaultTableModel) tbl.getModel();
-				for (int i = 0; i < model.getRowCount(); i++) {
-					if (model.getValueAt(i, 1).equals(sdt)) {
-						tbl.setRowSelectionInterval(i, i);
-						break;
-					}
+				model.setRowCount(0);
+				JOptionPane.showMessageDialog(this, "Tìm thấy ");
+				for (KhachHang kh : dsKH) {
+					model.addRow(new Object[] { kh.getMaKhachHang(), kh.getSoDienThoai(), kh.getTenKhachHang() });
 				}
 			}
 		}

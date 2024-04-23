@@ -86,8 +86,15 @@ public class KhachHang_Impl extends UnicastRemoteObject implements KhachHang_Dao
             tx.commit();
             return true;
         } catch (Exception e) {
-		return false;
+        	return false;
         }
+	}
+
+	@Override
+	public List<KhachHang> findBySDT2(String sdtKH) {
+		return em.createQuery("Select kh FROM KhachHang kh WHERE kh.soDienThoai = :soDienThoai", KhachHang.class)
+				.setParameter("soDienThoai", sdtKH)
+				.getResultList();
 	}
 
 

@@ -9,6 +9,7 @@ import dao.ChiTietDonDat_Dao;
 import dao.DonDat_Dao;
 import entity.ChiTietDonDat;
 import entity.DonDat;
+import entity.Thuoc;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
@@ -42,8 +43,9 @@ public class DonDat_Impl extends UnicastRemoteObject implements DonDat_Dao {
 
 	@Override
 	public boolean checkThuoc(String maThuoc) {
+		Thuoc temp = em.find(Thuoc.class, maThuoc);
 	    List<DonDat> result = em.createNamedQuery("DonDat.checkThuoc", DonDat.class)
-	                             .setParameter("maThuoc", maThuoc)
+	                             .setParameter("maThuoc", temp)
 	                             .getResultList();
 	    return !result.isEmpty();
 	}

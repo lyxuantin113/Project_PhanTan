@@ -16,6 +16,7 @@ import dao.KhachHang_Dao;
 import entity.ChiTietHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
+import entity.Thuoc;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
@@ -302,7 +303,8 @@ public class HoaDon_Impl extends UnicastRemoteObject implements HoaDon_Dao {
 
 	@Override
 	public boolean checkThuoc(String maThuoc) {
-		return em.createNamedQuery("HoaDon.checkThuoc", HoaDon.class).setParameter("maThuoc", maThuoc).getResultList()
+		Thuoc temp = em.find(Thuoc.class, maThuoc);
+		return em.createNamedQuery("HoaDon.checkThuoc", HoaDon.class).setParameter("maThuoc", temp).getResultList()
 				.size() > 0;
 
 	}

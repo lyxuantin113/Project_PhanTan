@@ -11,6 +11,8 @@ public interface KhachHang_Dao {
 	public KhachHang findById(String maKH);
 
 	public KhachHang findBySDT(String sdtKH);
+	
+	public List<KhachHang> findBySDT2(String sdtKH);
 
 	public List<KhachHang> getDSKH();
 

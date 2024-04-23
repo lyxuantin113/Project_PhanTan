@@ -16,7 +16,7 @@ import lombok.ToString;
 		@NamedQuery(name = "DonDat.findByMaNhanVien", query = "SELECT dd FROM DonDat dd WHERE dd.maNhanVien = :maNhanVien"),
 		@NamedQuery(name = "DonDat.findByNgayLap", query = "SELECT dd FROM DonDat dd WHERE dd.ngayLap = :ngayLap"),
 		@NamedQuery(name = "DonDat.findByNgayNhan", query = "SELECT dd FROM DonDat dd WHERE dd.ngayNhan = :ngayNhan"),
-		@NamedQuery(name = "DonDat.checkThuoc", query = "SELECT dd FROM DonDat dd JOIN dd.listChiTiet ct WHERE ct.maThuoc = :maThuoc AND dd.ngayNhan = :ngayNhan"),
+		@NamedQuery(name = "DonDat.checkThuoc", query = "SELECT dd FROM DonDat dd JOIN dd.listChiTiet ct WHERE ct.maThuoc = :maThuoc AND dd.ngayNhan > CURRENT_DATE()"),
 		@NamedQuery(name = "DonDat.deleteByID", query = "DELETE FROM DonDat dd WHERE dd.maDonDat = :maDonDat"),
 })
 public class DonDat {

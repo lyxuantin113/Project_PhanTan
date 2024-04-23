@@ -424,6 +424,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 				String maThuoc = txtMa.getText();
 				Thuoc_Dao thuocDao = new Thuoc_Impl();
 				thuocDao.deleteThuoc(maThuoc);
+				JOptionPane.showMessageDialog(this, "Xóa thành công");
 				xoaTrang();
 				hienTable();
 			}
@@ -438,7 +439,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 		DonDat_Dao donDatDao = new DonDat_Impl();
 		PhieuNhapThuoc_Dao phieuNhapThuocDao = new PhieuNhapThuoc_Impl();
 		
-		if (phieuNhapThuocDao.checkThuoc(maThuoc)) {
+		if (!phieuNhapThuocDao.checkThuoc(maThuoc)) {
 			JOptionPane.showMessageDialog(this, "Không thể xóa thuốc này vì có phiếu nhập thuốc chưa nhận tồn tại thuốc này");
 			return true;
 		}

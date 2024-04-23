@@ -226,12 +226,20 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 
 	private void timKiem() throws RemoteException {
 		String tim = txtTimKiem.getText();
+		if (tim.equals("")) {
+			JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa tìm kiếm");
+			return;
+		}
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		KhachHang_Dao khachHangDao = new KhachHang_Impl();
-		List<KhachHang> dsKH = khachHangDao.readFromTable();
-		for (KhachHang kh : dsKH) {
-			if (kh.getMaKhachHang().contains(tim) || kh.getSoDienThoai().contains(tim) || kh.getTenKhachHang().contains(tim)) {
+		List<KhachHang> dsKH = khachHangDao.findBySDT2(tim);
+		
+		if (dsKH.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Không tìm thấy khách hàng");
+		} else {
+			JOptionPane.showMessageDialog(this, "Tìm thấy ");
+			for (KhachHang kh : dsKH) {
 				model.addRow(new Object[] { kh.getMaKhachHang(), kh.getSoDienThoai(), kh.getTenKhachHang() });
 			}
 		}

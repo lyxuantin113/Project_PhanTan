@@ -34,4 +34,5 @@
     <fullyQualifiedTypeName name="java.rmi.RemoteException"/>
     <fullyQualifiedTypeName name="entity.TaiKhoan"/>
     <fullyQualifiedTypeName name="dao.impl.KhachHang_Impl"/>
+    <fullyQualifiedTypeName name="com.ctc.wstx.shaded.msv_core.datatype.xsd.StringType"/>
 </qualifiedTypeNameHistroy>

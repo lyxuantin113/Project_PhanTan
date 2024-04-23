@@ -336,20 +336,22 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 		int row = table.getSelectedRow();
 
 		String maPhieuNhap = table.getValueAt(row, 0).toString();
+		
 		DefaultTableModel model = (DefaultTableModel) table2.getModel();
 		model.setRowCount(0);
 		ChiTietPhieuNhapThuoc_Dao ctPNTDao = null;
 		try {
 			ctPNTDao = new ChiTietPhieuNhapThuoc_Impl();
+			List<ChiTietPhieuNhapThuoc> dsCTPNT =  ctPNTDao.readFromTable(maPhieuNhap);
+			for (ChiTietPhieuNhapThuoc ctPNT : dsCTPNT) {
+				Object[] rowData = { ctPNT.getMaThuoc(), ctPNT.getSoLuong(), ctPNT.getGiaNhap(), ctPNT.getHsd(),
+						ctPNT.getDonVi(), ctPNT.getThanhTien(), ctPNT.getMaPhieuNhap() };
+				model.addRow(rowData);
+			}
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
-		List<ChiTietPhieuNhapThuoc> dsCTPNT =  ctPNTDao.readFromTable(maPhieuNhap);
-		for (ChiTietPhieuNhapThuoc ctPNT : dsCTPNT) {
-			Object[] rowData = { ctPNT.getMaThuoc(), ctPNT.getSoLuong(), ctPNT.getGiaNhap(), ctPNT.getHsd(),
-					ctPNT.getDonVi(), ctPNT.getThanhTien(), ctPNT.getMaPhieuNhap() };
-			model.addRow(rowData);
-		}
+		
 
 	}
 

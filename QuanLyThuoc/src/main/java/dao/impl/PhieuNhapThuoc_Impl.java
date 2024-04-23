@@ -7,6 +7,7 @@ import java.util.List;
 import dao.PhieuNhapThuoc_Dao;
 import entity.HoaDon;
 import entity.PhieuNhapThuoc;
+import entity.Thuoc;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 
@@ -30,14 +31,22 @@ public class PhieuNhapThuoc_Impl extends UnicastRemoteObject implements PhieuNha
 
 	@Override
 	public void updateTrangThai(String maPhieuNhap) {
-		em.createNamedQuery("PhieuNhapThuoc.updateTrangThai", PhieuNhapThuoc.class).setParameter("maPhieuNhap", maPhieuNhap).executeUpdate();
-		
+	    PhieuNhapThuoc pnt = em.find(PhieuNhapThuoc.class, maPhieuNhap);
+	  
+	    if (pnt != null) {
+	        
+	        pnt.setTrangThai(false);
+	        
+	        em.merge(pnt);
+	    } else {
+	        System.out.println("Không tìm thấy phiếu nhập thuốc với mã: " + maPhieuNhap);
+	    }
 	}
-	
 	@Override
 	public boolean checkThuoc(String maThuoc) {
+		Thuoc temp = em.find(Thuoc.class, maThuoc);
 	    return em.createNamedQuery("PhieuNhapThuoc.checkThuoc", PhieuNhapThuoc.class)
-	             .setParameter("maThuoc", maThuoc)
+	             .setParameter("maThuoc", temp)
 	             .getResultList()
 	             .isEmpty();
 	}
