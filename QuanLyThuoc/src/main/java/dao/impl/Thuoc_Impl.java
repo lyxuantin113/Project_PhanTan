@@ -35,14 +35,17 @@ public class Thuoc_Impl extends UnicastRemoteObject implements Thuoc_Dao {
 
 	@Override
 	public boolean timTheoTen(String tenThuoc) {
-		return em.createQuery("Select t FROM Thuoc t WHERE t.tenThuoc = :tenThuoc", Thuoc.class)
-				.setParameter("tenThuoc", tenThuoc).executeUpdate() > 0;
+	    List<Thuoc> result = em.createQuery("SELECT t FROM Thuoc t WHERE t.tenThuoc = :tenThuoc", Thuoc.class)
+	                            .setParameter("tenThuoc", tenThuoc)
+	                            .getResultList();
+	    return !result.isEmpty();
 	}
-
 	@Override
 	public boolean timTheoLoai(String loaiThuoc) {
-		return em.createQuery("Select t FROM Thuoc t WHERE t.loaiThuoc = :loaiThuoc", Thuoc.class)
-				.setParameter("loaiThuoc", loaiThuoc).executeUpdate() > 0;
+	    List<Thuoc> result = em.createQuery("SELECT t FROM Thuoc t WHERE t.loaiThuoc = :loaiThuoc", Thuoc.class)
+	                            .setParameter("loaiThuoc", loaiThuoc)
+	                            .getResultList();
+	    return !result.isEmpty();
 	}
 
 	@Override
@@ -121,8 +124,10 @@ public class Thuoc_Impl extends UnicastRemoteObject implements Thuoc_Dao {
 
 	@Override
 	public boolean checkThuoc(String maThuoc) {
-		return em.createQuery("Select t FROM Thuoc t WHERE t.maThuoc = :maThuoc", Thuoc.class)
-				.setParameter("maThuoc", maThuoc).executeUpdate() > 0;
+	    List<Thuoc> result = em.createQuery("SELECT t FROM Thuoc t WHERE t.maThuoc = :maThuoc", Thuoc.class)
+	                            .setParameter("maThuoc", maThuoc)
+	                            .getResultList();
+	    return !result.isEmpty();
 	}
 
 	@Override
@@ -163,15 +168,17 @@ public class Thuoc_Impl extends UnicastRemoteObject implements Thuoc_Dao {
 
 	@Override
 	public boolean timTheoMaTuyetDoi(String thongTin) {
-		return em.createQuery("Select t FROM Thuoc t WHERE t.maThuoc = :maThuoc", Thuoc.class)
-				.setParameter("maThuoc", thongTin).executeUpdate() > 0;
-	
+	    List<Thuoc> result = em.createQuery("SELECT t FROM Thuoc t WHERE t.maThuoc = :maThuoc", Thuoc.class)
+	                            .setParameter("maThuoc", thongTin)
+	                            .getResultList();
+	    return !result.isEmpty();
 	}
-
 	@Override
 	public boolean timTheoNCC(String thongTin) {
-		return em.createQuery("Select t FROM Thuoc t WHERE t.maNCC = :maNCC", Thuoc.class)
-				.setParameter("maNCC", thongTin).executeUpdate() > 0;
+	    List<Thuoc> result = em.createQuery("SELECT t FROM Thuoc t WHERE t.maNCC = :maNCC", Thuoc.class)
+	                            .setParameter("maNCC", thongTin)
+	                            .getResultList();
+	    return !result.isEmpty();
 	}
 	
 

@@ -47,8 +47,12 @@ public class ChiTietPhieuNhapThuoc_Impl extends UnicastRemoteObject implements C
 
 	@Override
 	public boolean findMaPhieuNhap(String maCTPNT, String ma) {
-		return em.createNamedQuery("ChiTietPhieuNhapThuoc.findByMaPhieuNhap", ChiTietPhieuNhapThuoc.class).setParameter("maCTPNT", maCTPNT).setParameter("ma", ma).executeUpdate() > 0;
-    }
+	    List<ChiTietPhieuNhapThuoc> result = em.createNamedQuery("ChiTietPhieuNhapThuoc.findByMaPhieuNhap", ChiTietPhieuNhapThuoc.class)
+	                                            .setParameter("maCTPNT", maCTPNT)
+	                                            .setParameter("ma", ma)
+	                                            .getResultList();
+	    return !result.isEmpty();
+	}
 
 	@Override
 	public boolean create(ChiTietPhieuNhapThuoc ct) {

@@ -312,6 +312,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 		}
 		// add combobox
 		NhaCungCap_Dao nccDao = new NhaCungCap_Impl();
+		cbbNCC.removeAllItems();
 		List<NhaCungCap> dsNCC = nccDao.readFromTable();
 		for (NhaCungCap ncc : dsNCC) {
 			cbbNCC.addItem(ncc.getMaNCC());

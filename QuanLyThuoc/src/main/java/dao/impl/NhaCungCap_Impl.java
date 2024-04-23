@@ -29,7 +29,10 @@ public class NhaCungCap_Impl extends UnicastRemoteObject implements NhaCungCap_D
 
 	@Override
 	public boolean searchNCC(String maNCC) {
-		return em.createNamedQuery("NhaCungCap.searchNCC", NhaCungCap.class).setParameter("maNCC", maNCC).executeUpdate() > 0;
+	    List<NhaCungCap> result = em.createNamedQuery("NhaCungCap.searchNCC", NhaCungCap.class)
+	                                .setParameter("maNCC", maNCC)
+	                                .getResultList();
+	    return !result.isEmpty();
 	}
 
 	@Override

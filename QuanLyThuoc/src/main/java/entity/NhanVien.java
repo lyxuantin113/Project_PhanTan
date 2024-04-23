@@ -18,7 +18,6 @@ public class NhanVien implements Serializable {
 
 	@Id
 	@Column(name = "maNhanVien")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String maNhanVien;
 
 	@Column(name = "tenNhanVien", nullable = false)

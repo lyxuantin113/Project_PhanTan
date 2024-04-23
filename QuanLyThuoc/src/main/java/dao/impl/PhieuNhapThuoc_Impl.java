@@ -33,22 +33,28 @@ public class PhieuNhapThuoc_Impl extends UnicastRemoteObject implements PhieuNha
 		em.createNamedQuery("PhieuNhapThuoc.updateTrangThai", PhieuNhapThuoc.class).setParameter("maPhieuNhap", maPhieuNhap).executeUpdate();
 		
 	}
-
+	
 	@Override
 	public boolean checkThuoc(String maThuoc) {
-		return em.createNamedQuery("PhieuNhapThuoc.checkThuoc", PhieuNhapThuoc.class).setParameter("maThuoc", maThuoc).executeUpdate() > 0;
-		
+	    return em.createNamedQuery("PhieuNhapThuoc.checkThuoc", PhieuNhapThuoc.class)
+	             .setParameter("maThuoc", maThuoc)
+	             .getResultList()
+	             .isEmpty();
+	}
+	@Override
+	public boolean delete(String maPNT) {
+	    List<PhieuNhapThuoc> result = em.createNamedQuery("PhieuNhapThuoc.delete", PhieuNhapThuoc.class)
+	                                    .setParameter("maPNT", maPNT)
+	                                    .getResultList();
+	    return !result.isEmpty();
 	}
 
 	@Override
-	public boolean delete(String maPNT) {
-		return em.createNamedQuery("PhieuNhapThuoc.delete", PhieuNhapThuoc.class).setParameter("maPNT", maPNT).executeUpdate() > 0;
-    }
-
-	@Override
 	public boolean findMaPhieuNhap(String maPNT) {
-		return em.createNamedQuery("PhieuNhapThuoc.findByMaPhieuNhap", PhieuNhapThuoc.class).setParameter("maPNT", maPNT).executeUpdate() > 0;
-		
+	    List<PhieuNhapThuoc> result = em.createNamedQuery("PhieuNhapThuoc.findByMaPhieuNhap", PhieuNhapThuoc.class)
+	                                    .setParameter("maPNT", maPNT)
+	                                    .getResultList();
+	    return !result.isEmpty();
 	}
 
 	@Override
