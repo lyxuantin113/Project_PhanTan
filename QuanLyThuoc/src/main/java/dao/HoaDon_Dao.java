@@ -1,6 +1,7 @@
 package dao;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -69,7 +70,7 @@ public interface HoaDon_Dao extends Remote {
 	public List<HoaDon> findinDay(LocalDate ngayLap);
 
 //	Phương thức thống kê top 3 khách hàng có số đơn hàng nhiều nhất
-	public List<HoaDon> thongKeKHTiemNang();
+	public List<HoaDon> thongKeKHTiemNang() throws RemoteException;
 
 //	Phương thức thống kê nhân viên chăm chỉ
 	public List<HoaDon> thongKeNVChamChi();

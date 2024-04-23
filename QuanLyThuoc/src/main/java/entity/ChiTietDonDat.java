@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 @NamedQueries({
 		@NamedQuery(name = "ChiTietDonDat.findByID", query = "SELECT ctdd FROM ChiTietDonDat cthd WHERE ctdd.maHoaDon = :maHoaDon"),
 		@NamedQuery(name = "ChiTietDonDat.deleteOne", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maThuoc = :maThuoc"),
-		@NamedQuery(name = "", query = ""), })
+		@NamedQuery(name = "ChiTietDonDat.deleteByID", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maDonDat = :maDonDat"), })
 public class ChiTietDonDat implements Serializable {
 
 	private static final long serialVersionUID = 1254786925698547852L;

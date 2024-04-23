@@ -2,9 +2,12 @@ package dao.impl;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDate;
+import java.util.List;
 
 import dao.ChiTietDonDat_Dao;
 import dao.DonDat_Dao;
+import entity.ChiTietDonDat;
 import entity.DonDat;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -40,5 +43,51 @@ public class DonDat_Impl extends UnicastRemoteObject implements DonDat_Dao {
 	@Override
 	public boolean checkThuoc(String maThuoc) {
 		return em.createNamedQuery("DonDat.checkThuoc", DonDat.class).setParameter("maThuoc", maThuoc).executeUpdate() > 0;
+	}
+
+	@Override
+	public DonDat findByID(String maDonDat) {
+		return em.createNamedQuery("DonDat.findByMaDonDat", DonDat.class).setParameter("maDonDat", maDonDat).getSingleResult();
+	}
+
+	@Override
+	public List<DonDat> readFromTable() {
+		return em.createNamedQuery("DonDat.findAll", DonDat.class).getResultList();
+	}
+
+	@Override
+	public double tinhTongTien(DonDat donDat) {
+		double doanhThu = 0;
+		if (donDat.getListChiTiet() != null) {
+			for (ChiTietDonDat chiTietDonDat : donDat.getListChiTiet()) {
+				doanhThu += chiTietDonDat.getMaThuoc().getGiaBan() * chiTietDonDat.getSoLuong();
+			}
+		} else {
+			doanhThu = 0;
+		}
+		return doanhThu;
+	}
+
+	@Override
+	public List<DonDat> findByNhanVien(String textFind) {
+		return em.createNamedQuery("DonDat.findByMaNhanVien", DonDat.class).setParameter("maNhanVien", textFind)
+				.getResultList();
+	}
+
+	@Override
+	public List<DonDat> findByNgayLap(LocalDate textFindDate) {
+		return em.createNamedQuery("DonDat.findByNgayLap", DonDat.class).setParameter("ngayLap", textFindDate)
+				.getResultList();
+	}
+
+	@Override
+	public List<DonDat> findByNgayNhan(LocalDate textFindDate) {
+		return em.createNamedQuery("DonDat.findByNgayNhan", DonDat.class).setParameter("ngayNhan", textFindDate)
+				.getResultList();
+	}
+
+	@Override
+	public boolean deleteByID(String maDonDat) {
+		return em.createNamedQuery("DonDat.deleteByID", DonDat.class).setParameter("maDonDat", maDonDat).executeUpdate() > 0;
 	}
 }

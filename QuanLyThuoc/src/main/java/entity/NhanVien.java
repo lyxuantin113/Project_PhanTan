@@ -1,39 +1,43 @@
 package entity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "NhanVien")
-public class NhanVien {
+@NamedQueries({ // JPQL
+		@NamedQuery(name = "NhanVien.findAll", query = "select n from NhanVien n"),
+		@NamedQuery(name = "NhanVien.findByTenNV", query = "select n from NhanVien n where c.tenNhanVien like :tenNhanVien"),
+		})
+public class NhanVien implements Serializable {
 
 	@Id
 	@Column(name = "maNhanVien")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String maNhanVien;
 
-	@Column(name = "tenNhanVien")
+	@Column(name = "tenNhanVien", nullable = false)
 	private String tenNhanVien;
 
-	@Column(name = "soDienThoai")
+	@Column(name = "soDienThoai", unique = true, nullable = false)
 	private String soDienThoai;
 
-	@Column(name = "chucVu")
+	@Column(name = "chucVu", nullable = false)
 	private String chucVu;
 
 	@Column(name = "email")
 	private String email;
 
-	public NhanVien() {
-		// TODO Auto-generated constructor stub
-	}
+	@OneToMany(mappedBy = "NhanVien", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<HoaDon> listHoaDon = new HashSet<>();
 
-	public NhanVien(String maNhanVien, String tenNhanVien, String soDienThoai, String chucVu, String email) {
-		super();
-		this.maNhanVien = maNhanVien;
-		this.tenNhanVien = tenNhanVien;
-		this.soDienThoai = soDienThoai;
-		this.chucVu = chucVu;
-		this.email = email;
-	}
+	@OneToMany(mappedBy = "NhanVien", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<DonDat> listDonDatThuoc = new HashSet<>();
 
 	public String getMaNhanVien() {
 		return maNhanVien;
@@ -75,10 +79,40 @@ public class NhanVien {
 		this.email = email;
 	}
 
+	public Set<HoaDon> getListHoaDon() {
+		return listHoaDon;
+	}
+
+	public void setListHoaDon(Set<HoaDon> listHoaDon) {
+		this.listHoaDon = listHoaDon;
+	}
+
+	public Set<DonDat> getListDonDatThuoc() {
+		return listDonDatThuoc;
+	}
+
+	public void setListDonDatThuoc(Set<DonDat> listDonDatThuoc) {
+		this.listDonDatThuoc = listDonDatThuoc;
+	}
+
+	public NhanVien(String maNhanVien, String tenNhanVien, String soDienThoai, String chucVu, String email) {
+		super();
+		this.maNhanVien = maNhanVien;
+		this.tenNhanVien = tenNhanVien;
+		this.soDienThoai = soDienThoai;
+		this.chucVu = chucVu;
+		this.email = email;
+	}
+
+	public NhanVien() {
+		super();
+	}
+
 	@Override
 	public String toString() {
 		return "NhanVien [maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", soDienThoai=" + soDienThoai
 				+ ", chucVu=" + chucVu + ", email=" + email + "]";
 	}
+
 
 }

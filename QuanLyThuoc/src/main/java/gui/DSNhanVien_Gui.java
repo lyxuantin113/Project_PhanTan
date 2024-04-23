@@ -11,12 +11,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 
 import dao.NhanVien_Dao;
 import dao.TaiKhoan_Dao;
-import db.ConnectDB;
+import dao.impl.NhanVien_Impl;
+import dao.impl.TaiKhoan_Impl;
 import entity.NhanVien;
 import entity.TaiKhoan;
 
@@ -34,12 +36,13 @@ public class DSNhanVien_Gui extends JPanel implements ActionListener, MouseListe
 	private JTextField txtTenNV;
 	private JTextField txtMaNV;
 	private JTextField txtEmail;
-	private NhanVien_Dao dsNV = new NhanVien_Dao();
 	private DefaultTableModel modelNhanVien;
 	private JTable tableNhanVien;
 
-	private TaiKhoan_Dao dsTK = new TaiKhoan_Dao();
-	public DSNhanVien_Gui() {
+	public DSNhanVien_Gui() throws RemoteException {
+		
+		
+		
 //				JPANEL
 		JPanel pnMain = new JPanel();
 		pnMain.setLayout(new BorderLayout());
@@ -177,15 +180,16 @@ public class DSNhanVien_Gui extends JPanel implements ActionListener, MouseListe
 		btnXoa.addActionListener(this);
 		btnSua.addActionListener(this);
 		tableNhanVien.addMouseListener(this);
-		ConnectDB.connect();
+		
 
 		hienTable();
 	}
 
-	private void hienTable() {
+	private void hienTable() throws RemoteException{
+		NhanVien_Dao dsNV = new NhanVien_Impl();
 		modelNhanVien.setRowCount(0);
 		for (NhanVien n : dsNV.docTuBang()) {
-			String[] dataRow = { n.getMaNV(), n.getTenNV(), n.getSdtNV(), n.getChucVu(), n.getEmail() };
+			String[] dataRow = { n.getMaNhanVien(), n.getTenNhanVien(), n.getSoDienThoai(), n.getChucVu(), n.getEmail() };
 			modelNhanVien.addRow(dataRow);
 		}
 	}
@@ -232,7 +236,7 @@ public class DSNhanVien_Gui extends JPanel implements ActionListener, MouseListe
 
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
-
+		
 		if (o == btnThem) {
 			String ma = txtMaNV.getText();
 			String ten = txtTenNV.getText();
@@ -252,18 +256,25 @@ public class DSNhanVien_Gui extends JPanel implements ActionListener, MouseListe
 				txtMaNV.requestFocus();
 			}
 			if (check() == true) {
-				if (dsNV.createNhanVien(n)) {
-							String taiKhoan = n.getMaNV();
-							String matKhau = taiKhoan.substring(2, 5);
-							TaiKhoan tk = new TaiKhoan(taiKhoan, matKhau, n);
-							dsTK.createTaiKhoan(tk);
-					String[] row = { n.getMaNV() + "", n.getTenNV() + "", n.getSdtNV() + "", n.getChucVu() + "",
-							n.getEmail() + "", };
-					modelNhanVien.addRow(row);
-					xoaRong();
-				} else {
-					JOptionPane.showMessageDialog(null, "Không được thêm mã trùng!");
+				try {
+					NhanVien_Dao dsNV = new NhanVien_Impl();
+					TaiKhoan_Dao dsTK = new TaiKhoan_Impl();
+					if (dsNV.createNhanVien(n)) {
+								String taiKhoan = n.getMaNhanVien();
+								String matKhau = taiKhoan.substring(2, 5);
+								TaiKhoan tk = new TaiKhoan(n, taiKhoan, matKhau);
+								dsTK.createTaiKhoan(tk);
+						String[] row = { n.getMaNhanVien() + "", n.getTenNhanVien() + "", n.getSoDienThoai() + "", n.getChucVu() + "",
+								n.getEmail() + "", };
+						modelNhanVien.addRow(row);
+						xoaRong();
+					} else {
+						JOptionPane.showMessageDialog(null, "Không được thêm mã trùng!");
+					}
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
 				}
+				
 			}
 //			} catch (Exception e2) {
 //				JOptionPane.showMessageDialog(null, "Nhập liệu lỗi!");
@@ -271,21 +282,28 @@ public class DSNhanVien_Gui extends JPanel implements ActionListener, MouseListe
 		} else if (o == btnXoaRong) {
 			xoaRong();
 		} else if (o == btnXoa) {
-			int row = tableNhanVien.getSelectedRow();
-			if (row != -1) {
-				String maNV = (String) tableNhanVien.getModel().getValueAt(row, 0);
-				int hoiNhac = JOptionPane.showConfirmDialog(this,
-						"Chắn chắn xóa?\n*Bạn muốn xóa nhân viên này?",
-						"Chú ý", JOptionPane.YES_NO_OPTION);
-				if (hoiNhac == JOptionPane.YES_OPTION)
-					if (dsNV.deleteNhanVien(maNV)) {
-//						dsTK.deleteTaiKhoan(maNV);
-						modelNhanVien.removeRow(row);
-						xoaRong();
-					}
+			try {
+				int row = tableNhanVien.getSelectedRow();
+				NhanVien_Dao dsNV = new NhanVien_Impl();
+				TaiKhoan_Dao dsTK = new TaiKhoan_Impl();
+				if (row != -1) {
+					String maNV = (String) tableNhanVien.getModel().getValueAt(row, 0);
+					int hoiNhac = JOptionPane.showConfirmDialog(this,
+							"Chắn chắn xóa?\n*Bạn muốn xóa nhân viên này?",
+							"Chú ý", JOptionPane.YES_NO_OPTION);
+					if (hoiNhac == JOptionPane.YES_OPTION)
+						if (dsNV.deleteNhanVien(maNV)) {
+							dsTK.deleteTaiKhoan(maNV);
+							modelNhanVien.removeRow(row);
+							xoaRong();
+						}
+				}
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
 			}
 		} else if (o == btnSua) {
 			try {
+				NhanVien_Dao dsNV = new NhanVien_Impl();
 				int row = tableNhanVien.getSelectedRow();
 				String ma = txtMaNV.getText();
 				String ten = txtTenNV.getText();
