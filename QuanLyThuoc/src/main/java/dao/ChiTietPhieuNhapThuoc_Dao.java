@@ -1,11 +1,10 @@
 package dao;
 
-import java.rmi.Remote;
 import java.util.List;
 
 import entity.ChiTietPhieuNhapThuoc;
 
-public interface ChiTietPhieuNhapThuoc_Dao extends Remote {
+public interface ChiTietPhieuNhapThuoc_Dao {
 
 	List<ChiTietPhieuNhapThuoc> readFromTable(String maPhieuNhap);
 

@@ -1,12 +1,10 @@
 package dao;
 
-import java.rmi.Remote;
-import java.time.LocalDate;
 import java.util.List;
 
 import entity.Thuoc;
 
-public interface Thuoc_Dao extends Remote {
+public interface Thuoc_Dao {
 
 	public Thuoc timTheoMa(String maThuoc);
 

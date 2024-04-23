@@ -1,13 +1,12 @@
 package dao;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.List;
 
 import entity.HoaDon;
 
-public interface HoaDon_Dao extends Remote {
+public interface HoaDon_Dao {
 	public List<HoaDon> findAll();
 
 	public void addHoaDon(HoaDon hoaDon);

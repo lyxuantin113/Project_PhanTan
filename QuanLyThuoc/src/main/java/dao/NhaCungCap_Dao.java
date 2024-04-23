@@ -1,11 +1,10 @@
 package dao;
 
-import java.rmi.Remote;
 import java.util.List;
 
 import entity.NhaCungCap;
 
-public interface NhaCungCap_Dao extends Remote {
+public interface NhaCungCap_Dao {
 
 	List<NhaCungCap> readFromTable();
 

@@ -17,17 +17,21 @@
     <fullyQualifiedTypeName name="jakarta.persistence.FetchType"/>
     <fullyQualifiedTypeName name="jakarta.persistence.NamedQueries"/>
     <fullyQualifiedTypeName name="jakarta.persistence.NamedQuery"/>
-    <fullyQualifiedTypeName name="java.rmi.RemoteException"/>
     <fullyQualifiedTypeName name="dao.impl.DonDat_Impl"/>
     <fullyQualifiedTypeName name="dao.impl.HoaDon_Ipml"/>
     <fullyQualifiedTypeName name="dao.impl.ChiTietPhieuNhapThuoc_Impl"/>
     <fullyQualifiedTypeName name="dao.impl.PhieuNhapThuoc_Impl"/>
-    <fullyQualifiedTypeName name="dao.impl.NhanVien_Impl"/>
     <fullyQualifiedTypeName name="dao.impl.NhaCungCap_Impl"/>
-    <fullyQualifiedTypeName name="dao.impl.KhachHang_Impl"/>
     <fullyQualifiedTypeName name="dao.impl.Thuoc_Impl"/>
     <fullyQualifiedTypeName name="dao.impl.HoaDon_Impl"/>
     <fullyQualifiedTypeName name="dao.PhieuNhapThuoc_Dao"/>
     <fullyQualifiedTypeName name="entity.NhanVien"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="dao.impl.TaiKhoan_Impl"/>
+    <fullyQualifiedTypeName name="dao.TaiKhoan_Dao"/>
+    <fullyQualifiedTypeName name="dao.NhanVien_Dao"/>
+    <fullyQualifiedTypeName name="dao.impl.NhanVien_Impl"/>
+    <fullyQualifiedTypeName name="java.rmi.RemoteException"/>
+    <fullyQualifiedTypeName name="entity.TaiKhoan"/>
+    <fullyQualifiedTypeName name="dao.impl.KhachHang_Impl"/>
 </qualifiedTypeNameHistroy>

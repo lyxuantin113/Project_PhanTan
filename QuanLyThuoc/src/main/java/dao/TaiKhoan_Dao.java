@@ -1,14 +1,13 @@
 package dao;
 
-import java.rmi.Remote;
-import java.util.List;
-
-import entity.NhanVien;
+import java.rmi.RemoteException;
 import entity.TaiKhoan;
 
 
-public interface TaiKhoan_Dao extends Remote {
-	public boolean createTaiKhoan(TaiKhoan tk);
+public interface TaiKhoan_Dao {
+	public boolean createTaiKhoan(TaiKhoan tk) throws RemoteException;
 	
-	public boolean deleteTaiKhoan(String maNV);
+	public boolean deleteTaiKhoan(String maNV)  throws RemoteException;
+
+	public TaiKhoan getTKById(String maNV);
 }

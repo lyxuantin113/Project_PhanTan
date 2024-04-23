@@ -1,12 +1,11 @@
 package dao;
 
-import java.rmi.Remote;
 import java.time.LocalDate;
 import java.util.List;
 
 import entity.DonDat;
 
-public interface DonDat_Dao extends Remote{
+public interface DonDat_Dao {
 	public boolean addDonDat(DonDat donDat);
 	
 	public DonDat findByID(String maDonDat);

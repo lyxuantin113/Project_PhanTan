@@ -1,0 +1,45 @@
+package dao;
+
+import java.rmi.Remote;
+import java.time.LocalDate;
+import java.util.List;
+
+import entity.Thuoc;
+
+public interface Thuoc_Dao extends Remote {
+
+	public Thuoc timTheoMa(String maThuoc);
+
+	public List<Thuoc> findAll();
+
+	public boolean timTheoTen(String tenThuoc);
+
+	public boolean timTheoLoai(String loaiThuoc);
+
+	public Thuoc findByName(String tenThuoc);
+
+	public void updateThuocQuatity(String maThuoc, int soLuong);
+
+	public void updateTTThuoc(Thuoc thuoc);
+
+	public void updateThuoc(Thuoc thuoc);
+
+	public void deleteThuoc(String maThuoc);
+
+	public boolean checkThuoc(String maThuoc);
+
+	public void addThuoc(Thuoc thuoc);
+
+	public Thuoc[] getDSTByNCC(String maNCC);
+
+	public Thuoc readFromTable(String string);
+
+	public boolean searchNCC(String maNCC);
+
+	public boolean timTheoMaTuyetDoi(String thongTin);
+
+	public boolean timTheoNCC(String thongTin);
+
+	
+
+}

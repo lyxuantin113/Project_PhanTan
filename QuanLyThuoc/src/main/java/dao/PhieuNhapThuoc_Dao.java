@@ -1,11 +1,10 @@
 package dao;
 
-import java.rmi.Remote;
 import java.util.List;
 
 import entity.PhieuNhapThuoc;
 
-public interface PhieuNhapThuoc_Dao extends Remote {
+public interface PhieuNhapThuoc_Dao {
 
 	List<PhieuNhapThuoc> readFromTableSort();
 	void updateTrangThai(String maPhieuNhap);

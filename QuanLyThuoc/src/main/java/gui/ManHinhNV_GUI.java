@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.rmi.RemoteException;
 
 import javax.swing.*;
 
@@ -11,11 +12,11 @@ public class ManHinhNV_GUI extends JFrame {
 	private CardLayout cardLayout;
 	private JPanel cardPanel;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws RemoteException {
 		new ManHinhNV_GUI();
 	}
 
-	public ManHinhNV_GUI() {
+	public ManHinhNV_GUI() throws RemoteException {
 		super("Hệ Thống Quản Lý Hiệu Thuốc");
 		setSize(1800, 1080);
 		setVisible(true);

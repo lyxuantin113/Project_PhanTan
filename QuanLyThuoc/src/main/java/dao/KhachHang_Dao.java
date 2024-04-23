@@ -1,11 +1,10 @@
 package dao;
 
-import java.rmi.Remote;
 import java.util.List;
 
 import entity.KhachHang;
 
-public interface KhachHang_Dao extends Remote {
+public interface KhachHang_Dao {
 
 	public void addKhachHang(KhachHang kh);
 
