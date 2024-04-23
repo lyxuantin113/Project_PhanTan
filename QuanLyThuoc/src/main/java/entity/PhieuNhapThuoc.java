@@ -20,11 +20,11 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "PhieuNhapThuoc.readFromTableSort", query = "SELECT pnt FROM PhieuNhapThuoc pnt ORDER BY pnt.trangThai DESC, pnt.ngayNhap ASC"),
     @NamedQuery(name = "PhieuNhapThuoc.updateTrangThai", query = "UPDATE PhieuNhapThuoc pnt SET pnt.trangThai = 1 WHERE pnt.maPhieuNhap = :maPhieuNhap"),
     @NamedQuery(name = "PhieuNhapThuoc.findByMaPhieuNhap", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.maPhieuNhap = :maPhieuNhap"),
-    @NamedQuery(name = "PhieuNhapThuoc.findByMaNCC", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.maNCC = :maNCC"),
-    @NamedQuery(name = "PhieuNhapThuoc.findByMaNV", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.maNV = :maNV"),
+//    @NamedQuery(name = "PhieuNhapThuoc.findByMaNCC", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.maNCC = :maNCC"),
+//    @NamedQuery(name = "PhieuNhapThuoc.findByMaNV", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.maNV = :maNV"),
     @NamedQuery(name = "PhieuNhapThuoc.findByNgayNhap", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.ngayNhap = :ngayNhap"),
     @NamedQuery(name = "PhieuNhapThuoc.findByTongTien", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.tongTien = :tongTien"),
-    @NamedQuery(name= "PhieuNhapThuoc.checkThuoc", query = "SELECT pnt FROM PhieuNhapThuoc pnt JOIN pnt.listChiTiet ct WHERE ct.maThuoc = :maThuoc AND pnt.trangThai = 0"),
+    @NamedQuery(name= "PhieuNhapThuoc.checkThuoc", query = "SELECT pnt FROM PhieuNhapThuoc pnt JOIN pnt.listChiTiet ct WHERE ct.maThuoc = :maThuoc AND pnt.trangThai = false"),
     @NamedQuery(name = "PhieuNhapThuoc.delete", query = "DELETE FROM PhieuNhapThuoc pnt WHERE pnt.maPhieuNhap = :maPhieuNhap"),
     
 })

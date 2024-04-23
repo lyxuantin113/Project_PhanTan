@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "ChiTietPhieuNhapThuoc")
 @NamedQueries({
-		@NamedQuery(name = "ChiTietPhieuNhapThuoc.readFromTable", query = "SELECT * FROM ChiTietPhieuNhapThuoc"),
+		@NamedQuery(name = "ChiTietPhieuNhapThuoc.readFromTable", query = "SELECT c FROM ChiTietPhieuNhapThuoc c"),
 		@NamedQuery(name = "ChiTietPhieuNhapThuoc.update", query = "UPDATE ChiTietPhieuNhapThuoc SET soLuong = :soLuong, giaNhap = :giaNhap, hsd = :hsd, donVi = :donVi, thanhTien = :thanhTien WHERE maThuoc = :maThuoc AND maPhieuNhap = :maPhieuNhap"),
 		@NamedQuery(name = "ChiTietPhieuNhapThuoc.delete", query = "DELETE FROM ChiTietPhieuNhapThuoc WHERE maThuoc = :maThuoc AND maPhieuNhap = :maPhieuNhap"),
 		@NamedQuery(name = "ChiTietPhieuNhapThuoc.findMaPhieuNhap" , query = "SELECT ct FROM ChiTietPhieuNhapThuoc ct WHERE ct.maPhieuNhap = :maPhieuNhap"),

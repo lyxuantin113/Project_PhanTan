@@ -12,7 +12,7 @@ import jakarta.persistence.*;
 @Table(name = "NhanVien")
 @NamedQueries({ // JPQL
 		@NamedQuery(name = "NhanVien.findAll", query = "select n from NhanVien n"),
-		@NamedQuery(name = "NhanVien.findByTenNV", query = "select n from NhanVien n where c.tenNhanVien like :tenNhanVien"),
+		@NamedQuery(name = "NhanVien.findByTenNV", query = "select n from NhanVien n where n.tenNhanVien like :tenNhanVien"),
 		})
 public class NhanVien implements Serializable {
 
