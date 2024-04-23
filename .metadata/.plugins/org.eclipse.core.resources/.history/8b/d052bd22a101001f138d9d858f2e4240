@@ -18,6 +18,7 @@ import jakarta.persistence.Table;
 @Table(name = "PhieuNhapThuoc")
 @NamedQueries({ 
     @NamedQuery(name = "PhieuNhapThuoc.readFromTableSort", query = "SELECT pnt FROM PhieuNhapThuoc pnt ORDER BY pnt.trangThai DESC, pnt.ngayNhap ASC"),
+    @NamedQuery(name = "PhieuNhapThuoc.updateTrangThai", query = "UPDATE PhieuNhapThuoc pnt SET pnt.trangThai = 1 WHERE pnt.maPhieuNhap = :maPhieuNhap"),
     @NamedQuery(name = "PhieuNhapThuoc.findByMaPhieuNhap", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.maPhieuNhap = :maPhieuNhap"),
 //    @NamedQuery(name = "PhieuNhapThuoc.findByMaNCC", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.maNCC = :maNCC"),
 //    @NamedQuery(name = "PhieuNhapThuoc.findByMaNV", query = "SELECT pnt FROM PhieuNhapThuoc pnt WHERE pnt.maNV = :maNV"),
