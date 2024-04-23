@@ -8,7 +8,9 @@ import dao.ChiTietPhieuNhapThuoc_Dao;
 import entity.ChiTietPhieuNhapThuoc;
 import entity.PhieuNhapThuoc;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceException;
 
 public class ChiTietPhieuNhapThuoc_Impl extends UnicastRemoteObject implements ChiTietPhieuNhapThuoc_Dao {
 
@@ -59,14 +61,17 @@ public class ChiTietPhieuNhapThuoc_Impl extends UnicastRemoteObject implements C
 
 	@Override
 	public boolean create(ChiTietPhieuNhapThuoc ct) {
-		return em.createNamedQuery("ChiTietPhieuNhapThuoc.create", ChiTietPhieuNhapThuoc.class)
-				.setParameter("maPhieuNhap", ct.getMaPhieuNhap())
-				.setParameter("maThuoc", ct.getMaThuoc())
-				.setParameter("soLuong", ct.getSoLuong())
-				.setParameter("giaNhap", ct.getGiaNhap())
-				.setParameter("hsd", ct.getHsd())
-				.setParameter("thanhTien", ct.getThanhTien())
-				.executeUpdate() > 0;
+		EntityTransaction tx = em.getTransaction();
+	    try {
+	    	tx.begin();
+			em.persist(ct);
+			tx.commit();
+	        return true; 
+	    } catch (PersistenceException e) {
+	        
+	        e.printStackTrace();
+	        return false; 
+	    }
 	}
 	
 
