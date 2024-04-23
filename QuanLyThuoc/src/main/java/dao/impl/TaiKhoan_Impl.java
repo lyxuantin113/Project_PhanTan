@@ -2,9 +2,13 @@ package dao.impl;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 import dao.TaiKhoan_Dao;
+import entity.NhanVien;
+import entity.TaiKhoan;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
 public class TaiKhoan_Impl extends UnicastRemoteObject implements TaiKhoan_Dao {
@@ -20,4 +24,43 @@ public class TaiKhoan_Impl extends UnicastRemoteObject implements TaiKhoan_Dao {
 		em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
 	}
 
+	@Override
+	public boolean createTaiKhoan(TaiKhoan tk) {
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			
+			em.persist(tk);
+			
+			tx.commit();
+			
+			return true;
+		}catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean deleteTaiKhoan(String manv) {
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			TaiKhoan tk = em.find(TaiKhoan.class, manv);
+			em.remove(manv);
+			
+			tx.commit();
+			
+			return true;
+		}catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
+	
 }

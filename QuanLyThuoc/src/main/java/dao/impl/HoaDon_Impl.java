@@ -3,12 +3,19 @@ package dao.impl;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import dao.ChiTietHoaDon_Dao;
 import dao.HoaDon_Dao;
+import dao.KhachHang_Dao;
 import entity.ChiTietHoaDon;
 import entity.HoaDon;
+import entity.KhachHang;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
@@ -100,93 +107,169 @@ public class HoaDon_Impl extends UnicastRemoteObject implements HoaDon_Dao {
 
 	@Override
 	public List<HoaDon> findXByY(String maNV, String maKH) {
-		return em.createNamedQuery("HoaDon.findXYinYear", HoaDon.class).setParameter("maNhanVien", maNV)
+		return em.createNamedQuery("HoaDon.findXByY", HoaDon.class).setParameter("maNhanVien", maNV)
 				.setParameter("maKhachHang", maKH).getResultList();
 	}
 
 	@Override
 	public List<HoaDon> findNV(String maNV) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("HoaDon.findByMaNhanVien", HoaDon.class).setParameter("maNhanVien", maNV)
+				.getResultList();
 	}
 
 	@Override
 	public List<HoaDon> findNVinYear(LocalDate ngayLap, String maNV) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("HoaDon.findXYinYear", HoaDon.class).setParameter("maNhanVien", maNV)
+				.setParameter("year", ngayLap.getYear()).getResultList();
 	}
 
 	@Override
 	public List<HoaDon> findNVinMonth(LocalDate ngayLap, String maNV) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("HoaDon.findXYinMonth", HoaDon.class).setParameter("maNhanVien", maNV)
+				.setParameter("year", ngayLap.getYear()).setParameter("month", ngayLap.getMonthValue()).getResultList();
 	}
 
 	@Override
 	public List<HoaDon> findNVinDay(LocalDate ngayLap, String maNV) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("HoaDon.findTKFullField", HoaDon.class).setParameter("maNhanVien", maNV)
+				.setParameter("ngayLap", ngayLap).getResultList();
 	}
 
 	@Override
 	public List<HoaDon> findKH(String maKH) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("HoaDon.findByMaKhachHang", HoaDon.class).setParameter("maKhachHang", maKH)
+				.getResultList();
 	}
 
 	@Override
 	public List<HoaDon> findKHinYear(LocalDate ngayLap, String maKH) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("HoaDon.findXYinYear", HoaDon.class).setParameter("maKhachHang", maKH)
+				.setParameter("year", ngayLap.getYear()).getResultList();
 	}
 
 	@Override
 	public List<HoaDon> findKHinMonth(LocalDate ngayLap, String maKH) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("HoaDon.findXYinMonth", HoaDon.class).setParameter("maKhachHang", maKH)
+				.setParameter("year", ngayLap.getYear()).setParameter("month", ngayLap.getMonthValue()).getResultList();
 	}
 
 	@Override
 	public List<HoaDon> findKHinDay(LocalDate ngayLap, String maKH) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("HoaDon.findTKFullField", HoaDon.class).setParameter("maKhachHang", maKH)
+				.setParameter("ngayLap", ngayLap).getResultList();
 	}
 
 	@Override
 	public List<HoaDon> findinYear(LocalDate ngayLap) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("HoaDon.findXYinYear", HoaDon.class).setParameter("year", ngayLap.getYear())
+				.getResultList();
 	}
 
 	@Override
 	public List<HoaDon> findinMonth(LocalDate ngayLap) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("HoaDon.findXYinMonth", HoaDon.class).setParameter("year", ngayLap.getYear())
+				.setParameter("month", ngayLap.getMonthValue()).getResultList();
 	}
 
 	@Override
 	public List<HoaDon> findinDay(LocalDate ngayLap) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("HoaDon.findTKFullField", HoaDon.class).setParameter("ngayLap", ngayLap)
+				.getResultList();
 	}
 
-	@Override
-	public List<HoaDon> thongKeKHTiemNang() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// Phương thức thống kê top 3 khách hàng có số đơn hàng nhiều nhất
+		public List<HoaDon> thongKeKHTiemNang() throws RemoteException {
+			// Khởi tạo một map để lưu số đơn hàng của mỗi khách hàng
+			Map<String, Integer> khachHangCountMap = new HashMap<>();
 
-	@Override
-	public List<HoaDon> thongKeNVChamChi() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+			// Lấy danh sách tất cả các hóa đơn từ cơ sở dữ liệu
+			List<HoaDon> allHoaDon = findAll();
 
-	@Override
-	public List<HoaDon> thongKeLoiNhuanCaoNhat() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+			// Đếm số đơn hàng của mỗi khách hàng
+			for (HoaDon hoaDon : allHoaDon) {
+				String maKH = hoaDon.getMaKhachHang().getMaKhachHang();
+				if (!maKH.equals("KH00000"))
+					khachHangCountMap.put(maKH, khachHangCountMap.getOrDefault(maKH, 0) + 1);
+			}
+
+			// Sắp xếp theo số đơn hàng giảm dần và chọn ra khách hàng tiềm năng có số đơn
+			// hàng cao nhất
+			Optional<Map.Entry<String, Integer>> topKhachHangEntry = khachHangCountMap.entrySet().stream()
+					.sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue())).findFirst();
+
+			List<HoaDon> topHoaDonList = new ArrayList<>(); // Danh sách hóa đơn của khách hàng tiềm năng có số đơn hàng cao
+															// nhất
+
+			// Nếu có khách hàng tiềm năng, tạo danh sách hóa đơn chứa thông tin của khách
+			// hàng đó
+			if (topKhachHangEntry.isPresent()) {
+				String topMaKH = topKhachHangEntry.get().getKey();
+				KhachHang_Dao khachHangDao = new KhachHang_Impl();
+				KhachHang topKhachHang = khachHangDao.findById(topMaKH);
+
+				// Lọc danh sách hóa đơn theo mã khách hàng tiềm năng
+				topHoaDonList = allHoaDon.stream().filter(hoaDon -> hoaDon.getMaKhachHang().getMaKhachHang().equals(topMaKH))
+						.collect(Collectors.toList());
+			}
+
+			return topHoaDonList;
+		}
+
+		public List<HoaDon> thongKeNVChamChi() {
+			// Khởi tạo một map để lưu số đơn hàng của mỗi nhân viên
+			Map<String, Integer> nhanVienCountMap = new HashMap<>();
+
+			// Lấy danh sách tất cả các hóa đơn từ cơ sở dữ liệu
+			List<HoaDon> allHoaDon = findAll();
+
+			// Đếm số đơn hàng của mỗi nhân viên
+			for (HoaDon hoaDon : allHoaDon) {
+				String maNV = hoaDon.getMaNhanVien().getMaNhanVien();
+				if (!maNV.equals("NV000"))
+					nhanVienCountMap.put(maNV, nhanVienCountMap.getOrDefault(maNV, 0) + 1);
+			}
+
+			// Sắp xếp theo số đơn hàng giảm dần và chọn ra top 3 nhân viên lập số đơn nhiều
+			// nhất
+			Optional<Map.Entry<String, Integer>> topNhanVienEntry = nhanVienCountMap.entrySet().stream()
+					.sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue())).findFirst();
+
+			List<HoaDon> topHoaDonList = new ArrayList<>(); // Danh sách hóa đơn của nhân viên lập số đơn hàng nhiều nhất
+
+			// Nếu có nhân viên lập số đơn hàng nhiều nhất, tạo danh sách hóa đơn của nhân
+			// viên đó
+			if (topNhanVienEntry.isPresent()) {
+				String topMaNV = topNhanVienEntry.get().getKey();
+
+				// Lọc danh sách hóa đơn theo mã của nhân viên lập số đơn hàng nhiều nhất
+				topHoaDonList = allHoaDon.stream().filter(hoaDon -> hoaDon.getMaNhanVien().getMaNhanVien().equals(topMaNV))
+						.collect(Collectors.toList());
+			}
+
+			return topHoaDonList;
+		}
+
+		public List<HoaDon> thongKeLoiNhuanCaoNhat() {
+			// Khởi tạo một map để lưu lợi nhuận của mỗi đơn hàng
+			Map<String, Double> loiNhuanMap = new HashMap<>();
+
+			// Lấy danh sách tất cả các hóa đơn từ cơ sở dữ liệu
+			List<HoaDon> allHoaDon = findAll();
+
+			// Tính lợi nhuận cho mỗi đơn hàng
+			for (HoaDon hoaDon : allHoaDon) {
+				double loiNhuan = tinhLoiNhuanChoHoaDon(hoaDon);
+				loiNhuanMap.put(hoaDon.getMaHoaDon(), loiNhuan);
+			}
+
+			// Sắp xếp theo lợi nhuận giảm dần và chọn ra top 3 đơn hàng có lợi nhuận cao
+			// nhất
+			List<HoaDon> top3HoaDon = loiNhuanMap.entrySet().stream()
+					.sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue())).limit(3).map(e -> findById(e.getKey()))
+					.collect(Collectors.toList());
+
+			return top3HoaDon;
+		}
 
 	@Override
 	public double tinhTongTien(HoaDon hoaDon) {
@@ -219,7 +302,8 @@ public class HoaDon_Impl extends UnicastRemoteObject implements HoaDon_Dao {
 
 	@Override
 	public boolean checkThuoc(String maThuoc) {
-		return em.createNamedQuery("HoaDon.checkThuoc", HoaDon.class).setParameter("maThuoc", maThuoc).getResultList().size() > 0;
-		
+		return em.createNamedQuery("HoaDon.checkThuoc", HoaDon.class).setParameter("maThuoc", maThuoc).getResultList()
+				.size() > 0;
+
 	}
 }

@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -24,7 +25,9 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import dao.NhanVien_Dao;
-import db.ConnectDB;
+import dao.TaiKhoan_Dao;
+import dao.impl.NhanVien_Impl;
+import dao.impl.TaiKhoan_Impl;
 import entity.NhanVien;
 
 public class TimNhanVien_Gui extends JPanel implements ActionListener {
@@ -32,8 +35,7 @@ public class TimNhanVien_Gui extends JPanel implements ActionListener {
 	private JButton bntTim;
 	private JTable tableNhanVien;
 	private DefaultTableModel modelNhanVien;
-	private NhanVien_Dao dsNV = new NhanVien_Dao();
-	public TimNhanVien_Gui() {
+	public TimNhanVien_Gui() throws RemoteException {
 //				JPANEL
 		JPanel pnMain = new JPanel();
 		pnMain.setLayout(new BorderLayout());
@@ -90,7 +92,6 @@ public class TimNhanVien_Gui extends JPanel implements ActionListener {
 
 		bntTim.addActionListener(this);
 		bntXoaRong.addActionListener(this);
-		ConnectDB.connect();
 
 		hienTable();
 	}
@@ -105,26 +106,27 @@ public class TimNhanVien_Gui extends JPanel implements ActionListener {
 		}
 
 	}
-	private void hienTable() {
+	private void hienTable() throws RemoteException {
 		modelNhanVien.setRowCount(0);
+		NhanVien_Dao dsNV = new NhanVien_Impl();
 		for (NhanVien n : dsNV.docTuBang()) {
-			String[] dataRow = { n.getMaNV(), n.getTenNV(), n.getSdtNV(), n.getChucVu(), n.getEmail() };
+			String[] dataRow = { n.getMaNhanVien(), n.getTenNhanVien(), n.getSoDienThoai(), n.getChucVu(), n.getEmail() };
 			modelNhanVien.addRow(dataRow);
 		}
 	}
 	private void timAction() {
-		String searchName = JOptionPane.showInputDialog(this, "Nhập mã nhân viên cần tìm kiếm:");
+		String searchName = JOptionPane.showInputDialog(this, "Nhập tên nhân viên cần tìm kiếm:");
 
 		if (searchName == null || searchName.trim().isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Vui lòng nhập mã nhân viên .");
+			JOptionPane.showMessageDialog(this, "Vui lòng nhập tên nhân viên .");
 			return;
 		}
 		for (int i = 0; i < tableNhanVien.getRowCount(); i++) {
-			String maNV = (String) tableNhanVien.getValueAt(i, 0);
+			String ten = (String) tableNhanVien.getValueAt(i, 1);
 
-			if (maNV.equalsIgnoreCase(searchName)) {
+			if (ten.equalsIgnoreCase(searchName)) {
 				tableNhanVien.setRowSelectionInterval(i, i);
-				tableNhanVien.scrollRectToVisible(tableNhanVien.getCellRect(i, 0, true));
+				tableNhanVien.scrollRectToVisible(tableNhanVien.getCellRect(i, 1, true));
 				return;
 			}
 		}

@@ -26,7 +26,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import dao.HoaDon_Dao;
 import dao.KhachHang_Dao;
 import dao.NhanVien_Dao;
-import dao.impl.ChiTietHoaDon_Ipml;
 import dao.impl.HoaDon_Impl;
 //import dao.ThongKe_Dao;
 import entity.HoaDon;
@@ -71,7 +70,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	private JButton btnXemThongKe;
 
 //	private ThongKe_Dao dsTK = new ThongKe_Ipml();
-	private HoaDon_Dao dsHD = new HoaDon_Impl();
+//	private HoaDon_Dao dsHD = new HoaDon_Impl();
 	private Box boxBoLocBtn;
 	private JLabel lblKhachHang;
 	private JLabel lblNhanVien;
@@ -84,7 +83,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	private JTextField txtTongLoi;
 	private JButton btnIn;
 
-	public XemThongKe_Gui() {
+	public XemThongKe_Gui() throws RemoteException {
 
 //		JPANEL
 		pnlMain = new JPanel();
@@ -294,8 +293,9 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	 Trong phương thức hienTable()
-	public void hienTable() {
-		List<HoaDon> danhSachHoaDon = dsHD.readFromTable();
+	public void hienTable() throws RemoteException {
+		HoaDon_Dao dsHD = new HoaDon_Impl();
+		List<HoaDon> danhSachHoaDon = dsHD.findAll();
 
 		// Xóa các dòng hiện tại trên bảng trước khi cập nhật dữ liệu mới
 		model.setRowCount(0);
@@ -390,7 +390,12 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnXemThongKe) {
-			checkThongKe();
+			try {
+				checkThongKe();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (e.getSource() == btnXoaRong) {
 			// Xóa rỗng Combobox của năm
@@ -442,7 +447,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	        e.printStackTrace();
 	    }
 	}
-	public void checkThongKe() {
+	public void checkThongKe() throws RemoteException {
 		String checkNam = cbbNam.getSelectedItem() != null ? cbbNam.getSelectedItem().toString() : "";
 		String checkThang = cbbThang.getSelectedItem() != null ? cbbThang.getSelectedItem().toString() : "";
 		String checkNgay = cbbNgay.getSelectedItem() != null ? cbbNgay.getSelectedItem().toString() : "";
@@ -636,7 +641,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Top 3 Đơn hàng có lợi nhuận cao nhất
-	private void thongKeLoiNhuanCaoNhat() {
+	private void thongKeLoiNhuanCaoNhat() throws RemoteException {
 		HoaDon_Dao hdDao = new HoaDon_Impl();
 		List<HoaDon> listHD = hdDao.thongKeLoiNhuanCaoNhat();
 
@@ -665,7 +670,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 //  Khách Hàng X và Nhân Viên Y
 
 //	Thống kê đơn của KH X được lập bởi NV Y theo ngày
-	private void thongKeFullField() {
+	private void thongKeFullField() throws RemoteException {
 		int nam = Integer.parseInt(cbbNam.getSelectedItem().toString());
 		int thang = Integer.parseInt(cbbThang.getSelectedItem().toString());
 		int ngay = Integer.parseInt(cbbNgay.getSelectedItem().toString());
@@ -700,7 +705,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Thống kê đơn của KH X được lập bởi NV Y theo tháng
-	private void thongKeXYinMonth() {
+	private void thongKeXYinMonth() throws RemoteException {
 		int nam = Integer.parseInt(cbbNam.getSelectedItem().toString());
 		int thang = Integer.parseInt(cbbThang.getSelectedItem().toString());
 		String maNV = cbbNhanVien.getSelectedItem().toString();
@@ -734,7 +739,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Thống kê đơn của KH X được lập bởi NV Y theo năm
-	private void thongKeXYinYear() {
+	private void thongKeXYinYear() throws RemoteException {
 		int nam = Integer.parseInt(cbbNam.getSelectedItem().toString());
 		String maNV = cbbNhanVien.getSelectedItem().toString();
 		String maKH = cbbKhachHang.getSelectedItem().toString();
@@ -767,7 +772,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 	
 //	Thống kê đơn của KH X được lập bởi NV Y 
-	private void thongKeXY() {
+	private void thongKeXY() throws RemoteException {
 		String maNV = cbbNhanVien.getSelectedItem().toString();
 		String maKH = cbbKhachHang.getSelectedItem().toString();
 
@@ -799,7 +804,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 //	Khách Hàng
 
 //	Thống kê đơn của KH theo ngày
-	private void thongKeKHinDay() {
+	private void thongKeKHinDay() throws RemoteException {
 		int nam = Integer.parseInt(cbbNam.getSelectedItem().toString());
 		int thang = Integer.parseInt(cbbThang.getSelectedItem().toString());
 		int ngay = Integer.parseInt(cbbNgay.getSelectedItem().toString());
@@ -834,7 +839,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Thống kê đơn của KH theo tháng
-	private void thongKeKHinMonth() {
+	private void thongKeKHinMonth() throws RemoteException {
 		int nam = Integer.parseInt(cbbNam.getSelectedItem().toString());
 		int thang = Integer.parseInt(cbbThang.getSelectedItem().toString());
 		String maKH = cbbKhachHang.getSelectedItem().toString();
@@ -868,7 +873,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Thống kê đơn của KH theo năm
-	private void thongKeKHinYear() {
+	private void thongKeKHinYear() throws RemoteException {
 		int nam = Integer.parseInt(cbbNam.getSelectedItem().toString());
 		String maKH = cbbKhachHang.getSelectedItem().toString();
 
@@ -900,7 +905,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Thống kê tất cả đơn của KH
-	private void thongKeKH() {
+	private void thongKeKH() throws RemoteException {
 		String maKH = cbbKhachHang.getSelectedItem().toString();
 
 		HoaDon_Dao hdDao = new HoaDon_Impl();
@@ -932,7 +937,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 //	Nhân Viên
 
 //	Thống kê đơn Nhân Viên lập theo ngày
-	private void thongKeNVinDay() {
+	private void thongKeNVinDay() throws RemoteException {
 		int nam = Integer.parseInt(cbbNam.getSelectedItem().toString());
 		int thang = Integer.parseInt(cbbThang.getSelectedItem().toString());
 		int ngay = Integer.parseInt(cbbNgay.getSelectedItem().toString());
@@ -967,7 +972,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Thống kê đơn Nhân Viên lập theo tháng
-	private void thongKeNVinMonth() {
+	private void thongKeNVinMonth() throws RemoteException {
 		int nam = Integer.parseInt(cbbNam.getSelectedItem().toString());
 		int thang = Integer.parseInt(cbbThang.getSelectedItem().toString());
 		String maNV = cbbNhanVien.getSelectedItem().toString();
@@ -1001,7 +1006,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Thống kê đơn Nhân Viên lập theo năm
-	private void thongKeNVinYear() {
+	private void thongKeNVinYear() throws RemoteException {
 		int nam = Integer.parseInt(cbbNam.getSelectedItem().toString());
 		String maNV = cbbNhanVien.getSelectedItem().toString();
 
@@ -1034,7 +1039,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Thống kê tất cả đơn Nhân Viên đã lập
-	private void thongKeNV() {
+	private void thongKeNV() throws RemoteException {
 		String maNV = cbbNhanVien.getSelectedItem().toString();
 
 		HoaDon_Dao hdDao = new HoaDon_Impl();
@@ -1066,7 +1071,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 //	Đơn hàng
 
 //	Thống kê đơn theo ngày
-	private void thongKeDonInNgay() {
+	private void thongKeDonInNgay() throws RemoteException {
 		int nam = Integer.parseInt(cbbNam.getSelectedItem().toString());
 		int thang = Integer.parseInt(cbbThang.getSelectedItem().toString());
 		int ngay = Integer.parseInt(cbbNgay.getSelectedItem().toString());
@@ -1100,7 +1105,7 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Thống kê đơn theo tháng
-	private void thongKeDonInMonth() {
+	private void thongKeDonInMonth() throws RemoteException {
 		int nam = Integer.parseInt(cbbNam.getSelectedItem().toString());
 		int thang = Integer.parseInt(cbbThang.getSelectedItem().toString());
 
@@ -1165,10 +1170,10 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	}
 
 //	Thống kê tất cả các đơn
-	private void thongKeDon() {
+	private void thongKeDon() throws RemoteException {
 
 		HoaDon_Dao hdDao = new HoaDon_Impl();
-		List<HoaDon> listHD = hdDao.readFromTable();
+		List<HoaDon> listHD = hdDao.findAll();
 
 		if (listHD != null) {
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
