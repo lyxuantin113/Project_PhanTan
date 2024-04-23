@@ -43,16 +43,17 @@ public class PhieuNhapThuoc_Impl extends UnicastRemoteObject implements PhieuNha
 	}
 	@Override
 	public boolean delete(String maPNT) {
-	    List<PhieuNhapThuoc> result = em.createNamedQuery("PhieuNhapThuoc.delete", PhieuNhapThuoc.class)
-	                                    .setParameter("maPNT", maPNT)
-	                                    .getResultList();
-	    return !result.isEmpty();
+	    em.getTransaction().begin();
+	    int rowsAffected = em.createNamedQuery("PhieuNhapThuoc.delete")
+	                         .setParameter("maPhieuNhap", maPNT)
+	                         .executeUpdate();
+	    em.getTransaction().commit();
+	    return rowsAffected > 0;
 	}
-
 	@Override
 	public boolean findMaPhieuNhap(String maPNT) {
 	    List<PhieuNhapThuoc> result = em.createNamedQuery("PhieuNhapThuoc.findByMaPhieuNhap", PhieuNhapThuoc.class)
-	                                    .setParameter("maPNT", maPNT)
+	                                    .setParameter("maPhieuNhap", maPNT)
 	                                    .getResultList();
 	    return !result.isEmpty();
 	}

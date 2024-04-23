@@ -162,8 +162,12 @@ public class Thuoc_Impl extends UnicastRemoteObject implements Thuoc_Dao {
 
 	@Override
 	public boolean searchNCC(String maNCC) {
-		return em.createQuery("Select t FROM Thuoc t WHERE t.maNCC = :maNCC", Thuoc.class).setParameter("maNCC", maNCC)
-				.executeUpdate() > 0;
+	    List<Thuoc> result = em.createQuery(
+	            "SELECT t FROM Thuoc t WHERE t.maNCC = :maNCC", 
+	            Thuoc.class)
+	        .setParameter("maNCC", maNCC)
+	        .getResultList();
+	    return !result.isEmpty();
 	}
 
 	@Override

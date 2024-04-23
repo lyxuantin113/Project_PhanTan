@@ -31,7 +31,7 @@ public class NhanVien_Impl extends UnicastRemoteObject implements NhanVien_Dao {
 
 	@Override
 	public boolean maNhanVienDaTonTai(String maNV) {
-		return em.createQuery("Select nv FROM NhanVien nv WHERE nv.maNV = :maNV", NhanVien.class).setParameter("maNV", maNV).getSingleResult() != null;
+		return em.createQuery("Select nv FROM NhanVien nv WHERE nv.maNhanVien = :maNV", NhanVien.class).setParameter("maNV", maNV).getSingleResult() != null;
                
     }
 	@Override

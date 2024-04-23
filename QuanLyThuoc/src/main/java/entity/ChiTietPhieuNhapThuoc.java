@@ -8,10 +8,11 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "ChiTietPhieuNhapThuoc")
 @NamedQueries({
-		@NamedQuery(name = "ChiTietPhieuNhapThuoc.readFromTable", query = "SELECT c FROM ChiTietPhieuNhapThuoc c"),
+		@NamedQuery(name = "ChiTietPhieuNhapThuoc.readFromTable", query = "SELECT c FROM ChiTietPhieuNhapThuoc c WHERE c.maPhieuNhap = :maPhieuNhap"),
 		@NamedQuery(name = "ChiTietPhieuNhapThuoc.update", query = "UPDATE ChiTietPhieuNhapThuoc SET soLuong = :soLuong, giaNhap = :giaNhap, hsd = :hsd, donVi = :donVi, thanhTien = :thanhTien WHERE maThuoc = :maThuoc AND maPhieuNhap = :maPhieuNhap"),
 		@NamedQuery(name = "ChiTietPhieuNhapThuoc.delete", query = "DELETE FROM ChiTietPhieuNhapThuoc WHERE maThuoc = :maThuoc AND maPhieuNhap = :maPhieuNhap"),
 		@NamedQuery(name = "ChiTietPhieuNhapThuoc.findMaPhieuNhap" , query = "SELECT ct FROM ChiTietPhieuNhapThuoc ct WHERE ct.maPhieuNhap = :maPhieuNhap"),
+		@NamedQuery(name = "ChiTietPhieuNhapThuoc.findByMaPhieuNhap" , query = "SELECT ct FROM ChiTietPhieuNhapThuoc ct WHERE ct.maPhieuNhap = :maPhieuNhap AND ct.maThuoc = :maThuoc"),
 		@NamedQuery(name = "ChiTietPhieuNhapThuoc.create", query = "INSERT INTO ChiTietPhieuNhapThuoc(maThuoc, maPhieuNhap, soLuong, giaNhap, hsd, donVi, thanhTien) VALUES(:maThuoc, :maPhieuNhap, :soLuong, :giaNhap, :hsd, :donVi, :thanhTien)")
 })
 public class ChiTietPhieuNhapThuoc {

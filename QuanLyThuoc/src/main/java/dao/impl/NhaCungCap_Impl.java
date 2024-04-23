@@ -37,9 +37,11 @@ public class NhaCungCap_Impl extends UnicastRemoteObject implements NhaCungCap_D
 
 	@Override
 	public void deleteNCC(String maNCC) {
-		em.getTransaction().begin();
-        em.createNamedQuery("NhaCungCap.deleteNCC", NhaCungCap.class).setParameter("maNCC", maNCC).executeUpdate();
-		
+	    em.getTransaction().begin();
+	    em.createNamedQuery("NhaCungCap.deleteNCC")
+	      .setParameter("maNCC", maNCC)
+	      .executeUpdate();
+	    em.getTransaction().commit();
 	}
 
 	@Override
@@ -52,7 +54,7 @@ public class NhaCungCap_Impl extends UnicastRemoteObject implements NhaCungCap_D
 
 	@Override
 	public NhaCungCap getNhaCungCap(String maNCC) {
-		return em.createNamedQuery("NhaCungCap.getNhaCungCap", NhaCungCap.class).setParameter("maNCC", maNCC).getSingleResult();
+		return em.createNamedQuery("NhaCungCap.getNCC", NhaCungCap.class).setParameter("maNCC", maNCC).getSingleResult();
 	}
 	
 
