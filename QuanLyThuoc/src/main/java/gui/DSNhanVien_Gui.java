@@ -292,10 +292,11 @@ public class DSNhanVien_Gui extends JPanel implements ActionListener, MouseListe
 							"Chắn chắn xóa?\n*Bạn muốn xóa nhân viên này?",
 							"Chú ý", JOptionPane.YES_NO_OPTION);
 					if (hoiNhac == JOptionPane.YES_OPTION)
-						if (dsNV.deleteNhanVien(maNV)) {
-							dsTK.deleteTaiKhoan(maNV);
-							modelNhanVien.removeRow(row);
-							xoaRong();
+						if (dsTK.deleteTaiKhoan(maNV)) {
+							if (dsNV.deleteNhanVien(maNV)) {
+								modelNhanVien.removeRow(row);
+								xoaRong();
+							}
 						}
 				}
 			} catch (RemoteException e1) {
