@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 @NamedQueries({
 	@NamedQuery(name = "ChiTietHoaDon.findByID", query = "SELECT cthd FROM ChiTietHoaDon cthd WHERE cthd.maHoaDon = :maHoaDon"),
 	@NamedQuery(name = "ChiTietHoaDon.deleteOne", query = "DELETE FROM ChiTietHoaDon cthd WHERE cthd.maThuoc = :maThuoc"),
-	@NamedQuery(name = "", query = ""),
 })
 public class ChiTietHoaDon {
 

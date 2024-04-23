@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Table(name = "ChiTietDonDat")
 
 @NamedQueries({
-		@NamedQuery(name = "ChiTietDonDat.findByID", query = "SELECT ctdd FROM ChiTietDonDat cthd WHERE ctdd.maHoaDon = :maHoaDon"),
+		@NamedQuery(name = "ChiTietDonDat.findByID", query = "SELECT ctdd FROM ChiTietDonDat ctdd WHERE ctdd.maDonDat = :maDonDat"),
 		@NamedQuery(name = "ChiTietDonDat.deleteOne", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maThuoc = :maThuoc"),
 		@NamedQuery(name = "ChiTietDonDat.deleteByID", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maDonDat = :maDonDat"), })
 public class ChiTietDonDat implements Serializable {

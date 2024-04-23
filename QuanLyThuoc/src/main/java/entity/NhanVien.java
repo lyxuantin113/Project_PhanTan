@@ -33,11 +33,11 @@ public class NhanVien implements Serializable {
 	@Column(name = "email")
 	private String email;
 
-	@OneToMany(mappedBy = "NhanVien", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<HoaDon> listHoaDon = new HashSet<>();
-
-	@OneToMany(mappedBy = "NhanVien", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<DonDat> listDonDatThuoc = new HashSet<>();
+//	@OneToMany(mappedBy = "NhanVien", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private Set<HoaDon> listHoaDon = new HashSet<>();
+//
+//	@OneToMany(mappedBy = "NhanVien", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private Set<DonDat> listDonDatThuoc = new HashSet<>();
 
 	public String getMaNhanVien() {
 		return maNhanVien;
@@ -79,21 +79,21 @@ public class NhanVien implements Serializable {
 		this.email = email;
 	}
 
-	public Set<HoaDon> getListHoaDon() {
-		return listHoaDon;
-	}
-
-	public void setListHoaDon(Set<HoaDon> listHoaDon) {
-		this.listHoaDon = listHoaDon;
-	}
-
-	public Set<DonDat> getListDonDatThuoc() {
-		return listDonDatThuoc;
-	}
-
-	public void setListDonDatThuoc(Set<DonDat> listDonDatThuoc) {
-		this.listDonDatThuoc = listDonDatThuoc;
-	}
+//	public Set<HoaDon> getListHoaDon() {
+//		return listHoaDon;
+//	}
+//
+//	public void setListHoaDon(Set<HoaDon> listHoaDon) {
+//		this.listHoaDon = listHoaDon;
+//	}
+//
+//	public Set<DonDat> getListDonDatThuoc() {
+//		return listDonDatThuoc;
+//	}
+//
+//	public void setListDonDatThuoc(Set<DonDat> listDonDatThuoc) {
+//		this.listDonDatThuoc = listDonDatThuoc;
+//	}
 
 	public NhanVien(String maNhanVien, String tenNhanVien, String soDienThoai, String chucVu, String email) {
 		super();
