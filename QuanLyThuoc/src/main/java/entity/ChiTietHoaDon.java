@@ -1,24 +1,27 @@
 package entity;
 
+import java.io.Serializable;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ChiTietHoaDon")
 @NamedQueries({
-	@NamedQuery(name = "ChiTietHoaDon.findByID", query = "SELECT cthd FROM ChiTietHoaDon cthd WHERE cthd.maHoaDon = :maHoaDon"),
-	@NamedQuery(name = "ChiTietHoaDon.deleteOne", query = "DELETE FROM ChiTietHoaDon cthd WHERE cthd.maThuoc = :maThuoc"),
+	@NamedQuery(name = "ChiTietHoaDon.findByID", query = "SELECT cthd FROM ChiTietHoaDon cthd WHERE cthd.maHoaDon.maHoaDon = :maHoaDon"),
+	@NamedQuery(name = "ChiTietHoaDon.deleteOne", query = "DELETE FROM ChiTietHoaDon cthd WHERE cthd.maThuoc.maThuoc = :maThuoc"),
 })
-public class ChiTietHoaDon {
+public class ChiTietHoaDon implements Serializable {
 
+	private static final long serialVersionUID = 1254786925698545872L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY , cascade = CascadeType.ALL)
 	@JoinColumn(name = "maHoaDon")
 	private HoaDon maHoaDon;
 
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY , cascade = CascadeType.ALL)
 	@JoinColumn(name = "maThuoc")
 	private Thuoc maThuoc;
 

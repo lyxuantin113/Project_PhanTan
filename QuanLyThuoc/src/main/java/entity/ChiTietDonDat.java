@@ -8,9 +8,9 @@ import jakarta.persistence.*;
 @Table(name = "ChiTietDonDat")
 
 @NamedQueries({
-		@NamedQuery(name = "ChiTietDonDat.findByID", query = "SELECT ctdd FROM ChiTietDonDat ctdd WHERE ctdd.maDonDat = :maDonDat"),
-		@NamedQuery(name = "ChiTietDonDat.deleteOne", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maThuoc = :maThuoc"),
-		@NamedQuery(name = "ChiTietDonDat.deleteByID", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maDonDat = :maDonDat"), })
+		@NamedQuery(name = "ChiTietDonDat.findByID", query = "SELECT ctdd FROM ChiTietDonDat ctdd WHERE ctdd.maDonDat.maDonDat = :maDonDat"),
+		@NamedQuery(name = "ChiTietDonDat.deleteOne", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maThuoc.maThuoc = :maThuoc"),
+		@NamedQuery(name = "ChiTietDonDat.deleteByID", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maDonDat.maDonDat = :maDonDat"), })
 public class ChiTietDonDat implements Serializable {
 
 	private static final long serialVersionUID = 1254786925698547852L;
@@ -19,11 +19,11 @@ public class ChiTietDonDat implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY , cascade = CascadeType.ALL)
 	@JoinColumn(name = "maDonDat")
 	private DonDat maDonDat;
 
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY , cascade = CascadeType.ALL)
 	@JoinColumn(name = "maThuoc")
 	private Thuoc maThuoc;
 

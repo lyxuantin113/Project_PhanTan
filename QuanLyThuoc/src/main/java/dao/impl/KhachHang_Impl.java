@@ -48,8 +48,7 @@ public class KhachHang_Impl extends UnicastRemoteObject implements KhachHang_Dao
 
 	@Override
 	public KhachHang findBySDT(String sdtKH) {
-		return em.createQuery("Select kh FROM KhachHang kh WHERE kh.soDienThoai = :soDienThoai", KhachHang.class)
-				.setParameter("soDienThoai", sdtKH)
+		return em.createNamedQuery("KhachHang.findKhachHangBySDT", KhachHang.class).setParameter("soDienThoai", sdtKH)
 				.getSingleResult();
 	}
 

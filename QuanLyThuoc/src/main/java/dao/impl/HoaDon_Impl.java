@@ -51,6 +51,7 @@ public class HoaDon_Impl extends UnicastRemoteObject implements HoaDon_Dao {
 		}
 	}
 
+	
 	@Override
 	public HoaDon findById(String maHoaDon) {
 		return em.find(HoaDon.class, maHoaDon);

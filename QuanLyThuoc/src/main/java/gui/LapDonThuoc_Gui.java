@@ -427,11 +427,12 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 		txtSoLuong.setText("");
 		txtMaNV.setText("");
 		txtTenKH.setText("");
-		txtSDT.setText("");
+//		txtSDT.setText("");
 		txtTenThuoc.setText("");
 		txtLoaiThuoc.setText("");
 		txtDonVi.setText("");
 		txtHSD.setText("");
+		txtTong.setText("");
 		txtMaThuoc.requestFocus();
 	}
 
@@ -526,7 +527,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 		NhanVien_Dao nvDao;
 		try {
 			nvDao = new NhanVien_Impl();
-			if (nvDao.getNhanVien(maNV) != null) {
+			if (nvDao.getNhanVien(maNV) == null) {
 				JOptionPane.showMessageDialog(this, "Lưu ý: Mã nhân viên không tồn tại");
 				return false;
 			}

@@ -12,6 +12,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import dao.TaiKhoan_Dao;
+import dao.impl.TaiKhoan_Impl;
 //import dao.TaiKhoan_Dao;
 //import db.ConnectDB;
 import entity.NhanVien;
@@ -124,26 +126,31 @@ public class DangNhap_Gui extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		if (e.getSource() == btnDangNhap) {
-//			String taiKhoan = tfTaiKhoan.getText();
-//			String matKhau = new String(tfMatKhau.getPassword());
-//
-//			// Kiểm tra đăng nhập
-//			if (dstk.kiemTraDangNhap(taiKhoan, matKhau)) {
-//				JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
-//				// Mở cửa sổ mới sau khi đăng nhập thành công
-//				NhanVien nv = dstk.getNVByAccount(taiKhoan, matKhau);
-//				if (nv.getChucVu().equals("Nhan vien ban hang"))
-//					new ManHinhNV_GUI();
-//				else
-//					new ManHinh_GUI();
-//				// Đóng cửa sổ đăng nhập
-//				dispose();
-//			} else {
-//				lbThongBao.setText("Tài khoản hoặc mật khẩu không đúng.");
-//			}
-//		} else if (e.getSource() == btnThoat) {
-//			System.exit(0);
-//		}
+		if (e.getSource() == btnDangNhap) {
+			String taiKhoan = tfTaiKhoan.getText();
+			String matKhau = new String(tfMatKhau.getPassword());
+
+			// Kiểm tra đăng nhập
+			try {
+				TaiKhoan_Dao dstk = new TaiKhoan_Impl();
+				if (dstk.kiemTraDangNhap(taiKhoan, matKhau)) {
+					JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
+					// Mở cửa sổ mới sau khi đăng nhập thành công
+					NhanVien nv = dstk.getNVByAccount(taiKhoan, matKhau);
+					if (nv.getChucVu().equals("Nhan vien ban hang"))
+						new ManHinhNV_GUI();
+					else
+						new ManHinh_GUI();
+					// Đóng cửa sổ đăng nhập
+					dispose();
+				} else {
+					lbThongBao.setText("Tài khoản hoặc mật khẩu không đúng.");
+				}
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		} else if (e.getSource() == btnThoat) {
+			System.exit(0);
+		}
 	}
 }

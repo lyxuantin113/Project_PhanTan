@@ -62,7 +62,7 @@ public class Thuoc_Impl extends UnicastRemoteObject implements Thuoc_Dao {
 		try {
 			tx.begin();
 			em.createQuery("UPDATE Thuoc t SET t.soLuongTon = t.soLuongTon - :soLuong WHERE t.maThuoc = :maThuoc")
-					.setParameter("soLuongGiam", soLuongGiam).setParameter("maThuoc", maThuoc).executeUpdate();
+					.setParameter("soLuong", soLuongGiam).setParameter("maThuoc", maThuoc).executeUpdate();
 
 			tx.commit();
 		} catch (Exception e) {

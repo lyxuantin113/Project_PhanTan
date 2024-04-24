@@ -2,6 +2,7 @@ package dao.impl;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.ChiTietDonDat_Dao;
@@ -18,15 +19,17 @@ public class ChiTietDonDat_Impl extends UnicastRemoteObject implements ChiTietDo
 	private static final long serialVersionUID = -8582181906822373544L;
 	private static final String PERSISTENCE_UNIT_NAME = "QuanLyThuoc MSSQL";
 	private EntityManager em;
+	private List<ChiTietDonDat> ds;
 	
 	public ChiTietDonDat_Impl() throws RemoteException {
 		em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
+		ds = new ArrayList<ChiTietDonDat>();
 	}
 
 	@Override
-	public List<ChiTietDonDat> findByID(String maHoaDon) {
+	public List<ChiTietDonDat> findByID(String maDonDat) {
 		return em.createNamedQuery("ChiTietDonDat.findByID", ChiTietDonDat.class)
-				.setParameter("maHoaDon", maHoaDon)
+				.setParameter("maDonDat", maDonDat)
 				.getResultList();
 	}
 
@@ -36,7 +39,8 @@ public class ChiTietDonDat_Impl extends UnicastRemoteObject implements ChiTietDo
 		try {
 			tx.begin();
 			for (ChiTietDonDat chiTietDonDat : donDat.getListChiTiet()) {
-				em.persist(chiTietDonDat);
+//				em.persist(chiTietDonDat);
+				ds.add(chiTietDonDat);
 			}
 			tx.commit();
 		} catch (Exception e) {

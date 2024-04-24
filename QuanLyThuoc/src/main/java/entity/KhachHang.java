@@ -12,7 +12,6 @@ import jakarta.persistence.*;
 		@NamedQuery(name = "KhachHang.readFromTable", query = "SELECT kh FROM KhachHang kh"),
 		@NamedQuery(name = "KhachHang.findAll", query = "SELECT kh FROM KhachHang kh"),
 		@NamedQuery(name = "KhachHang.findByMaKhachHang", query = "SELECT kh FROM KhachHang kh WHERE kh.maKhachHang = :maKhachHang"),
-		@NamedQuery(name = "KhachHang.findBySoDienThoai", query = "SELECT kh FROM KhachHang kh WHERE kh.soDienThoai = :soDienThoai"),
 		@NamedQuery(name = "KhachHang.findByTenKhachHang", query = "SELECT kh FROM KhachHang kh WHERE kh.tenKhachHang = :tenKhachHang"),
 		@NamedQuery(name = "KhachHang.findKhachHangByName", query = "SELECT kh FROM KhachHang kh WHERE kh.tenKhachHang like :tenKhachHang"),
 		@NamedQuery(name = "KhachHang.findKhachHangBySDT", query = "SELECT kh FROM KhachHang kh WHERE kh.soDienThoai = :soDienThoai"),

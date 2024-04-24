@@ -6,7 +6,7 @@ import entity.ChiTietDonDat;
 import entity.DonDat;
 
 public interface ChiTietDonDat_Dao {
-	public List<ChiTietDonDat> findByID(String maHoaDon);
+	public List<ChiTietDonDat> findByID(String maDonDat);
 	public void addChiTietDonDat(DonDat donDat);
 	public boolean deleteOne(ChiTietDonDat chiTietDonDat);
 	public boolean deleteByID(String maDonDat);
