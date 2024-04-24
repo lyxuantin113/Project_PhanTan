@@ -154,8 +154,8 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 			Object[] rowData = new Object[6];
 			rowData[0] = pnt.getMaPhieuNhap();
 			rowData[1] = pnt.getNgayNhap();
-			rowData[2] = pnt.getMaNV();
-			rowData[3] = pnt.getMaNCC();
+			rowData[2] = pnt.getMaNV().getMaNhanVien();
+			rowData[3] = pnt.getMaNCC().getTenNCC();
 			rowData[4] = pnt.getTongTien();
 			rowData[5] = pnt.getTrangThai();
 			model.addRow(rowData);
@@ -167,6 +167,9 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnDaNhan)) {
+			if (checkDaNhan() == false) {
+				return;
+			}
 			int hoiNhac = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn đã nhận thuốc?");
 			if (hoiNhac == JOptionPane.YES_OPTION) {
 				// Đánh dấu phiếu nhập đã nhận
@@ -200,7 +203,7 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 				List<Thuoc> dsThuoc = thuocDao.findAll();
 				for (ChiTietPhieuNhapThuoc ctPNT : dsCTPNT) {
 					for (Thuoc thuoc : dsThuoc) {
-						if (ctPNT.getMaThuoc().equals(thuoc.getMaThuoc())) {
+						if (ctPNT.getMaThuoc().getMaThuoc().equals(thuoc.getMaThuoc())) {
 							int soLuongTon = thuoc.getSoLuongTon() + ctPNT.getSoLuong();
 							thuoc.setSoLuongTon(soLuongTon);
 						}
@@ -330,6 +333,22 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 //
 //	}
 
+	private boolean checkDaNhan() {
+		int row = table.getSelectedRow();
+		if (row == -1) {
+			JOptionPane.showMessageDialog(this, "Chọn phiếu nhập cần đánh dấu đã nhận!");
+			return false;
+		}
+		String trangThai = table.getValueAt(row, 5).toString();
+		if (trangThai.equals("true")) {
+			JOptionPane.showMessageDialog(this, "Phiếu nhập đã được đánh dấu đã nhận!");
+			return false;
+		}
+		return true;
+	}
+		
+	
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// Hiển thị danh sách chi tiết phiếu nhập thuốc
@@ -344,8 +363,8 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 			ctPNTDao = new ChiTietPhieuNhapThuoc_Impl();
 			List<ChiTietPhieuNhapThuoc> dsCTPNT =  ctPNTDao.readFromTable(maPhieuNhap);
 			for (ChiTietPhieuNhapThuoc ctPNT : dsCTPNT) {
-				Object[] rowData = { ctPNT.getMaThuoc(), ctPNT.getSoLuong(), ctPNT.getGiaNhap(), ctPNT.getHsd(),
-						ctPNT.getDonVi(), ctPNT.getThanhTien(), ctPNT.getMaPhieuNhap() };
+				Object[] rowData = { ctPNT.getMaThuoc().getMaThuoc(), ctPNT.getSoLuong(), ctPNT.getGiaNhap(), ctPNT.getHsd(),
+						ctPNT.getDonVi(), ctPNT.getThanhTien(), ctPNT.getMaPhieuNhap().getMaPhieuNhap() };
 				model.addRow(rowData);
 			}
 		} catch (RemoteException e1) {

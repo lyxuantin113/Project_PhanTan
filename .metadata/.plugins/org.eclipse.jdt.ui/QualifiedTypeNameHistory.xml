@@ -10,8 +10,6 @@
     <fullyQualifiedTypeName name="jakarta.persistence.Entity"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Table"/>
     <fullyQualifiedTypeName name="entity.NhaCungCap"/>
-    <fullyQualifiedTypeName name="entity.PhieuNhapThuoc"/>
-    <fullyQualifiedTypeName name="entity.Thuoc"/>
     <fullyQualifiedTypeName name="jakarta.persistence.OneToMany"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="jakarta.persistence.FetchType"/>
@@ -35,4 +33,7 @@
     <fullyQualifiedTypeName name="entity.TaiKhoan"/>
     <fullyQualifiedTypeName name="dao.impl.KhachHang_Impl"/>
     <fullyQualifiedTypeName name="com.ctc.wstx.shaded.msv_core.datatype.xsd.StringType"/>
+    <fullyQualifiedTypeName name="entity.PhieuNhapThuoc"/>
+    <fullyQualifiedTypeName name="entity.Thuoc"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.PersistenceException"/>
 </qualifiedTypeNameHistroy>
