@@ -13,7 +13,6 @@
     <fullyQualifiedTypeName name="entity.PhieuNhapThuoc"/>
     <fullyQualifiedTypeName name="entity.Thuoc"/>
     <fullyQualifiedTypeName name="jakarta.persistence.OneToMany"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="jakarta.persistence.FetchType"/>
     <fullyQualifiedTypeName name="jakarta.persistence.NamedQueries"/>
     <fullyQualifiedTypeName name="jakarta.persistence.NamedQuery"/>
@@ -27,12 +26,18 @@
     <fullyQualifiedTypeName name="dao.PhieuNhapThuoc_Dao"/>
     <fullyQualifiedTypeName name="entity.NhanVien"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="dao.impl.TaiKhoan_Impl"/>
-    <fullyQualifiedTypeName name="dao.TaiKhoan_Dao"/>
     <fullyQualifiedTypeName name="dao.NhanVien_Dao"/>
     <fullyQualifiedTypeName name="dao.impl.NhanVien_Impl"/>
     <fullyQualifiedTypeName name="java.rmi.RemoteException"/>
     <fullyQualifiedTypeName name="entity.TaiKhoan"/>
     <fullyQualifiedTypeName name="dao.impl.KhachHang_Impl"/>
     <fullyQualifiedTypeName name="com.ctc.wstx.shaded.msv_core.datatype.xsd.StringType"/>
+    <fullyQualifiedTypeName name="dao.TaiKhoan_Dao"/>
+    <fullyQualifiedTypeName name="dao.impl.TaiKhoan_Impl"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.TypedQuery"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.NoResultException"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="entity.ChiTietDonDat"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.EntityTransaction"/>
+    <fullyQualifiedTypeName name="entity.DonDat"/>
 </qualifiedTypeNameHistroy>
