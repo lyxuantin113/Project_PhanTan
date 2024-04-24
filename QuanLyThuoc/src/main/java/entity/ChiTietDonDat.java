@@ -8,13 +8,13 @@ import jakarta.persistence.*;
 @Table(name = "ChiTietDonDat")
 
 @NamedQueries({
-		@NamedQuery(name = "ChiTietDonDat.findByID", query = "SELECT ctdd FROM ChiTietDonDat ctdd WHERE ctdd.maDonDat = :maDonDat"),
-		@NamedQuery(name = "ChiTietDonDat.deleteOne", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maThuoc = :maThuoc"),
-		@NamedQuery(name = "ChiTietDonDat.deleteByID", query = "DELETE FROM ChiTietDonDat cthd WHERE cthd.maDonDat = :maDonDat"), })
+		@NamedQuery(name = "ChiTietDonDat.findByID", query = "SELECT ctdd FROM ChiTietDonDat ctdd WHERE ctdd.maDonDat.maDonDat = :maDonDat"),
+		@NamedQuery(name = "ChiTietDonDat.deleteOne", query = "DELETE FROM ChiTietDonDat ctdd WHERE ctdd.maThuoc.maThuoc = :maThuoc"),
+		@NamedQuery(name = "ChiTietDonDat.deleteByID", query = "DELETE FROM ChiTietDonDat ctdd WHERE ctdd.maDonDat.maDonDat = :maDonDat"), })
 public class ChiTietDonDat implements Serializable {
 
 	private static final long serialVersionUID = 1254786925698547852L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -45,6 +45,14 @@ public class ChiTietDonDat implements Serializable {
 		this.maDonDat = maDonDat;
 		this.maThuoc = maThuoc;
 		this.soLuong = soLuong;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public DonDat getMaDonDat() {

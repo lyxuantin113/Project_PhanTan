@@ -12,11 +12,11 @@ import lombok.ToString;
 @Table(name = "DonDat")
 @NamedQueries({ @NamedQuery(name = "DonDat.findAll", query = "SELECT dd FROM DonDat dd"),
 		@NamedQuery(name = "DonDat.findByMaDonDat", query = "SELECT dd FROM DonDat dd WHERE dd.maDonDat = :maDonDat"),
-		@NamedQuery(name = "DonDat.findByMaKhachHang", query = "SELECT dd FROM DonDat dd WHERE dd.maKhachHang = :maKhachHang"),
-		@NamedQuery(name = "DonDat.findByMaNhanVien", query = "SELECT dd FROM DonDat dd WHERE dd.maNhanVien = :maNhanVien"),
+		@NamedQuery(name = "DonDat.findByMaKhachHang", query = "SELECT dd FROM DonDat dd WHERE dd.maKhachHang.maKhachHang = :maKhachHang"),
+		@NamedQuery(name = "DonDat.findByMaNhanVien", query = "SELECT dd FROM DonDat dd WHERE dd.maNhanVien.maNhanVien = :maNhanVien"),
 		@NamedQuery(name = "DonDat.findByNgayLap", query = "SELECT dd FROM DonDat dd WHERE dd.ngayLap = :ngayLap"),
 		@NamedQuery(name = "DonDat.findByNgayNhan", query = "SELECT dd FROM DonDat dd WHERE dd.ngayNhan = :ngayNhan"),
-		@NamedQuery(name = "DonDat.checkThuoc", query = "SELECT dd FROM DonDat dd JOIN dd.listChiTiet ct WHERE ct.maThuoc = :maThuoc AND dd.ngayNhan > CURRENT_DATE()"),
+		@NamedQuery(name = "DonDat.checkThuoc", query = "SELECT dd FROM DonDat dd JOIN dd.listChiTiet ct WHERE ct.maThuoc.maThuoc = :maThuoc AND dd.ngayNhan > CURRENT_DATE()"),
 		@NamedQuery(name = "DonDat.deleteByID", query = "DELETE FROM DonDat dd WHERE dd.maDonDat = :maDonDat"),
 })
 public class DonDat {
