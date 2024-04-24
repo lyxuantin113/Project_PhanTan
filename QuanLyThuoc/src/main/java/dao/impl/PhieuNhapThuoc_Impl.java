@@ -32,12 +32,13 @@ public class PhieuNhapThuoc_Impl extends UnicastRemoteObject implements PhieuNha
 	@Override
 	public void updateTrangThai(String maPhieuNhap) {
 	    PhieuNhapThuoc pnt = em.find(PhieuNhapThuoc.class, maPhieuNhap);
-	  
+	    em.getTransaction().begin();
 	    if (pnt != null) {
 	        
-	        pnt.setTrangThai(false);
+	        pnt.setTrangThai(true);
 	        
 	        em.merge(pnt);
+	        em.getTransaction().commit();
 	    } else {
 	        System.out.println("Không tìm thấy phiếu nhập thuốc với mã: " + maPhieuNhap);
 	    }

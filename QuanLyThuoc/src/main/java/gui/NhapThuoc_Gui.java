@@ -302,7 +302,7 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 		DefaultTableModel model = new DefaultTableModel(headers, 0);
 		table = new JTable(model);
 		JScrollPane sp = new JScrollPane(table);
-		table.setPreferredScrollableViewportSize(new java.awt.Dimension(1000, 210));
+		table.setPreferredScrollableViewportSize(new java.awt.Dimension(1000, 150));
 		pnCenterBot.add(sp);
 		pnCenter.add(Box.createVerticalStrut(10));
 		// FOOTER
@@ -410,7 +410,7 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 		// Lấy dữ liệu từ database
 		ChiTietPhieuNhapThuoc_Dao pntDao = new ChiTietPhieuNhapThuoc_Impl();
 		for (ChiTietPhieuNhapThuoc ct : pntDao.readFromTable(maPhieuNhap)) {
-			model.addRow(new Object[] { ct.getMaThuoc(), ct.getMaPhieuNhap(), ct.getSoLuong(), ct.getGiaNhap(),
+			model.addRow(new Object[] { ct.getMaThuoc().getMaThuoc(), ct.getMaPhieuNhap().getMaPhieuNhap(), ct.getSoLuong(), ct.getGiaNhap(),
 					ct.getHsd(), ct.getDonVi(), ct.getThanhTien() });
 		}
 

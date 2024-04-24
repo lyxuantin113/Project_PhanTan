@@ -68,14 +68,13 @@ public class Thuoc_Impl extends UnicastRemoteObject implements Thuoc_Dao {
 		} catch (Exception e) {
 			tx.rollback();
 			e.printStackTrace();
-		} finally {
-			em.close();
-		}
+		} 
 	}
 
 	@Override
 	public void updateTTThuoc(Thuoc thuoc) {
 		EntityTransaction tx = em.getTransaction();
+		
 		try {
 			tx.begin();
 			em.merge(thuoc);
@@ -83,9 +82,7 @@ public class Thuoc_Impl extends UnicastRemoteObject implements Thuoc_Dao {
 		} catch (Exception e) {
 			tx.rollback();
 			e.printStackTrace();
-		} finally {
-			em.close();
-		}
+		} 
 		
 		
 	}
@@ -100,9 +97,7 @@ public class Thuoc_Impl extends UnicastRemoteObject implements Thuoc_Dao {
 		} catch (Exception e) {
 			tx.rollback();
 			e.printStackTrace();
-		} finally {
-			em.close();
-		}
+		} 
 		
 	}
 
@@ -116,9 +111,7 @@ public class Thuoc_Impl extends UnicastRemoteObject implements Thuoc_Dao {
 		} catch (Exception e) {
 			tx.rollback();
 			e.printStackTrace();
-		} finally {
-			em.close();
-		}
+		} 
 		
 	}
 
@@ -140,9 +133,7 @@ public class Thuoc_Impl extends UnicastRemoteObject implements Thuoc_Dao {
 		} catch (Exception e) {
 			tx.rollback();
 			e.printStackTrace();
-		} finally {
-			em.close();
-		}
+		} 
 		
 	}
 
