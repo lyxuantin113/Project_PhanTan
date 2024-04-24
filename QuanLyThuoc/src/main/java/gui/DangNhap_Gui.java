@@ -64,7 +64,7 @@ public class DangNhap_Gui extends JFrame implements ActionListener {
 		Box loginBox = Box.createVerticalBox();
 
 		JLabel lbTaiKhoan = new JLabel("Tài khoản:");
-		ImageIcon iconUser = new ImageIcon("src//Icon//user.png");
+		ImageIcon iconUser = new ImageIcon("src//main//java//Icon//user.png");
 		Image imageUser = iconUser.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
 		iconUser = new ImageIcon(imageUser);
 		lbTaiKhoan.setIcon(iconUser);
@@ -148,6 +148,7 @@ public class DangNhap_Gui extends JFrame implements ActionListener {
 				}
 			} catch (Exception e2) {
 				// TODO: handle exception
+				e2.printStackTrace();
 			}
 		} else if (e.getSource() == btnThoat) {
 			System.exit(0);

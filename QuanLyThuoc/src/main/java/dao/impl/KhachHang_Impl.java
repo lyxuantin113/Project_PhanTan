@@ -20,7 +20,7 @@ public class KhachHang_Impl extends UnicastRemoteObject implements KhachHang_Dao
 	private static final String PERSISTENCE_UNIT_NAME = "QuanLyThuoc MSSQL";
 	private EntityManager em;
 	List<KhachHang> ds = null;
-	
+
 	public KhachHang_Impl() throws RemoteException {
 		em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
 		ds = new ArrayList<KhachHang>();
@@ -48,15 +48,14 @@ public class KhachHang_Impl extends UnicastRemoteObject implements KhachHang_Dao
 
 	@Override
 	public KhachHang findBySDT(String sdtKH) {
-		return em.createNamedQuery("KhachHang.findKhachHangBySDT", KhachHang.class).setParameter("soDienThoai", sdtKH)
-				.getSingleResult();
+		return em.createQuery("Select kh FROM KhachHang kh WHERE kh.soDienThoai = :soDienThoai", KhachHang.class)
+				.setParameter("soDienThoai", sdtKH).getResultList().stream().findFirst().orElse(null);
 	}
 
 	@Override
 	public List<KhachHang> getDSKH() {
 		return ds;
 	}
-
 
 	@Override
 	public List<KhachHang> readFromTable() {
@@ -67,12 +66,12 @@ public class KhachHang_Impl extends UnicastRemoteObject implements KhachHang_Dao
 	public boolean updateKhachHang(KhachHang kh) {
 		EntityTransaction tx = em.getTransaction();
 		try {
-            tx.begin();
-            em.merge(kh);
-            tx.commit();
-            return true;
-        } catch (Exception e) {
-		return false;
+			tx.begin();
+			em.merge(kh);
+			tx.commit();
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 
@@ -80,21 +79,19 @@ public class KhachHang_Impl extends UnicastRemoteObject implements KhachHang_Dao
 	public boolean deleteKhachHang(KhachHang kh) {
 		EntityTransaction tx = em.getTransaction();
 		try {
-            tx.begin();
-            em.remove(kh);
-            tx.commit();
-            return true;
-        } catch (Exception e) {
-        	return false;
-        }
+			tx.begin();
+			em.remove(kh);
+			tx.commit();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
 	public List<KhachHang> findBySDT2(String sdtKH) {
 		return em.createQuery("Select kh FROM KhachHang kh WHERE kh.soDienThoai = :soDienThoai", KhachHang.class)
-				.setParameter("soDienThoai", sdtKH)
-				.getResultList();
+				.setParameter("soDienThoai", sdtKH).getResultList();
 	}
-
 
 }

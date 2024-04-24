@@ -43,8 +43,8 @@ public class HoaDon_Impl extends UnicastRemoteObject implements HoaDon_Dao {
 			tx.begin();
 			em.persist(hoaDon);
 			ChiTietHoaDon_Dao cthdDao = new ChiTietHoaDon_Impl();
-			cthdDao.addChiTietHoaDon(hoaDon);
 			tx.commit();
+			cthdDao.addChiTietHoaDon(hoaDon);
 		} catch (Exception e) {
 			tx.rollback();
 			e.printStackTrace();

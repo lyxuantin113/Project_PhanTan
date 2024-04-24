@@ -26,7 +26,7 @@ public class TrangChu_Gui extends JPanel {
         setLayout(new BorderLayout());
 
         // Thêm hình ảnh nhà thuốc
-        ImageIcon originalIcon = new ImageIcon("src//Icon//bg.png");
+        ImageIcon originalIcon = new ImageIcon("src//main//java//Icon//bg.png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel lblImage = new JLabel(scaledIcon, SwingConstants.CENTER);

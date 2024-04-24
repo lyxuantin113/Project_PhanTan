@@ -18,7 +18,7 @@ import lombok.ToString;
 		@NamedQuery(name = "HoaDon.findXYinMonth", query = "SELECT hd FROM HoaDon hd WHERE FUNCTION('YEAR', hd.ngayLap) = :year AND FUNCTION('MONTH', hd.ngayLap) = :month AND hd.maNhanVien.maNhanVien = :maNhanVien AND hd.maKhachHang.maKhachHang = :maKhachHang"),
 		@NamedQuery(name = "HoaDon.findXYinYear", query = "SELECT hd FROM HoaDon hd WHERE FUNCTION('YEAR', hd.ngayLap) = :year AND hd.maNhanVien.maNhanVien = :maNhanVien AND hd.maKhachHang.maKhachHang = :maKhachHang"),
 		@NamedQuery(name = "HoaDon.findXByY", query = "SELECT hd FROM HoaDon hd WHERE hd.maNhanVien.maNhanVien = :maNhanVien AND hd.maKhachHang.maKhachHang = :maKhachHang"),
-		@NamedQuery(name = "HoaDon.checkThuoc", query = "SELECT hd FROM HoaDon hd JOIN hd.listChiTiet ct WHERE ct.maThuoc = :maThuoc"),
+		@NamedQuery(name = "HoaDon.checkThuoc", query = "SELECT hd FROM HoaDon hd JOIN hd.listChiTiet ct WHERE ct.maThuoc.maThuoc = :maThuoc"),
 		
 		@NamedQuery(name = "HoaDon.findNVinYear", query = "SELECT hd FROM HoaDon hd WHERE FUNCTION('YEAR', hd.ngayLap) = :year AND hd.maNhanVien.maNhanVien = :maNhanVien"),
 		@NamedQuery(name = "HoaDon.findNVinMonth", query = "SELECT hd FROM HoaDon hd WHERE FUNCTION('YEAR', hd.ngayLap) = :year AND FUNCTION('MONTH', hd.ngayLap) = :month AND hd.maNhanVien.maNhanVien = :maNhanVien"),

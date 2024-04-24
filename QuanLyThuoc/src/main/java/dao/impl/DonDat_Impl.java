@@ -30,9 +30,9 @@ public class DonDat_Impl extends UnicastRemoteObject implements DonDat_Dao {
 		try {
 			tr.begin();
 			em.persist(donDat);
+			tr.commit();
 			ChiTietDonDat_Dao ctddDao = new ChiTietDonDat_Impl();
 			ctddDao.addChiTietDonDat(donDat);
-			tr.commit();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,6 +93,16 @@ public class DonDat_Impl extends UnicastRemoteObject implements DonDat_Dao {
 
 	@Override
 	public boolean deleteByID(String maDonDat) {
-		return em.createNamedQuery("DonDat.deleteByID", DonDat.class).setParameter("maDonDat", maDonDat).executeUpdate() > 0;
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			em.remove(em.find(DonDat.class, maDonDat));
+			tx.commit();
+			return true;
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

@@ -469,7 +469,6 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 				return false;
 			}
 		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -629,7 +628,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 			}
 			txtTong.setText(total + "");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -658,7 +657,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 					tempListDD.add(ctdd);
 					total += Double.parseDouble(modelHoaDon.getValueAt(i, 7).toString());
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 			}
@@ -888,7 +887,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 				try {
 					timThuoc();
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 			}
@@ -920,7 +919,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 				model.addRow(rowData);
 			}
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 

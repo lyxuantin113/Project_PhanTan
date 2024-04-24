@@ -2790,3 +2790,308 @@
 2024-04-24 01:38:59,825 [Worker-85: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
 2024-04-24 01:38:59,831 [Worker-85: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
 2024-04-24 01:38:59,831 [Worker-85: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-04-24 01:41:45,819 [Worker-92: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:41:45,821 [Worker-92: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 01:41:45,827 [Worker-92: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:41:45,828 [Worker-92: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-04-24 01:48:06,007 [Worker-92: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:48:06,009 [Worker-92: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 01:48:06,014 [Worker-92: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:48:06,015 [Worker-92: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-04-24 01:49:04,061 [Worker-89: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:49:04,063 [Worker-89: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 01:49:04,068 [Worker-89: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:49:04,068 [Worker-89: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-04-24 01:49:23,687 [Worker-93: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:49:23,689 [Worker-93: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 01:49:23,694 [Worker-93: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:49:23,695 [Worker-93: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-04-24 01:50:32,718 [Worker-91: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:50:32,720 [Worker-91: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 01:50:32,726 [Worker-91: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:50:32,727 [Worker-91: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-04-24 01:51:05,184 [Worker-89: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:51:05,187 [Worker-89: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 01:51:05,193 [Worker-89: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:51:05,193 [Worker-89: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-04-24 01:51:33,037 [Worker-94: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:51:33,039 [Worker-94: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 01:51:33,044 [Worker-94: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:51:33,045 [Worker-94: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-04-24 01:54:10,355 [Worker-91: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:54:10,358 [Worker-91: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 01:54:10,363 [Worker-91: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:54:10,363 [Worker-91: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-04-24 01:57:22,442 [Worker-89: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:57:22,445 [Worker-89: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 01:57:22,450 [Worker-89: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:57:22,451 [Worker-89: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-04-24 01:58:53,519 [Worker-89: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:58:53,521 [Worker-89: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 01:58:53,527 [Worker-89: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 01:58:53,528 [Worker-89: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-04-24 11:09:21,475 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-04-24 11:09:26,896 [Worker-11: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.hibernate:hibernate-core:jar:6.4.4.Final has been relocated to org.hibernate.orm:hibernate-core:jar:6.4.4.Final
+2024-04-24 11:09:26,897 [Worker-11: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.hibernate:hibernate-testing:jar:6.4.4.Final has been relocated to org.hibernate.orm:hibernate-testing:jar:6.4.4.Final
+2024-04-24 11:09:29,018 [Worker-11: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.hibernate:hibernate-core:jar:6.4.4.Final has been relocated to org.hibernate.orm:hibernate-core:jar:6.4.4.Final
+2024-04-24 11:09:29,023 [Worker-11: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.hibernate:hibernate-testing:jar:6.4.4.Final has been relocated to org.hibernate.orm:hibernate-testing:jar:6.4.4.Final
+2024-04-24 11:09:30,581 [Worker-11: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: QuanLyThuoc:QuanLyThuoc:0.0.1-SNAPSHOT @ D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\pom.xml.
+2024-04-24 11:09:30,606 [Worker-11: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.hibernate:hibernate-core:jar:6.4.4.Final has been relocated to org.hibernate.orm:hibernate-core:jar:6.4.4.Final
+2024-04-24 11:09:30,607 [Worker-11: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.hibernate:hibernate-testing:jar:6.4.4.Final has been relocated to org.hibernate.orm:hibernate-testing:jar:6.4.4.Final
+2024-04-24 11:09:33,389 [Worker-11: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:09:33,402 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:09:33,465 [Worker-11: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:09:33,466 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:09:40,818 [Worker-4: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2024-04-24 11:09:41,900 [Worker-4: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: QuanLyThuoc:QuanLyThuoc:0.0.1-SNAPSHOT @ D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\pom.xml.
+2024-04-24 11:09:43,208 [Worker-4: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.hibernate:hibernate-core:jar:6.4.4.Final has been relocated to org.hibernate.orm:hibernate-core:jar:6.4.4.Final
+2024-04-24 11:09:43,209 [Worker-4: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.hibernate:hibernate-testing:jar:6.4.4.Final has been relocated to org.hibernate.orm:hibernate-testing:jar:6.4.4.Final
+2024-04-24 11:09:44,360 [Worker-4: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /QuanLyThuoc/src/main/java
+2024-04-24 11:09:44,363 [Worker-4: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Resources folder /QuanLyThuoc/src/main/java overlaps with sources folder /QuanLyThuoc/src/main/java
+2024-04-24 11:09:44,368 [Worker-4: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /QuanLyThuoc/src/test/java
+2024-04-24 11:09:44,374 [Worker-4: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /QuanLyThuoc/src/test/resources
+2024-04-24 11:09:44,378 [Worker-4: Updating Maven Project] ERROR o.e.m.j.i.AbstractJavaProjectConfigurator - Failed to find a compatible VM for environment id 'JavaSE-18', falling back to workspace default
+2024-04-24 11:09:45,494 [Worker-4: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 1 poms: local refresh takes 0.00 sec, refresh facades takes 3.00 sec, update config takes 1.00 sec 
+2024-04-24 11:09:48,616 [Worker-30: Building Project QuanLyThuoc] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:09:48,620 [Worker-30: Building Project QuanLyThuoc] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:09:48,640 [Worker-30: Building Project QuanLyThuoc] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:09:48,641 [Worker-30: Building Project QuanLyThuoc] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:10:00,579 [Worker-9: Building Project QuanLyThuoc] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:10:00,584 [Worker-9: Building Project QuanLyThuoc] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:10:00,651 [Worker-9: Building Project QuanLyThuoc] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:10:00,653 [Worker-9: Building Project QuanLyThuoc] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:21:56,012 [Worker-36: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:21:56,019 [Worker-36: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:21:56,036 [Worker-36: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:21:56,037 [Worker-36: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:22:05,300 [Worker-35: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:22:05,308 [Worker-35: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:22:05,326 [Worker-35: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:22:05,327 [Worker-35: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:28:13,396 [Worker-32: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:28:13,403 [Worker-32: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:28:13,416 [Worker-32: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:28:13,417 [Worker-32: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:37:26,205 [Worker-31: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:37:26,213 [Worker-31: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:37:26,231 [Worker-31: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:37:26,232 [Worker-31: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:40:20,015 [Worker-42: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:40:20,024 [Worker-42: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:40:20,039 [Worker-42: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:40:20,041 [Worker-42: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:43:30,359 [Worker-42: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:43:30,364 [Worker-42: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:43:30,378 [Worker-42: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:43:30,379 [Worker-42: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:45:21,975 [Worker-47: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:45:21,982 [Worker-47: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:45:22,003 [Worker-47: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:45:22,005 [Worker-47: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:45:30,608 [Worker-46: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:45:30,614 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:45:30,626 [Worker-46: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:45:30,627 [Worker-46: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:46:54,539 [Worker-41: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:46:54,543 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:46:54,556 [Worker-41: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:46:54,557 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:51:17,836 [Worker-44: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:51:17,841 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:51:17,850 [Worker-44: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:51:17,851 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 11:58:27,567 [Worker-51: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:58:27,573 [Worker-51: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 11:58:27,588 [Worker-51: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 11:58:27,590 [Worker-51: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:00:00,897 [Worker-55: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:00:00,902 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:00:00,913 [Worker-55: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:00:00,914 [Worker-55: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:35:10,380 [Worker-44: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:35:10,384 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:35:10,392 [Worker-44: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:35:10,393 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:35:34,679 [Worker-53: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:35:34,684 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:35:34,696 [Worker-53: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:35:34,698 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:36:29,258 [Worker-56: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:36:29,263 [Worker-56: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:36:29,272 [Worker-56: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:36:29,273 [Worker-56: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:36:45,079 [Worker-58: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:36:45,082 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:36:45,090 [Worker-58: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:36:45,091 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:37:20,576 [Worker-53: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:37:20,582 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:37:20,597 [Worker-53: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:37:20,598 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:40:11,845 [Worker-59: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:40:11,849 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:40:11,859 [Worker-59: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:40:11,860 [Worker-59: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:42:07,345 [Worker-44: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:42:07,348 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:42:07,354 [Worker-44: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:42:07,355 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:42:37,454 [Worker-57: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:42:37,458 [Worker-57: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:42:37,466 [Worker-57: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:42:37,467 [Worker-57: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:42:59,154 [Worker-56: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:42:59,157 [Worker-56: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:42:59,162 [Worker-56: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:42:59,163 [Worker-56: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:47:34,926 [Worker-44: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:47:34,930 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:47:34,939 [Worker-44: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:47:34,940 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:48:36,525 [Worker-53: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:48:36,528 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:48:36,535 [Worker-53: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:48:36,535 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:49:00,656 [Worker-53: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:49:00,662 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:49:00,672 [Worker-53: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:49:00,674 [Worker-53: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:49:23,429 [Worker-62: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:49:23,435 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:49:23,450 [Worker-62: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:49:23,451 [Worker-62: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:49:44,369 [Worker-63: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:49:44,372 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:49:44,379 [Worker-63: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:49:44,379 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:49:56,320 [Worker-44: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:49:56,324 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:49:56,331 [Worker-44: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:49:56,332 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:50:10,490 [Worker-63: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:50:10,493 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:50:10,501 [Worker-63: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:50:10,502 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:52:06,226 [Worker-63: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:52:06,232 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:52:06,244 [Worker-63: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:52:06,245 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:55:38,540 [Worker-65: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:55:38,543 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:55:38,551 [Worker-65: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:55:38,551 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:56:38,773 [Worker-63: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:56:38,777 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:56:38,787 [Worker-63: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:56:38,788 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:56:49,052 [Worker-65: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:56:49,056 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:56:49,063 [Worker-65: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:56:49,063 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:57:05,246 [Worker-65: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:57:05,250 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:57:05,277 [Worker-65: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:57:05,278 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 12:57:35,525 [Worker-67: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:57:35,527 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 12:57:35,535 [Worker-67: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 12:57:35,536 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:03:31,530 [Worker-65: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:03:31,535 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:03:31,543 [Worker-65: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:03:31,544 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:08:15,506 [Worker-70: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:08:15,509 [Worker-70: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:08:15,517 [Worker-70: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:08:15,518 [Worker-70: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:09:25,051 [Worker-64: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:09:25,055 [Worker-64: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:09:25,063 [Worker-64: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:09:25,063 [Worker-64: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:09:38,395 [Worker-65: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:09:38,398 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:09:38,406 [Worker-65: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:09:38,407 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:09:46,672 [Worker-64: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:09:46,675 [Worker-64: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:09:46,682 [Worker-64: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:09:46,683 [Worker-64: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:10:02,716 [Worker-64: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:10:02,720 [Worker-64: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:10:02,727 [Worker-64: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:10:02,728 [Worker-64: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:10:26,067 [Worker-65: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:10:26,072 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:10:26,080 [Worker-65: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:10:26,081 [Worker-65: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:10:30,948 [Worker-71: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:10:30,951 [Worker-71: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:10:30,957 [Worker-71: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:10:30,957 [Worker-71: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:13:17,835 [Worker-64: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:13:17,839 [Worker-64: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:13:17,846 [Worker-64: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:13:17,847 [Worker-64: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:13:24,236 [Worker-70: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:13:24,241 [Worker-70: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:13:24,303 [Worker-70: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:13:24,304 [Worker-70: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:13:41,174 [Worker-70: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:13:41,177 [Worker-70: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:13:41,189 [Worker-70: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:13:41,190 [Worker-70: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:13:56,519 [Worker-72: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:13:56,522 [Worker-72: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:13:56,528 [Worker-72: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:13:56,529 [Worker-72: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:22:06,584 [Worker-72: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:22:06,587 [Worker-72: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:22:06,593 [Worker-72: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:22:06,593 [Worker-72: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:26:31,079 [Worker-71: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:26:31,084 [Worker-71: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:26:31,093 [Worker-71: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:26:31,094 [Worker-71: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:31:32,678 [Worker-75: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:31:32,682 [Worker-75: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:31:32,689 [Worker-75: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:31:32,690 [Worker-75: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:32:34,410 [Worker-64: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:32:34,414 [Worker-64: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:32:34,424 [Worker-64: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:32:34,426 [Worker-64: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:35:22,064 [Worker-71: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:35:22,069 [Worker-71: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:35:22,077 [Worker-71: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:35:22,078 [Worker-71: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:35:31,739 [Worker-71: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:35:31,743 [Worker-71: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:35:31,748 [Worker-71: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:35:31,749 [Worker-71: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:37:03,058 [Worker-74: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:37:03,062 [Worker-74: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:37:03,069 [Worker-74: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:37:03,070 [Worker-74: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 13:41:52,754 [Worker-67: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:41:52,757 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 13:41:52,763 [Worker-67: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 13:41:52,763 [Worker-67: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 14:02:06,395 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-04-24 14:02:35,903 [Worker-10: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.hibernate:hibernate-core:jar:6.4.4.Final has been relocated to org.hibernate.orm:hibernate-core:jar:6.4.4.Final
+2024-04-24 14:02:35,907 [Worker-10: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.hibernate:hibernate-testing:jar:6.4.4.Final has been relocated to org.hibernate.orm:hibernate-testing:jar:6.4.4.Final
+2024-04-24 14:02:37,784 [Worker-10: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 14:02:37,797 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 14:02:37,834 [Worker-10: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 14:02:37,835 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 14:07:40,987 [Worker-20: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 14:07:40,994 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 14:07:41,009 [Worker-20: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 14:07:41,011 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 14:08:47,195 [Worker-21: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 14:08:47,201 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 14:08:47,215 [Worker-21: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 14:08:47,216 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources
+2024-04-24 14:09:51,954 [Worker-22: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 14:09:51,966 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 31 resources from src\main\java to target\classes
+2024-04-24 14:09:51,987 [Worker-22: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-04-24 14:09:51,988 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Nam3\RealPhanTan\Project_LTPTJ\Project_PhanTan\QuanLyThuoc\src\test\resources

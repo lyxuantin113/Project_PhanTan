@@ -264,7 +264,7 @@ public class DSDonDat_Gui extends JPanel implements ActionListener, MouseListene
 				List<ChiTietDonDat> listCTDD = ctddDao.findByID(donDat.getMaDonDat());
 				List<ChiTietHoaDon> listCTHD = new ArrayList<ChiTietHoaDon>();
 				for (ChiTietDonDat ctdd : listCTDD) {
-					ChiTietHoaDon cthd = new ChiTietHoaDon(ctdd.getMaThuoc(), ctdd.getSoLuong());
+					ChiTietHoaDon cthd = new ChiTietHoaDon(hoaDon, ctdd.getMaThuoc(), ctdd.getSoLuong());
 					listCTHD.add(cthd);
 				}
 
