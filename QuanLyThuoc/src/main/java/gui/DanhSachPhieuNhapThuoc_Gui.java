@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -41,13 +42,31 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.time.LocalDate;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPRow;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import org.apache.poi.ss.usermodel.*;
 
 import dao.PhieuNhapThuoc_Dao;
@@ -234,6 +253,124 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 		if (o.equals(btnIn)) {
 			// In danh sách phiếu nhập
 //			inPhieuNhap(table, "data/DanhSachPhieuNhap.xlsx");
+			
+			try {
+				// Tạo tài liệu in
+				String urlFont = System.getProperty("user.dir") + "\\lib\\Arial Unicode MS.ttf";
+				BaseFont unicodeFont = BaseFont.createFont(urlFont, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+				com.itextpdf.text.Font unicodeFontObject = new com.itextpdf.text.Font(unicodeFont, 12);
+				Document document = new Document();
+				document.setMargins(50, 50, 10, 0);
+				// Nơi lưu file
+				String url = "";
+				url = System.getProperty("user.dir") + "\\fileOutput\\";
+				url +=  "test.pdf";
+				String filename = url;
+				PdfWriter.getInstance(document, new FileOutputStream(filename));
+				document.open();
+				// Tiêu đề
+				String tenQuan = "NHÀ THUỐC TTV";
+				Paragraph ten = new Paragraph(tenQuan, new com.itextpdf.text.Font(unicodeFont, 20, com.itextpdf.text.Font.BOLD));
+				ten.setAlignment(Element.ALIGN_CENTER);
+				document.add(ten);
+				String diaChi = "Đường số 28 Phường 6 Gò Vấp Thành phố Hồ Chí Minh\n";
+				Paragraph dc = new Paragraph(diaChi, unicodeFontObject);
+				dc.setAlignment(Element.ALIGN_CENTER);
+				document.add(dc);
+				Paragraph hoaDonThanhToan = new Paragraph("HÓA ĐƠN THANH TOÁN",
+						new com.itextpdf.text.Font(unicodeFont, 20, com.itextpdf.text.Font.BOLD));
+				Paragraph dong = new Paragraph("********************", unicodeFontObject);
+				hoaDonThanhToan.setAlignment(Element.ALIGN_CENTER);
+				document.add(hoaDonThanhToan);
+				dong.setAlignment(Element.ALIGN_CENTER);
+				document.add(dong);
+
+				// THÔNG TIN QUÁN VÀ THÔNG TIN KHÁCH HÀNH NHÂN VIÊN
+				String ngayTao = LocalDate.now().toString();
+				Paragraph ngay = new Paragraph(ngayTao, unicodeFontObject);
+				ngay.setAlignment(Element.ALIGN_RIGHT);
+				document.add(ngay);
+				String nhanVien = "Nhân Viên: ..." ;
+				String kh = "Khách Hàng: ..." ;
+				Paragraph nv = new Paragraph(nhanVien, unicodeFontObject);
+				nv.setAlignment(Element.ALIGN_LEFT);
+				Paragraph kh1 = new Paragraph(kh, unicodeFontObject);
+				kh1.setAlignment(Element.ALIGN_LEFT);
+				document.add(nv);
+				document.add(kh1);
+				document.add(Chunk.NEWLINE);
+				Paragraph dong2 = new Paragraph("Thông Tin Hóa Đơn*",
+						new com.itextpdf.text.Font(unicodeFont, 10, com.itextpdf.text.Font.BOLD));
+				dong2.setAlignment(Element.ALIGN_CENTER);
+				document.add(dong2);
+				document.add(Chunk.NEWLINE);
+
+				// tạo bảng
+				PdfPTable table = new PdfPTable(5);
+				table.setTotalWidth(new float[] { 100f, 70f, 60f, 50f, 70f });
+				table.setWidthPercentage(100);
+				// Thêm tiêu đề cho bảng
+//				String[] headers2 = { "Mã thuốc", "Số lượng", "Giá nhập", "Hạn sử dụng", "Đơn vị", "Thành tiền", "Mã CTPNT" };
+				table.addCell(new PdfPCell(new Phrase("Mã thuốc", unicodeFontObject)));
+				table.addCell(new PdfPCell(new Phrase("Số lượng", unicodeFontObject)));
+				table.addCell(new PdfPCell(new Phrase("Giá nhập", unicodeFontObject)));
+				table.addCell(new PdfPCell(new Phrase("Đơn vị", unicodeFontObject)));
+				table.addCell(new PdfPCell(new Phrase("Thành tiền", unicodeFontObject)));
+				// Thêm dữ liệu
+				DefaultTableModel model = (DefaultTableModel) table2.getModel();
+				for (int i = 0; i < model.getRowCount(); i++) {
+					String maThuoc = model.getValueAt(i, 0).toString();
+					String soluong = model.getValueAt(i, 1).toString();
+					String giaNhap = model.getValueAt(i, 2).toString();
+					String donVi = model.getValueAt(i, 4).toString();
+					String thanhTien = model.getValueAt(i, 5).toString();
+					table.addCell(new PdfPCell(new Paragraph(maThuoc, unicodeFontObject)));
+					table.addCell(new PdfPCell(new Paragraph(soluong, unicodeFontObject)));
+					table.addCell(new PdfPCell(new Paragraph(giaNhap, unicodeFontObject)));
+					table.addCell(new PdfPCell(new Paragraph(donVi, unicodeFontObject)));
+					table.addCell(new PdfPCell(new Paragraph(thanhTien, unicodeFontObject)));
+				}
+				for (PdfPRow row : table.getRows()) {
+					for (PdfPCell cell : row.getCells()) {
+						cell.setBorder(Rectangle.NO_BORDER);
+					}
+				}
+				for (PdfPRow row : table.getRows()) {
+					for (PdfPCell cell : row.getCells()) {
+						cell.setBorder(Rectangle.BOTTOM);
+					}
+				}
+				
+				Double t = 0.0;
+				for (int i = 0; i < model.getRowCount(); i++) {
+					String thanhTien = model.getValueAt(i, 5).toString();
+					t += Double.parseDouble(thanhTien);
+				}
+				document.add(table);
+				document.add(Chunk.NEWLINE);
+				String tongTien = "Tổng Tiền: " + t.toString() + " VNĐ";
+				
+
+				Paragraph TongTien = new Paragraph(tongTien, unicodeFontObject);
+				TongTien.setAlignment(Element.ALIGN_RIGHT);
+				document.add(TongTien);
+
+
+				document.add(Chunk.NEWLINE);
+				Paragraph dong3 = new Paragraph("\nXin Cảm Ơn",
+						new com.itextpdf.text.Font(unicodeFont, 10, com.itextpdf.text.Font.BOLD));
+				dong3.setAlignment(Element.ALIGN_CENTER);
+				document.add(dong3);
+
+				document.close();
+				System.out.println("Tạo tệp PDF hóa đơn thành công.");
+			} catch (DocumentException | FileNotFoundException | MalformedURLException e1) {
+				// TODO: handle exception
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
 		}
 		if (o.equals(btnInChiTiet)) {
 
