@@ -307,8 +307,8 @@ public class HoaDon_Impl extends UnicastRemoteObject implements HoaDon_Dao {
 
 	@Override
 	public boolean checkThuoc(String maThuoc) {
-		Thuoc temp = em.find(Thuoc.class, maThuoc);
-		return em.createNamedQuery("HoaDon.checkThuoc", HoaDon.class).setParameter("maThuoc", temp).getResultList()
+		
+		return em.createNamedQuery("HoaDon.checkThuoc", HoaDon.class).setParameter("maThuoc", maThuoc).getResultList()
 				.size() > 0;
 
 	}
