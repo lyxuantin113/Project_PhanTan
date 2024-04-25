@@ -41,7 +41,6 @@ public class ChiTietDonDat_Impl extends UnicastRemoteObject implements ChiTietDo
 			tx.begin();
 			for (ChiTietDonDat chiTietDonDat : donDat.getListChiTiet()) {
 				em.persist(chiTietDonDat);
-				list.add(chiTietDonDat);
 			}
 			tx.commit();
 		} catch (Exception e) {
