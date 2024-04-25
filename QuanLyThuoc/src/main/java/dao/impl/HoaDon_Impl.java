@@ -10,6 +10,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+
 import dao.ChiTietHoaDon_Dao;
 import dao.HoaDon_Dao;
 import dao.KhachHang_Dao;
@@ -51,7 +54,6 @@ public class HoaDon_Impl extends UnicastRemoteObject implements HoaDon_Dao {
 		}
 	}
 
-	
 	@Override
 	public HoaDon findById(String maHoaDon) {
 		return em.find(HoaDon.class, maHoaDon);
@@ -180,98 +182,99 @@ public class HoaDon_Impl extends UnicastRemoteObject implements HoaDon_Dao {
 	}
 
 	// Phương thức thống kê top 3 khách hàng có số đơn hàng nhiều nhất
-		public List<HoaDon> thongKeKHTiemNang() throws RemoteException {
-			// Khởi tạo một map để lưu số đơn hàng của mỗi khách hàng
-			Map<String, Integer> khachHangCountMap = new HashMap<>();
+	public List<HoaDon> thongKeKHTiemNang() throws RemoteException {
+		// Khởi tạo một map để lưu số đơn hàng của mỗi khách hàng
+		Map<String, Integer> khachHangCountMap = new HashMap<>();
 
-			// Lấy danh sách tất cả các hóa đơn từ cơ sở dữ liệu
-			List<HoaDon> allHoaDon = findAll();
+		// Lấy danh sách tất cả các hóa đơn từ cơ sở dữ liệu
+		List<HoaDon> allHoaDon = findAll();
 
-			// Đếm số đơn hàng của mỗi khách hàng
-			for (HoaDon hoaDon : allHoaDon) {
-				String maKH = hoaDon.getMaKhachHang().getMaKhachHang();
-				if (!maKH.equals("KH00000"))
-					khachHangCountMap.put(maKH, khachHangCountMap.getOrDefault(maKH, 0) + 1);
-			}
-
-			// Sắp xếp theo số đơn hàng giảm dần và chọn ra khách hàng tiềm năng có số đơn
-			// hàng cao nhất
-			Optional<Map.Entry<String, Integer>> topKhachHangEntry = khachHangCountMap.entrySet().stream()
-					.sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue())).findFirst();
-
-			List<HoaDon> topHoaDonList = new ArrayList<>(); // Danh sách hóa đơn của khách hàng tiềm năng có số đơn hàng cao
-															// nhất
-
-			// Nếu có khách hàng tiềm năng, tạo danh sách hóa đơn chứa thông tin của khách
-			// hàng đó
-			if (topKhachHangEntry.isPresent()) {
-				String topMaKH = topKhachHangEntry.get().getKey();
-				KhachHang_Dao khachHangDao = new KhachHang_Impl();
-				KhachHang topKhachHang = khachHangDao.findById(topMaKH);
-
-				// Lọc danh sách hóa đơn theo mã khách hàng tiềm năng
-				topHoaDonList = allHoaDon.stream().filter(hoaDon -> hoaDon.getMaKhachHang().getMaKhachHang().equals(topMaKH))
-						.collect(Collectors.toList());
-			}
-
-			return topHoaDonList;
+		// Đếm số đơn hàng của mỗi khách hàng
+		for (HoaDon hoaDon : allHoaDon) {
+			String maKH = hoaDon.getMaKhachHang().getMaKhachHang();
+			if (!maKH.equals("KH00000"))
+				khachHangCountMap.put(maKH, khachHangCountMap.getOrDefault(maKH, 0) + 1);
 		}
 
-		public List<HoaDon> thongKeNVChamChi() {
-			// Khởi tạo một map để lưu số đơn hàng của mỗi nhân viên
-			Map<String, Integer> nhanVienCountMap = new HashMap<>();
+		// Sắp xếp theo số đơn hàng giảm dần và chọn ra khách hàng tiềm năng có số đơn
+		// hàng cao nhất
+		Optional<Map.Entry<String, Integer>> topKhachHangEntry = khachHangCountMap.entrySet().stream()
+				.sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue())).findFirst();
 
-			// Lấy danh sách tất cả các hóa đơn từ cơ sở dữ liệu
-			List<HoaDon> allHoaDon = findAll();
+		List<HoaDon> topHoaDonList = new ArrayList<>(); // Danh sách hóa đơn của khách hàng tiềm năng có số đơn hàng cao
+														// nhất
 
-			// Đếm số đơn hàng của mỗi nhân viên
-			for (HoaDon hoaDon : allHoaDon) {
-				String maNV = hoaDon.getMaNhanVien().getMaNhanVien();
-				if (!maNV.equals("NV000"))
-					nhanVienCountMap.put(maNV, nhanVienCountMap.getOrDefault(maNV, 0) + 1);
-			}
+		// Nếu có khách hàng tiềm năng, tạo danh sách hóa đơn chứa thông tin của khách
+		// hàng đó
+		if (topKhachHangEntry.isPresent()) {
+			String topMaKH = topKhachHangEntry.get().getKey();
+			KhachHang_Dao khachHangDao = new KhachHang_Impl();
+			KhachHang topKhachHang = khachHangDao.findById(topMaKH);
 
-			// Sắp xếp theo số đơn hàng giảm dần và chọn ra top 3 nhân viên lập số đơn nhiều
-			// nhất
-			Optional<Map.Entry<String, Integer>> topNhanVienEntry = nhanVienCountMap.entrySet().stream()
-					.sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue())).findFirst();
-
-			List<HoaDon> topHoaDonList = new ArrayList<>(); // Danh sách hóa đơn của nhân viên lập số đơn hàng nhiều nhất
-
-			// Nếu có nhân viên lập số đơn hàng nhiều nhất, tạo danh sách hóa đơn của nhân
-			// viên đó
-			if (topNhanVienEntry.isPresent()) {
-				String topMaNV = topNhanVienEntry.get().getKey();
-
-				// Lọc danh sách hóa đơn theo mã của nhân viên lập số đơn hàng nhiều nhất
-				topHoaDonList = allHoaDon.stream().filter(hoaDon -> hoaDon.getMaNhanVien().getMaNhanVien().equals(topMaNV))
-						.collect(Collectors.toList());
-			}
-
-			return topHoaDonList;
-		}
-
-		public List<HoaDon> thongKeLoiNhuanCaoNhat() {
-			// Khởi tạo một map để lưu lợi nhuận của mỗi đơn hàng
-			Map<String, Double> loiNhuanMap = new HashMap<>();
-
-			// Lấy danh sách tất cả các hóa đơn từ cơ sở dữ liệu
-			List<HoaDon> allHoaDon = findAll();
-
-			// Tính lợi nhuận cho mỗi đơn hàng
-			for (HoaDon hoaDon : allHoaDon) {
-				double loiNhuan = tinhLoiNhuanChoHoaDon(hoaDon);
-				loiNhuanMap.put(hoaDon.getMaHoaDon(), loiNhuan);
-			}
-
-			// Sắp xếp theo lợi nhuận giảm dần và chọn ra top 3 đơn hàng có lợi nhuận cao
-			// nhất
-			List<HoaDon> top3HoaDon = loiNhuanMap.entrySet().stream()
-					.sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue())).limit(3).map(e -> findById(e.getKey()))
+			// Lọc danh sách hóa đơn theo mã khách hàng tiềm năng
+			topHoaDonList = allHoaDon.stream()
+					.filter(hoaDon -> hoaDon.getMaKhachHang().getMaKhachHang().equals(topMaKH))
 					.collect(Collectors.toList());
-
-			return top3HoaDon;
 		}
+
+		return topHoaDonList;
+	}
+
+	public List<HoaDon> thongKeNVChamChi() {
+		// Khởi tạo một map để lưu số đơn hàng của mỗi nhân viên
+		Map<String, Integer> nhanVienCountMap = new HashMap<>();
+
+		// Lấy danh sách tất cả các hóa đơn từ cơ sở dữ liệu
+		List<HoaDon> allHoaDon = findAll();
+
+		// Đếm số đơn hàng của mỗi nhân viên
+		for (HoaDon hoaDon : allHoaDon) {
+			String maNV = hoaDon.getMaNhanVien().getMaNhanVien();
+			if (!maNV.equals("NV000"))
+				nhanVienCountMap.put(maNV, nhanVienCountMap.getOrDefault(maNV, 0) + 1);
+		}
+
+		// Sắp xếp theo số đơn hàng giảm dần và chọn ra top 3 nhân viên lập số đơn nhiều
+		// nhất
+		Optional<Map.Entry<String, Integer>> topNhanVienEntry = nhanVienCountMap.entrySet().stream()
+				.sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue())).findFirst();
+
+		List<HoaDon> topHoaDonList = new ArrayList<>(); // Danh sách hóa đơn của nhân viên lập số đơn hàng nhiều nhất
+
+		// Nếu có nhân viên lập số đơn hàng nhiều nhất, tạo danh sách hóa đơn của nhân
+		// viên đó
+		if (topNhanVienEntry.isPresent()) {
+			String topMaNV = topNhanVienEntry.get().getKey();
+
+			// Lọc danh sách hóa đơn theo mã của nhân viên lập số đơn hàng nhiều nhất
+			topHoaDonList = allHoaDon.stream().filter(hoaDon -> hoaDon.getMaNhanVien().getMaNhanVien().equals(topMaNV))
+					.collect(Collectors.toList());
+		}
+
+		return topHoaDonList;
+	}
+
+	public List<HoaDon> thongKeLoiNhuanCaoNhat() {
+		// Khởi tạo một map để lưu lợi nhuận của mỗi đơn hàng
+		Map<String, Double> loiNhuanMap = new HashMap<>();
+
+		// Lấy danh sách tất cả các hóa đơn từ cơ sở dữ liệu
+		List<HoaDon> allHoaDon = findAll();
+
+		// Tính lợi nhuận cho mỗi đơn hàng
+		for (HoaDon hoaDon : allHoaDon) {
+			double loiNhuan = tinhLoiNhuanChoHoaDon(hoaDon);
+			loiNhuanMap.put(hoaDon.getMaHoaDon(), loiNhuan);
+		}
+
+		// Sắp xếp theo lợi nhuận giảm dần và chọn ra top 3 đơn hàng có lợi nhuận cao
+		// nhất
+		List<HoaDon> top3HoaDon = loiNhuanMap.entrySet().stream()
+				.sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue())).limit(3).map(e -> findById(e.getKey()))
+				.collect(Collectors.toList());
+
+		return top3HoaDon;
+	}
 
 	@Override
 	public double tinhTongTien(HoaDon hoaDon) {

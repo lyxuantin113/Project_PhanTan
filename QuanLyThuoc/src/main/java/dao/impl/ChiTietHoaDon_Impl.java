@@ -20,7 +20,7 @@ public class ChiTietHoaDon_Impl extends UnicastRemoteObject implements ChiTietHo
 	private static final long serialVersionUID = -2034982718177208289L;
 	private static final String PERSISTENCE_UNIT_NAME = "QuanLyThuoc MSSQL";
 	private EntityManager em;
-	List<ChiTietHoaDon> ds = null;
+	List<ChiTietHoaDon> ds;
 
 	public ChiTietHoaDon_Impl() throws RemoteException {
 		em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();

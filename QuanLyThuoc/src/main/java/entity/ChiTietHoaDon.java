@@ -17,11 +17,11 @@ public class ChiTietHoaDon implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne (fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+	@ManyToOne (cascade = CascadeType.ALL)
 	@JoinColumn(name = "maHoaDon")
 	private HoaDon maHoaDon;
 
-	@ManyToOne (fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+	@ManyToOne (cascade = CascadeType.ALL)
 	@JoinColumn(name = "maThuoc")
 	private Thuoc maThuoc;
 

@@ -46,7 +46,7 @@ public class DonDat implements Serializable {
 	private LocalDate ngayNhan;
 
 	@ToString.Exclude
-	@OneToMany(mappedBy = "maDonDat", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "maDonDat", fetch = FetchType.EAGER)
 	private List<ChiTietDonDat> listChiTiet;
 
 	public DonDat() {

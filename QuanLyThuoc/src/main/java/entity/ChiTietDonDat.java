@@ -19,11 +19,11 @@ public class ChiTietDonDat implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne (fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+	@ManyToOne (fetch = FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinColumn(name = "maDonDat")
 	private DonDat maDonDat;
 
-	@ManyToOne (fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+	@ManyToOne (fetch = FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinColumn(name = "maThuoc")
 	private Thuoc maThuoc;
 

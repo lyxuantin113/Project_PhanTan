@@ -1011,7 +1011,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 
 			// THÔNG TIN QUÁN VÀ THÔNG TIN KHÁCH HÀNH NHÂN VIÊN
 //			Mã Hóa Đơn
-			String maDon = tempHoaDon.getMaHoaDon();
+			String maDon = tempDonDat.getMaDonDat();
 			Paragraph maDonPara = new Paragraph(maDon, new com.itextpdf.text.Font(unicodeFont, 16, com.itextpdf.text.Font.NORMAL));
 			maDonPara.setAlignment(Element.ALIGN_CENTER);
 			document.add(maDonPara);			
@@ -1043,11 +1043,11 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
             
 //          Table tên NV, KH
 			
-			String nv = "Tên nhân viên: " + tempHoaDon.getMaNhanVien().getTenNhanVien();
+			String nv = "Tên nhân viên: " + tempDonDat.getMaNhanVien().getTenNhanVien();
 			Paragraph nvPara = new Paragraph(nv, unicodeFontObject);
 			nvPara.setAlignment(Element.ALIGN_LEFT);
 
-			String kh = "Tên khách hàng: " + tempHoaDon.getMaKhachHang().getTenKhachHang() ;
+			String kh = "Tên khách hàng: " + tempDonDat.getMaKhachHang().getTenKhachHang() ;
 			Paragraph khPara = new Paragraph(kh, unicodeFontObject);
 			khPara.setAlignment(Element.ALIGN_RIGHT);
 
@@ -1082,7 +1082,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 			table.addCell(new PdfPCell(new Phrase("Số lượng", unicodeFontObject)));
 			table.addCell(new PdfPCell(new Phrase("Thành tiền", unicodeFontObject)));
 			// Thêm dữ liệu
-			for (ChiTietHoaDon cthd : tempHoaDon.getListChiTiet()) {
+			for (ChiTietDonDat cthd : tempDonDat.getListChiTiet()) {
 				String tenThuoc = cthd.getMaThuoc().getTenThuoc();
 				String donGia = cthd.getMaThuoc().getGiaBan()+"";
 				String donVi = cthd.getMaThuoc().getDonVi();

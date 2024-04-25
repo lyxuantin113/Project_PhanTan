@@ -61,7 +61,7 @@ public class HoaDon implements Serializable{
 	private LocalDate ngayNhan;
 
 	@ToString.Exclude
-	@OneToMany(mappedBy = "maHoaDon", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "maHoaDon", fetch = FetchType.EAGER)
 	private List<ChiTietHoaDon> listChiTiet;
 
 	public HoaDon() {

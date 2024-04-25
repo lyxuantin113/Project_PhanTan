@@ -20,9 +20,11 @@ public class ChiTietDonDat_Impl extends UnicastRemoteObject implements ChiTietDo
 	private static final long serialVersionUID = -8582181906822373544L;
 	private static final String PERSISTENCE_UNIT_NAME = "QuanLyThuoc MSSQL";
 	private EntityManager em;
+	private List<ChiTietDonDat> list;
 
 	public ChiTietDonDat_Impl() throws RemoteException {
 		em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
+		list = new ArrayList<ChiTietDonDat>();
 	}
 
 	@Override
@@ -39,6 +41,7 @@ public class ChiTietDonDat_Impl extends UnicastRemoteObject implements ChiTietDo
 			tx.begin();
 			for (ChiTietDonDat chiTietDonDat : donDat.getListChiTiet()) {
 				em.persist(chiTietDonDat);
+				list.add(chiTietDonDat);
 			}
 			tx.commit();
 		} catch (Exception e) {
