@@ -54,6 +54,7 @@ import java.time.LocalDate;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -255,6 +256,16 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 //			inPhieuNhap(table, "data/DanhSachPhieuNhap.xlsx");
 			
 			try {
+				// Lấy mã phiếu nhập
+				int row1 = table.getSelectedRow();
+				if (row1 == -1) {
+					JOptionPane.showMessageDialog(this, "Chọn phiếu nhập cần in!");
+					return;
+				}
+				// Lấy tên nhà cung cấp
+				String tenNCC = table.getValueAt(row1, 3).toString();
+				
+				String maPhieuNhap = table.getValueAt(row1, 0).toString();
 				// Tạo tài liệu in
 				String urlFont = System.getProperty("user.dir") + "\\lib\\Arial Unicode MS.ttf";
 				BaseFont unicodeFont = BaseFont.createFont(urlFont, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
@@ -264,7 +275,7 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 				// Nơi lưu file
 				String url = "";
 				url = System.getProperty("user.dir") + "\\fileOutput\\";
-				url +=  "test.pdf";
+				url +=  maPhieuNhap + ".pdf";
 				String filename = url;
 				PdfWriter.getInstance(document, new FileOutputStream(filename));
 				document.open();
@@ -277,54 +288,61 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 				Paragraph dc = new Paragraph(diaChi, unicodeFontObject);
 				dc.setAlignment(Element.ALIGN_CENTER);
 				document.add(dc);
-				Paragraph hoaDonThanhToan = new Paragraph("HÓA ĐƠN THANH TOÁN",
+				Paragraph hoaDonThanhToan = new Paragraph("\n\nPHIẾU NHẬP THUỐC",
 						new com.itextpdf.text.Font(unicodeFont, 20, com.itextpdf.text.Font.BOLD));
-				Paragraph dong = new Paragraph("********************", unicodeFontObject);
+				Paragraph dong = new Paragraph("********************************", unicodeFontObject);
 				hoaDonThanhToan.setAlignment(Element.ALIGN_CENTER);
 				document.add(hoaDonThanhToan);
 				dong.setAlignment(Element.ALIGN_CENTER);
 				document.add(dong);
 
-				// THÔNG TIN QUÁN VÀ THÔNG TIN KHÁCH HÀNH NHÂN VIÊN
+				// thông tin phiếu và nhà cung cấp
 				String ngayTao = LocalDate.now().toString();
-				Paragraph ngay = new Paragraph(ngayTao, unicodeFontObject);
+				Paragraph ngay = new Paragraph("Ngày :" + ngayTao, unicodeFontObject);
 				ngay.setAlignment(Element.ALIGN_RIGHT);
 				document.add(ngay);
-				String nhanVien = "Nhân Viên: ..." ;
-				String kh = "Khách Hàng: ..." ;
-				Paragraph nv = new Paragraph(nhanVien, unicodeFontObject);
+				String ma = "Mã phiếu: " + maPhieuNhap;
+				String ncc = "Nhà cung cấp: " + tenNCC ;
+				Paragraph nv = new Paragraph(ma, unicodeFontObject);
 				nv.setAlignment(Element.ALIGN_LEFT);
-				Paragraph kh1 = new Paragraph(kh, unicodeFontObject);
+				Paragraph kh1 = new Paragraph(ncc, unicodeFontObject);
 				kh1.setAlignment(Element.ALIGN_LEFT);
 				document.add(nv);
 				document.add(kh1);
 				document.add(Chunk.NEWLINE);
-				Paragraph dong2 = new Paragraph("Thông Tin Hóa Đơn*",
-						new com.itextpdf.text.Font(unicodeFont, 10, com.itextpdf.text.Font.BOLD));
+				Paragraph dong2 = new Paragraph("Danh sách thuốc nhập",
+						new com.itextpdf.text.Font(unicodeFont, 12, com.itextpdf.text.Font.BOLD));
 				dong2.setAlignment(Element.ALIGN_CENTER);
 				document.add(dong2);
 				document.add(Chunk.NEWLINE);
 
 				// tạo bảng
-				PdfPTable table = new PdfPTable(5);
-				table.setTotalWidth(new float[] { 100f, 70f, 60f, 50f, 70f });
+				PdfPTable table = new PdfPTable(6);
+				table.setTotalWidth(new float[] { 100f, 70f,70f, 60f, 50f, 70f });
 				table.setWidthPercentage(100);
 				// Thêm tiêu đề cho bảng
-//				String[] headers2 = { "Mã thuốc", "Số lượng", "Giá nhập", "Hạn sử dụng", "Đơn vị", "Thành tiền", "Mã CTPNT" };
-				table.addCell(new PdfPCell(new Phrase("Mã thuốc", unicodeFontObject)));
+				table.addCell(new PdfPCell(new Phrase("Thuốc", unicodeFontObject)));
+				table.addCell(new PdfPCell(new Phrase("Hạn sử dụng", unicodeFontObject)));
 				table.addCell(new PdfPCell(new Phrase("Số lượng", unicodeFontObject)));
 				table.addCell(new PdfPCell(new Phrase("Giá nhập", unicodeFontObject)));
 				table.addCell(new PdfPCell(new Phrase("Đơn vị", unicodeFontObject)));
 				table.addCell(new PdfPCell(new Phrase("Thành tiền", unicodeFontObject)));
 				// Thêm dữ liệu
+				Thuoc_Dao thuocDao = new Thuoc_Impl();
 				DefaultTableModel model = (DefaultTableModel) table2.getModel();
 				for (int i = 0; i < model.getRowCount(); i++) {
 					String maThuoc = model.getValueAt(i, 0).toString();
+					// Lấy tên thuốc
+					
+					String tenThuoc = thuocDao.timTheoMa(maThuoc).getTenThuoc();
+					
+					String hsd = model.getValueAt(i, 3).toString();
 					String soluong = model.getValueAt(i, 1).toString();
 					String giaNhap = model.getValueAt(i, 2).toString();
 					String donVi = model.getValueAt(i, 4).toString();
 					String thanhTien = model.getValueAt(i, 5).toString();
-					table.addCell(new PdfPCell(new Paragraph(maThuoc, unicodeFontObject)));
+					table.addCell(new PdfPCell(new Paragraph(tenThuoc, unicodeFontObject)));
+					table.addCell(new PdfPCell(new Paragraph(hsd, unicodeFontObject)));
 					table.addCell(new PdfPCell(new Paragraph(soluong, unicodeFontObject)));
 					table.addCell(new PdfPCell(new Paragraph(giaNhap, unicodeFontObject)));
 					table.addCell(new PdfPCell(new Paragraph(donVi, unicodeFontObject)));
@@ -332,14 +350,11 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 				}
 				for (PdfPRow row : table.getRows()) {
 					for (PdfPCell cell : row.getCells()) {
-						cell.setBorder(Rectangle.NO_BORDER);
+						cell.setBorderWidth(1);
+						cell.setBorderColor(BaseColor.BLACK);
 					}
 				}
-				for (PdfPRow row : table.getRows()) {
-					for (PdfPCell cell : row.getCells()) {
-						cell.setBorder(Rectangle.BOTTOM);
-					}
-				}
+				
 				
 				Double t = 0.0;
 				for (int i = 0; i < model.getRowCount(); i++) {
@@ -356,11 +371,49 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 				document.add(TongTien);
 
 
+				// Tạo một đối tượng Phrase để chứa các đoạn văn bản 
+				
 				document.add(Chunk.NEWLINE);
-				Paragraph dong3 = new Paragraph("\nXin Cảm Ơn",
-						new com.itextpdf.text.Font(unicodeFont, 10, com.itextpdf.text.Font.BOLD));
-				dong3.setAlignment(Element.ALIGN_CENTER);
-				document.add(dong3);
+				Phrase phrase = new Phrase();
+				
+				// Đoạn văn bản "Người lập phiếu"
+				Chunk chunk1 = new Chunk("Người lập phiếu ", new com.itextpdf.text.Font(unicodeFont, 12, com.itextpdf.text.Font.BOLD));
+				phrase.add(chunk1);
+
+				phrase.add(new Chunk("                                              ", new com.itextpdf.text.Font(unicodeFont, 10)));
+  
+				Chunk chunk2 = new Chunk("Người giao ", new com.itextpdf.text.Font(unicodeFont, 12, com.itextpdf.text.Font.BOLD));
+				phrase.add(chunk2);
+
+				phrase.add(new Chunk("                                                 ", new com.itextpdf.text.Font(unicodeFont, 10)));
+
+				Chunk chunk3 = new Chunk("Người nhận ", new com.itextpdf.text.Font(unicodeFont, 12, com.itextpdf.text.Font.BOLD));
+				phrase.add(chunk3);
+
+				document.add(phrase);
+
+				document.add(Chunk.NEWLINE);
+				
+				Phrase phrase2 = new Phrase();
+				
+				// Đoạn văn bản "Chữ ký"
+				Chunk chunk4 = new Chunk("    (Ký họ, tên)", new com.itextpdf.text.Font(unicodeFont, 12));
+				phrase2.add(chunk4);
+				
+				phrase2.add(new Chunk("                                          ", new com.itextpdf.text.Font(unicodeFont, 12)));
+				
+				Chunk chunk5 = new Chunk("(Ký họ, tên)", new com.itextpdf.text.Font(unicodeFont, 12));
+				phrase2.add(chunk5);
+				
+				phrase2.add(new Chunk("                                         ", new com.itextpdf.text.Font(unicodeFont, 12)));
+				
+				Chunk chunk6 = new Chunk("(Ký họ, tên)", new com.itextpdf.text.Font(unicodeFont, 12));
+				phrase2.add(chunk6);
+				
+				document.add(phrase2);
+				
+
+				
 
 				document.close();
 				JOptionPane.showMessageDialog(this, "In thành công!");
