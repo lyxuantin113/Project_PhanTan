@@ -43,9 +43,9 @@ public class DonDat_Impl extends UnicastRemoteObject implements DonDat_Dao {
 
 	@Override
 	public boolean checkThuoc(String maThuoc) {
-		Thuoc temp = em.find(Thuoc.class, maThuoc);
+	
 	    List<DonDat> result = em.createNamedQuery("DonDat.checkThuoc", DonDat.class)
-	                             .setParameter("maThuoc", temp)
+	                             .setParameter("maThuoc", maThuoc)
 	                             .getResultList();
 	    return !result.isEmpty();
 	}
