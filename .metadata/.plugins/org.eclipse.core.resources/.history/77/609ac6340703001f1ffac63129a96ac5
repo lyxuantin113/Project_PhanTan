@@ -363,7 +363,7 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 				document.add(dong3);
 
 				document.close();
-				JOptionPane.showMessageDialog(this, "In thành công!");
+				
 			} catch (DocumentException | FileNotFoundException | MalformedURLException e1) {
 				// TODO: handle exception
 				e1.printStackTrace();
