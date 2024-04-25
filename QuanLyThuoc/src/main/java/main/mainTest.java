@@ -23,15 +23,7 @@ public class mainTest {
 		try {
 			tr.begin();
 			System.out.println("Hello World");
-/**			Quy trình tổng quát: có khách hàng, tạo hóa đơn/đơn đặt không có chi tiết, tạo chi tiết hóa đơn/đơn đặt, thêm vào hóa đơn/đơn đặt, hiển thị
-			Có khách hàng: thêm khách hàng mới, tìm khách hàng theo tên, tìm theo số đt
-			--> Xong
-			Tạo hóa đơn/đơn đặt không có chi tiết: thêm hóa đơn/đơn đặt không có chi tiết, tìm hóa đơn/đơn đặt theo mã
-			--> ????
-			Tạo chi tiết hóa đơn/đơn đặt: tạo chi tiết hóa đơn/đơn đặt theo mã hóa đơn/đơn đặt
-			Thêm chi tiết hóa đơn/đơn đặt: thêm chi tiết vào hóa đơn, đơn đặt
-			Thống kê: tìm hóa đơn, đơn đặt theo tên khách hàng, theo ngày lập, theo ngày nhận, đếm số hóa đơn theo ngày lập, theo ngày nhận, theo nhân viên, theo khách hàng
-*/
+
 			tr.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
