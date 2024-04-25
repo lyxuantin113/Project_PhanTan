@@ -16,6 +16,11 @@ import jakarta.persistence.*;
 		})
 public class NhanVien implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4544874174779785589L;
+
 	@Id
 	@Column(name = "maNhanVien")
 	private String maNhanVien;

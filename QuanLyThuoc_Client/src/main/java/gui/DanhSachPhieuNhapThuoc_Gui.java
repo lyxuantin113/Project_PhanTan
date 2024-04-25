@@ -1,9 +1,11 @@
 package gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,13 +41,33 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import rmi.RMIClient;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.time.LocalDate;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPRow;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import org.apache.poi.ss.usermodel.*;
 
 import dao.PhieuNhapThuoc_Dao;
@@ -142,7 +164,7 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 
 	}
 
-	private void hienTable() throws RemoteException{
+	private void hienTable() throws RemoteException {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		// Lấy danh sách phiếu nhập từ database
@@ -165,58 +187,243 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnDaNhan)) {
-			if (checkDaNhan() == false) {
-				return;
-			}
-			int hoiNhac = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn đã nhận thuốc?");
-			if (hoiNhac == JOptionPane.YES_OPTION) {
-				// Đánh dấu phiếu nhập đã nhận
-				int row = table.getSelectedRow();
-				String maPhieuNhap = table.getValueAt(row, 0).toString();
-				PhieuNhapThuoc_Dao pntDao = null;
-				ChiTietPhieuNhapThuoc_Dao ctPNTDao = null;
-				Thuoc_Dao thuocDao = null;
-				ctPNTDao = RMIClient.lookup("ChiTietPhieuNhapThuoc_Dao", ChiTietPhieuNhapThuoc_Dao.class);
-				thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
-				pntDao = RMIClient.lookup("PhieuNhapThuoc_Dao", PhieuNhapThuoc_Dao.class);
-				pntDao.updateTrangThai(maPhieuNhap);
+			try {
 
-				// Update thông tin thuốc trong kho
-				List<ChiTietPhieuNhapThuoc> dsCTPNT = ctPNTDao.readFromTable(maPhieuNhap);
-				List<Thuoc> dsThuoc = thuocDao.findAll();
-				for (ChiTietPhieuNhapThuoc ctPNT : dsCTPNT) {
-					for (Thuoc thuoc : dsThuoc) {
-						if (ctPNT.getMaThuoc().getMaThuoc().equals(thuoc.getMaThuoc())) {
-							int soLuongTon = thuoc.getSoLuongTon() + ctPNT.getSoLuong();
-							thuoc.setSoLuongTon(soLuongTon);
+				if (checkDaNhan() == false) {
+					return;
+				}
+				int hoiNhac = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn đã nhận thuốc?");
+				if (hoiNhac == JOptionPane.YES_OPTION) {
+					// Đánh dấu phiếu nhập đã nhận
+					int row = table.getSelectedRow();
+					String maPhieuNhap = table.getValueAt(row, 0).toString();
+					PhieuNhapThuoc_Dao pntDao = null;
+					ChiTietPhieuNhapThuoc_Dao ctPNTDao = null;
+					Thuoc_Dao thuocDao = null;
+					ctPNTDao = RMIClient.lookup("ChiTietPhieuNhapThuoc_Dao", ChiTietPhieuNhapThuoc_Dao.class);
+					thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+					pntDao = RMIClient.lookup("PhieuNhapThuoc_Dao", PhieuNhapThuoc_Dao.class);
+					pntDao.updateTrangThai(maPhieuNhap);
+
+					// Update thông tin thuốc trong kho
+					List<ChiTietPhieuNhapThuoc> dsCTPNT = ctPNTDao.readFromTable(maPhieuNhap);
+					List<Thuoc> dsThuoc = thuocDao.findAll();
+					for (ChiTietPhieuNhapThuoc ctPNT : dsCTPNT) {
+						for (Thuoc thuoc : dsThuoc) {
+							if (ctPNT.getMaThuoc().getMaThuoc().equals(thuoc.getMaThuoc())) {
+								int soLuongTon = thuoc.getSoLuongTon() + ctPNT.getSoLuong();
+								thuoc.setSoLuongTon(soLuongTon);
+							}
 						}
 					}
-				}
-				// Cập nhật lại thông tin thuốc trong database
-				for (Thuoc thuoc : dsThuoc) {
-					thuocDao.updateTTThuoc(thuoc);
-				}
-				DSThuoc_Gui thuocGui = null;
-				try {
-					thuocGui = new DSThuoc_Gui();
-					thuocGui.hienTable();
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+					// Cập nhật lại thông tin thuốc trong database
+					for (Thuoc thuoc : dsThuoc) {
+						thuocDao.updateTTThuoc(thuoc);
+					}
+					DSThuoc_Gui thuocGui = null;
+					try {
+						thuocGui = new DSThuoc_Gui();
+						thuocGui.hienTable();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 
-				try {
-					hienTable();
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					try {
+						hienTable();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
 			}
-
 		}
 		if (o.equals(btnIn)) {
 			// In danh sách phiếu nhập
 //			inPhieuNhap(table, "data/DanhSachPhieuNhap.xlsx");
+
+			try {
+				// Lấy mã phiếu nhập
+				int row1 = table.getSelectedRow();
+				if (row1 == -1) {
+					JOptionPane.showMessageDialog(this, "Chọn phiếu nhập cần in!");
+					return;
+				}
+				// Lấy tên nhà cung cấp
+				String tenNCC = table.getValueAt(row1, 3).toString();
+
+				String maPhieuNhap = table.getValueAt(row1, 0).toString();
+				// Tạo tài liệu in
+				String urlFont = System.getProperty("user.dir") + "\\lib\\Arial Unicode MS.ttf";
+				BaseFont unicodeFont = BaseFont.createFont(urlFont, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+				com.itextpdf.text.Font unicodeFontObject = new com.itextpdf.text.Font(unicodeFont, 12);
+				Document document = new Document();
+				document.setMargins(50, 50, 10, 0);
+				// Nơi lưu file
+				String url = "";
+				url = System.getProperty("user.dir") + "\\fileOutput\\";
+				url += maPhieuNhap + ".pdf";
+				String filename = url;
+				PdfWriter.getInstance(document, new FileOutputStream(filename));
+				document.open();
+				// Tiêu đề
+				String tenQuan = "NHÀ THUỐC TTV";
+				Paragraph ten = new Paragraph(tenQuan,
+						new com.itextpdf.text.Font(unicodeFont, 20, com.itextpdf.text.Font.BOLD));
+				ten.setAlignment(Element.ALIGN_CENTER);
+				document.add(ten);
+				String diaChi = "Đường số 28 Phường 6 Gò Vấp Thành phố Hồ Chí Minh\n";
+				Paragraph dc = new Paragraph(diaChi, unicodeFontObject);
+				dc.setAlignment(Element.ALIGN_CENTER);
+				document.add(dc);
+				Paragraph hoaDonThanhToan = new Paragraph("\n\nPHIẾU NHẬP THUỐC",
+						new com.itextpdf.text.Font(unicodeFont, 20, com.itextpdf.text.Font.BOLD));
+				Paragraph dong = new Paragraph("********************************", unicodeFontObject);
+				hoaDonThanhToan.setAlignment(Element.ALIGN_CENTER);
+				document.add(hoaDonThanhToan);
+				dong.setAlignment(Element.ALIGN_CENTER);
+				document.add(dong);
+
+				// thông tin phiếu và nhà cung cấp
+				String ngayTao = LocalDate.now().toString();
+				Paragraph ngay = new Paragraph("Ngày :" + ngayTao, unicodeFontObject);
+				ngay.setAlignment(Element.ALIGN_RIGHT);
+				document.add(ngay);
+				String ma = "Mã phiếu: " + maPhieuNhap;
+				String ncc = "Nhà cung cấp: " + tenNCC;
+				Paragraph nv = new Paragraph(ma, unicodeFontObject);
+				nv.setAlignment(Element.ALIGN_LEFT);
+				Paragraph kh1 = new Paragraph(ncc, unicodeFontObject);
+				kh1.setAlignment(Element.ALIGN_LEFT);
+				document.add(nv);
+				document.add(kh1);
+				document.add(Chunk.NEWLINE);
+				Paragraph dong2 = new Paragraph("Danh sách thuốc nhập",
+						new com.itextpdf.text.Font(unicodeFont, 12, com.itextpdf.text.Font.BOLD));
+				dong2.setAlignment(Element.ALIGN_CENTER);
+				document.add(dong2);
+				document.add(Chunk.NEWLINE);
+
+				// tạo bảng
+				PdfPTable table = new PdfPTable(6);
+				table.setTotalWidth(new float[] { 100f, 70f, 70f, 60f, 50f, 70f });
+				table.setWidthPercentage(100);
+				// Thêm tiêu đề cho bảng
+				table.addCell(new PdfPCell(new Phrase("Thuốc", unicodeFontObject)));
+				table.addCell(new PdfPCell(new Phrase("Hạn sử dụng", unicodeFontObject)));
+				table.addCell(new PdfPCell(new Phrase("Số lượng", unicodeFontObject)));
+				table.addCell(new PdfPCell(new Phrase("Giá nhập", unicodeFontObject)));
+				table.addCell(new PdfPCell(new Phrase("Đơn vị", unicodeFontObject)));
+				table.addCell(new PdfPCell(new Phrase("Thành tiền", unicodeFontObject)));
+				// Thêm dữ liệu
+				Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+				DefaultTableModel model = (DefaultTableModel) table2.getModel();
+				for (int i = 0; i < model.getRowCount(); i++) {
+					String maThuoc = model.getValueAt(i, 0).toString();
+					// Lấy tên thuốc
+
+					String tenThuoc = thuocDao.timTheoMa(maThuoc).getTenThuoc();
+
+					String hsd = model.getValueAt(i, 3).toString();
+					String soluong = model.getValueAt(i, 1).toString();
+					String giaNhap = model.getValueAt(i, 2).toString();
+					String donVi = model.getValueAt(i, 4).toString();
+					String thanhTien = model.getValueAt(i, 5).toString();
+					table.addCell(new PdfPCell(new Paragraph(tenThuoc, unicodeFontObject)));
+					table.addCell(new PdfPCell(new Paragraph(hsd, unicodeFontObject)));
+					table.addCell(new PdfPCell(new Paragraph(soluong, unicodeFontObject)));
+					table.addCell(new PdfPCell(new Paragraph(giaNhap, unicodeFontObject)));
+					table.addCell(new PdfPCell(new Paragraph(donVi, unicodeFontObject)));
+					table.addCell(new PdfPCell(new Paragraph(thanhTien, unicodeFontObject)));
+				}
+				for (PdfPRow row : table.getRows()) {
+					for (PdfPCell cell : row.getCells()) {
+						cell.setBorderWidth(1);
+						cell.setBorderColor(BaseColor.BLACK);
+					}
+				}
+
+				Double t = 0.0;
+				for (int i = 0; i < model.getRowCount(); i++) {
+					String thanhTien = model.getValueAt(i, 5).toString();
+					t += Double.parseDouble(thanhTien);
+				}
+				document.add(table);
+				document.add(Chunk.NEWLINE);
+				String tongTien = "Tổng Tiền: " + t.toString() + " VNĐ";
+
+				Paragraph TongTien = new Paragraph(tongTien, unicodeFontObject);
+				TongTien.setAlignment(Element.ALIGN_RIGHT);
+				document.add(TongTien);
+
+				// Tạo một đối tượng Phrase để chứa các đoạn văn bản
+
+				document.add(Chunk.NEWLINE);
+				Phrase phrase = new Phrase();
+
+				// Đoạn văn bản "Người lập phiếu"
+				Chunk chunk1 = new Chunk("Người lập phiếu ",
+						new com.itextpdf.text.Font(unicodeFont, 12, com.itextpdf.text.Font.BOLD));
+				phrase.add(chunk1);
+
+				phrase.add(new Chunk("                                              ",
+						new com.itextpdf.text.Font(unicodeFont, 10)));
+
+				Chunk chunk2 = new Chunk("Người giao ",
+						new com.itextpdf.text.Font(unicodeFont, 12, com.itextpdf.text.Font.BOLD));
+				phrase.add(chunk2);
+
+				phrase.add(new Chunk("                                                 ",
+						new com.itextpdf.text.Font(unicodeFont, 10)));
+
+				Chunk chunk3 = new Chunk("Người nhận ",
+						new com.itextpdf.text.Font(unicodeFont, 12, com.itextpdf.text.Font.BOLD));
+				phrase.add(chunk3);
+
+				document.add(phrase);
+
+				document.add(Chunk.NEWLINE);
+
+				Phrase phrase2 = new Phrase();
+
+				// Đoạn văn bản "Chữ ký"
+				Chunk chunk4 = new Chunk("    (Ký họ, tên)", new com.itextpdf.text.Font(unicodeFont, 12));
+				phrase2.add(chunk4);
+
+				phrase2.add(new Chunk("                                          ",
+						new com.itextpdf.text.Font(unicodeFont, 12)));
+
+				Chunk chunk5 = new Chunk("(Ký họ, tên)", new com.itextpdf.text.Font(unicodeFont, 12));
+				phrase2.add(chunk5);
+
+				phrase2.add(new Chunk("                                         ",
+						new com.itextpdf.text.Font(unicodeFont, 12)));
+
+				Chunk chunk6 = new Chunk("(Ký họ, tên)", new com.itextpdf.text.Font(unicodeFont, 12));
+				phrase2.add(chunk6);
+
+				document.add(phrase2);
+
+				document.close();
+				JOptionPane.showMessageDialog(this, "In thành công!");
+				// Mở file pdf
+				try {
+					File file = new File(filename);
+					Desktop desktop = Desktop.getDesktop();
+					desktop.open(file);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			} catch (DocumentException | FileNotFoundException | MalformedURLException e1) {
+				// TODO: handle exception
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
 		}
 		if (o.equals(btnInChiTiet)) {
 
@@ -329,27 +536,29 @@ public class DanhSachPhieuNhapThuoc_Gui extends JPanel implements ActionListener
 		}
 		return true;
 	}
-		
-	
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// Hiển thị danh sách chi tiết phiếu nhập thuốc
-		int row = table.getSelectedRow();
+		try {
+			int row = table.getSelectedRow();
 
-		String maPhieuNhap = table.getValueAt(row, 0).toString();
-		
-		DefaultTableModel model = (DefaultTableModel) table2.getModel();
-		model.setRowCount(0);
-		ChiTietPhieuNhapThuoc_Dao ctPNTDao = null;
-		ctPNTDao = RMIClient.lookup("ChiTietPhieuNhapThuoc_Dao", ChiTietPhieuNhapThuoc_Dao.class);
-		List<ChiTietPhieuNhapThuoc> dsCTPNT =  ctPNTDao.readFromTable(maPhieuNhap);
-		for (ChiTietPhieuNhapThuoc ctPNT : dsCTPNT) {
-			Object[] rowData = { ctPNT.getMaThuoc().getMaThuoc(), ctPNT.getSoLuong(), ctPNT.getGiaNhap(), ctPNT.getHsd(),
-					ctPNT.getDonVi(), ctPNT.getThanhTien(), ctPNT.getMaPhieuNhap().getMaPhieuNhap() };
-			model.addRow(rowData);
+			String maPhieuNhap = table.getValueAt(row, 0).toString();
+
+			DefaultTableModel model = (DefaultTableModel) table2.getModel();
+			model.setRowCount(0);
+			ChiTietPhieuNhapThuoc_Dao ctPNTDao = null;
+			ctPNTDao = RMIClient.lookup("ChiTietPhieuNhapThuoc_Dao", ChiTietPhieuNhapThuoc_Dao.class);
+			List<ChiTietPhieuNhapThuoc> dsCTPNT = ctPNTDao.readFromTable(maPhieuNhap);
+			for (ChiTietPhieuNhapThuoc ctPNT : dsCTPNT) {
+				Object[] rowData = { ctPNT.getMaThuoc().getMaThuoc(), ctPNT.getSoLuong(), ctPNT.getGiaNhap(),
+						ctPNT.getHsd(), ctPNT.getDonVi(), ctPNT.getThanhTien(), ctPNT.getMaPhieuNhap().getMaPhieuNhap() };
+				model.addRow(rowData);
+			}
+		} catch (Exception e2) {
+			// TODO: handle exception
+			e2.printStackTrace();
 		}
-		
 
 	}
 

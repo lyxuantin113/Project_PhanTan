@@ -1,12 +1,18 @@
 package entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Thuoc")
-public class Thuoc {
+public class Thuoc implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7834018117303079856L;
 
 	@Id
 	@Column(name = "maThuoc")

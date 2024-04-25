@@ -4,7 +4,7 @@ import java.rmi.Naming;
 
 public class RMIClient {
 	// url của server
-	private static final String SERVER_URL = "rmi://192.168.1.3:7878/";
+	private static final String SERVER_URL = "rmi://192.168.123.41:2024/";
 
 	// Không cho phép khởi tạo đối tượng từ bên ngoài
 	private RMIClient() {
@@ -17,13 +17,23 @@ public class RMIClient {
 	 * @param clazz kiểu dữ liệu của đối tượng (dao) cần lookup
 	 * @return đối tượng đã lookup được
 	 */
+//	public static <T> T lookup(String serviceName, Class<T> clazz) {
+//		try {
+//			return clazz.cast(Naming.lookup(SERVER_URL + serviceName));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
+	
 	public static <T> T lookup(String serviceName, Class<T> clazz) {
-		try {
-			return clazz.cast(Naming.lookup(SERVER_URL + serviceName));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+	    try {
+	        return (T) Naming.lookup(SERVER_URL + serviceName);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
+
 
 }

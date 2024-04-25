@@ -29,8 +29,9 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 	private JTextField txtTimKiem;
 	private JButton btnTim;
 	private JButton btnLamMoi;
+	private KhachHang_Dao khachHangDao;
 	
-	public DSKhachHang_Gui() {
+	public DSKhachHang_Gui() throws RemoteException {
 		setSize(1070, 600);
 		setVisible(true);
 
@@ -154,17 +155,15 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 				txtTen.setText((String) table.getValueAt(row, 2));
 			}
 		});
-
+		khachHangDao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
 		hienTable();
 	}
 
-	private void hienTable() {
+	private void hienTable() throws RemoteException {
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		// Lấy dữ liệu từ database
-		KhachHang_Dao khachHangDao = null;
-		khachHangDao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
 		 List<KhachHang> dsKH = khachHangDao.readFromTable();
 		 for (KhachHang kh : dsKH) {
 		 model.addRow(new Object[] { kh.getMaKhachHang(), kh.getSoDienThoai(), kh.getTenKhachHang() });
@@ -214,7 +213,12 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 		if (o.equals(btnLamMoi)) {
 			txtTimKiem.setText("");
 			table.clearSelection();
-			hienTable();
+			try {
+				hienTable();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 	}
@@ -227,7 +231,6 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 		}
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
-		KhachHang_Dao khachHangDao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
 		List<KhachHang> dsKH = khachHangDao.findBySDT2(tim);
 		
 		if (dsKH.isEmpty()) {
@@ -252,7 +255,7 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 		} else {
 			// Sửa trong database
 			KhachHang kh = new KhachHang(ma, sdt, ten);
-			KhachHang_Dao khachHangDao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
+			
 			
 			boolean suaThanhCong = khachHangDao.updateKhachHang(kh);
 			if (suaThanhCong) {
@@ -289,7 +292,7 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 		} else {
 			// Thêm vào database
 			KhachHang kh = new KhachHang(ma, sdt, ten);
-			KhachHang_Dao khachHangDao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
+			
 			khachHangDao.addKhachHang(kh);
 			
 			// thêm vào table
@@ -314,7 +317,7 @@ public class DSKhachHang_Gui extends JPanel implements ActionListener {
 	        
 	        // Xóa khách hàng trong database
 	        KhachHang kh = new KhachHang(maKH, sdt, ten);
-	        KhachHang_Dao khachHangDao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
+	        
 	        boolean xoaThanhCong = khachHangDao.deleteKhachHang(kh); // Kiểm tra kết quả xóa từ cơ sở dữ liệu
 	        if (xoaThanhCong) {
 	            // Xóa khách hàng trong table

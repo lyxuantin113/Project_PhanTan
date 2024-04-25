@@ -175,34 +175,38 @@ public class DoiMatKhau_Gui extends JPanel implements ActionListener {
 	}
 
 	public boolean doiMatKhau() {
-		String maNV = txtMaNV.getText();
-		String tenTK = txtTaiKhoan.getText();
-		String matKhau = txtMatKhau.getText();
-		String matKhauMoi = txtNewMatKhau.getText();
+		try {
+			String maNV = txtMaNV.getText();
+			String tenTK = txtTaiKhoan.getText();
+			String matKhau = txtMatKhau.getText();
+			String matKhauMoi = txtNewMatKhau.getText();
+			TaiKhoan tk = tkDao.getTKById(maNV);
+			if (nvDao.getNhanVien(maNV) == null) {
+				JOptionPane.showMessageDialog(this, "Lưu ý: Mã nhân viên sai");
+				return false;
+			}
+			if (!tk.getTaiKhoan().equals(tenTK)) {
+				JOptionPane.showMessageDialog(this, "Lưu ý: Tên tài khoản không đúng");
+				return false;
+			}
+			if (!tk.getMatKhau().equals(matKhau)) {
+				JOptionPane.showMessageDialog(this, "Lưu ý: Mật khẩu không đúng");
+				return false;
+			}
+			if (matKhauMoi.equals("")) {
+				JOptionPane.showMessageDialog(this, "Lưu ý: Hãy nhập mật khẩu mới");
+				return false;
+			}
+			if (tk.getMatKhau().equals(matKhauMoi)) {
+				JOptionPane.showMessageDialog(this, "Lưu ý: Mật khẩu mới trùng với mật khẩu cũ");
+				return false;
+			}
 
-		if (nvDao.getNhanVien(maNV) == null) {
-			JOptionPane.showMessageDialog(this, "Lưu ý: Mã nhân viên sai");
-			return false;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 
-		TaiKhoan tk = tkDao.getTKById(maNV);
-
-		if (!tk.getTaiKhoan().equals(tenTK)) {
-			JOptionPane.showMessageDialog(this, "Lưu ý: Tên tài khoản không đúng");
-			return false;
-		}
-		if (!tk.getMatKhau().equals(matKhau)) {
-			JOptionPane.showMessageDialog(this, "Lưu ý: Mật khẩu không đúng");
-			return false;
-		}
-		if (matKhauMoi.equals("")) {
-			JOptionPane.showMessageDialog(this, "Lưu ý: Hãy nhập mật khẩu mới");
-			return false;
-		}
-		if (tk.getMatKhau().equals(matKhauMoi)) {
-			JOptionPane.showMessageDialog(this, "Lưu ý: Mật khẩu mới trùng với mật khẩu cũ");
-			return false;
-		}
 		return true;
 	}
 }

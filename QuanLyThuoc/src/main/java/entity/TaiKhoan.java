@@ -4,7 +4,12 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "TaiKhoan")
-public class TaiKhoan {
+public class TaiKhoan implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2542536046981436623L;
 
 	@Id
 	@OneToOne

@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.*;
@@ -15,7 +16,14 @@ import jakarta.persistence.*;
 		@NamedQuery(name = "ChiTietPhieuNhapThuoc.findByMaPhieuNhap" , query = "SELECT ct FROM ChiTietPhieuNhapThuoc ct WHERE ct.maPhieuNhap.maPhieuNhap = :maPhieuNhap AND ct.maThuoc.maThuoc = :maThuoc"),
 		@NamedQuery(name = "ChiTietPhieuNhapThuoc.create", query = "INSERT INTO ChiTietPhieuNhapThuoc(maThuoc, maPhieuNhap, soLuong, giaNhap, hsd, donVi, thanhTien) VALUES(:maThuoc, :maPhieuNhap, :soLuong, :giaNhap, :hsd, :donVi, :thanhTien)")
 })
-public class ChiTietPhieuNhapThuoc {
+public class ChiTietPhieuNhapThuoc implements Serializable{
+
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1033125751943256225L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

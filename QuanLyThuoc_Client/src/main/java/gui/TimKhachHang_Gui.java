@@ -14,7 +14,7 @@ import dao.KhachHang_Dao;
 import entity.KhachHang;
 import rmi.RMIClient;
 
-public class TimKhachHang_Gui extends JPanel implements ActionListener {
+public class TimKhachHang_Gui extends JPanel implements ActionListener{
 	private JTextField txtSDT;
 	private JButton btnTim;
 	private JTable tbl;
@@ -23,31 +23,31 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener {
 	public TimKhachHang_Gui() throws RemoteException {
 		setSize(1070, 600);
 		setVisible(true);
-
+		
 		JPanel pnMain = new JPanel();
 		pnMain.setLayout(new BorderLayout());
-
-		// HEADER
+		
+		//HEADER
 		JPanel pnHead = new JPanel();
 		JLabel lblHead = new JLabel("Tìm kiếm khách hàng");
 		Font fo20 = new Font("Times New Roman", Font.BOLD, 20);
 		lblHead.setFont(fo20);
 		lblHead.setForeground(Color.blue);
 		pnHead.add(lblHead);
-
+		
 		pnMain.add(pnHead, BorderLayout.NORTH);
-
-		// CENTER
+		
+		//CENTER
 		JPanel pnCenter = new JPanel();
 		pnCenter.setLayout(new BoxLayout(pnCenter, BoxLayout.Y_AXIS));
 		JPanel pnCenterTop = new JPanel();
 		pnCenterTop.setLayout(new BoxLayout(pnCenterTop, BoxLayout.Y_AXIS));
 		JPanel pnCenterBot = new JPanel();
 		pnCenterBot.setLayout(new BoxLayout(pnCenterBot, BoxLayout.Y_AXIS));
-		// Box
+		//Box
 		Box b1 = Box.createHorizontalBox();
-
-		// SĐT khách hàng
+		
+		//SĐT khách hàng
 		JLabel lblSDT = new JLabel("Số điện thoại khách hàng: ");
 		lblSDT.setPreferredSize(new Dimension(165, 20));
 		txtSDT = new JTextField(30);
@@ -56,16 +56,16 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener {
 		b1.add(txtSDT);
 		btnTim = new JButton("Tìm");
 		btnTim.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnTim.setBackground(new Color(0, 160, 255));
+		btnTim.setBackground(new Color(0,160,255));
 		btnLamMoi = new JButton("Làm mới");
 		btnLamMoi.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnLamMoi.setBackground(new Color(0, 160, 255));
+		btnLamMoi.setBackground(new Color(0,160,255));
 		b1.add(Box.createHorizontalStrut(10));
 		b1.add(btnTim);
 		b1.add(Box.createHorizontalStrut(10));
 		b1.add(btnLamMoi);
 		// Table
-		String[] headers = { "Mã khách hàng", "Số điện thoại", "Tên khách hàng" };
+		String[] headers = {"Mã khách hàng","Số điện thoại","Tên khách hàng"};
 		DefaultTableModel dtm = new DefaultTableModel(headers, 0);
 		tbl = new JTable(dtm);
 		JScrollPane scp = new JScrollPane(tbl);
@@ -74,8 +74,7 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener {
 		pnCenterTop.add(Box.createVerticalStrut(10));
 		pnCenterTop.add(b1);
 		pnCenterTop.add(Box.createVerticalStrut(20));
-		pnCenterTop.setBorder(
-				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "Thông tin tìm kiếm"));
+		pnCenterTop.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "Thông tin tìm kiếm"));
 		pnCenterBot.add(Box.createVerticalStrut(10));
 		pnCenter.add(pnCenterTop);
 		Box b2 = Box.createHorizontalBox();
@@ -87,14 +86,15 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener {
 		pnCenter.add(b2);
 		pnCenter.add(Box.createVerticalStrut(10));
 		pnCenter.add(pnCenterBot);
-
+		
 		pnMain.add(pnCenter, BorderLayout.CENTER);
-
+		
 		add(pnMain);
-
+		
+		
 		btnTim.addActionListener(this);
 		btnLamMoi.addActionListener(this);
-
+		
 //		ConnectDB.connect();
 		hienTable();
 	}
@@ -104,11 +104,11 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener {
 		model.setRowCount(0);
 		// Lấy dữ liệu từ database
 		KhachHang_Dao khachHang_Dao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
-		List<KhachHang> dsKH = khachHang_Dao.readFromTable();
-		for (KhachHang kh : dsKH) {
-			model.addRow(new Object[] { kh.getMaKhachHang(), kh.getSoDienThoai(), kh.getTenKhachHang() });
-		}
-
+		 List<KhachHang> dsKH = khachHang_Dao.readFromTable();
+		 for (KhachHang kh : dsKH) {
+		 model.addRow(new Object[] { kh.getMaKhachHang(), kh.getSoDienThoai(), kh.getTenKhachHang() });
+		 }
+		
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener {
 			txtSDT.setText("");
 			tbl.clearSelection();
 		}
-
+		
 	}
 
 	private void timKH() throws RemoteException {
@@ -145,7 +145,7 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener {
 		} else {
 			KhachHang_Dao khachHangDao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
 			List<KhachHang> dsKH = khachHangDao.findBySDT2(sdt);
-
+			
 			if (dsKH.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "Không tìm thấy khách hàng");
 			} else {
@@ -156,7 +156,9 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener {
 				}
 			}
 		}
-
+		
+		
+		
 	}
 
 	private boolean checkSdt(String sdt) {
@@ -164,7 +166,7 @@ public class TimKhachHang_Gui extends JPanel implements ActionListener {
 		if (sdt.matches(regex)) {
 			return true;
 		}
-
+		
 		return false;
 	}
 }

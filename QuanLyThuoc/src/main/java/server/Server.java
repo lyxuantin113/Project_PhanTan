@@ -1,6 +1,5 @@
 package server;
 import dao.impl.*;
-import gui.ManHinh_GUI;
 
 import java.rmi.registry.LocateRegistry;
 
@@ -11,7 +10,7 @@ import javax.naming.InitialContext;
 import dao.*;
 
 public class Server {
-	private static final String URL = "rmi://localhost:7878/";
+	private static final String URL = "rmi://localhost:2024/";
 
 	public static void main(String[] args) {
 		try {
@@ -31,16 +30,10 @@ public class Server {
 			PhieuNhapThuoc_Dao phieuNhapThuocService = new PhieuNhapThuoc_Impl();
 			ChiTietPhieuNhapThuoc_Dao chiTietPhieuNhapThuocService = new ChiTietPhieuNhapThuoc_Impl();
 			
-//			ManHinh_GUI manHinh = new ManHinh_GUI();
-			
-			
 			
 			Context context = new InitialContext();
 			
-			LocateRegistry.createRegistry(7878);
-			
-//			context.bind(URL + "ManHinh_GUI", manHinh);
-			
+			LocateRegistry.createRegistry(2024);
 			context.bind(URL + "Thuoc_Dao", thuocService);
 			context.bind(URL + "DonDat_Dao", donDatService);
 			context.bind(URL + "ChiTietDonDat_Dao", chiTietDonDatService);
@@ -52,8 +45,6 @@ public class Server {
 			context.bind(URL + "PhieuNhapThuoc_Dao", phieuNhapThuocService);
 			context.bind(URL + "ChiTietPhieuNhapThuoc_Dao", chiTietPhieuNhapThuocService);
 			context.bind(URL + "TaiKhoan_Dao", taiKhoanService);
-			
-			
 			
 			System.out.println("Server is running...");
 			

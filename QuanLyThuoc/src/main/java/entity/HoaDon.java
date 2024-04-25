@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
@@ -33,7 +34,12 @@ import lombok.ToString;
 		@NamedQuery(name = "HoaDon.findinDay", query = "SELECT hd FROM HoaDon hd WHERE hd.ngayLap = :ngayLap"),
 })
 
-public class HoaDon {
+public class HoaDon implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4591141964495341534L;
+
 	private static final String PREFIX = "HD";
 
 	@Id

@@ -11,7 +11,12 @@ import jakarta.persistence.*;
 	@NamedQuery(name = "NhaCungCap.deleteNCC", query = "DELETE FROM NhaCungCap ncc WHERE maNCC = :maNCC"),
 	@NamedQuery(name = "NhaCungCap.getNCC", query = "SELECT ncc FROM NhaCungCap ncc WHERE maNCC = :maNCC"),
 })
-public class NhaCungCap {
+public class NhaCungCap implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6760605146446201245L;
 
 	@Id
 	@Column(name = "maNCC")

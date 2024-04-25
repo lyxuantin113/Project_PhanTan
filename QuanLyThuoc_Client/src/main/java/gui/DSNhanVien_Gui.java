@@ -37,6 +37,8 @@ public class DSNhanVien_Gui extends JPanel implements ActionListener, MouseListe
 	private JTextField txtEmail;
 	private DefaultTableModel modelNhanVien;
 	private JTable tableNhanVien;
+	private NhanVien_Dao dsNV;
+	private TaiKhoan_Dao dsTK;
 
 	public DSNhanVien_Gui() throws RemoteException {
 		
@@ -180,12 +182,14 @@ public class DSNhanVien_Gui extends JPanel implements ActionListener, MouseListe
 		btnSua.addActionListener(this);
 		tableNhanVien.addMouseListener(this);
 		
+		dsNV = RMIClient.lookup("NhanVien_Dao", NhanVien_Dao.class);
+		dsTK = RMIClient.lookup("TaiKhoan_Dao", TaiKhoan_Dao.class);
 
 		hienTable();
 	}
 
 	private void hienTable() throws RemoteException{
-		NhanVien_Dao dsNV = RMIClient.lookup("NhanVien_Dao", NhanVien_Dao.class);
+		
 		modelNhanVien.setRowCount(0);
 		for (NhanVien n : dsNV.docTuBang()) {
 			String[] dataRow = { n.getMaNhanVien(), n.getTenNhanVien(), n.getSoDienThoai(), n.getChucVu(), n.getEmail() };
@@ -256,8 +260,8 @@ public class DSNhanVien_Gui extends JPanel implements ActionListener, MouseListe
 			}
 			if (check() == true) {
 				try {
-					NhanVien_Dao dsNV = RMIClient.lookup("NhanVien_Dao", NhanVien_Dao.class);
-					TaiKhoan_Dao dsTK = RMIClient.lookup("TaiKhoan_Dao", TaiKhoan_Dao.class);
+					
+					
 					if (dsNV.createNhanVien(n)) {
 								String taiKhoan = n.getMaNhanVien();
 								String matKhau = taiKhoan.substring(2, 5);
@@ -283,8 +287,8 @@ public class DSNhanVien_Gui extends JPanel implements ActionListener, MouseListe
 		} else if (o == btnXoa) {
 			try {
 				int row = tableNhanVien.getSelectedRow();
-				NhanVien_Dao dsNV = RMIClient.lookup("NhanVien_Dao", NhanVien_Dao.class);
-				TaiKhoan_Dao dsTK = RMIClient.lookup("TaiKhoan_Dao", TaiKhoan_Dao.class);
+				
+				
 				if (row != -1) {
 					String maNV = (String) tableNhanVien.getModel().getValueAt(row, 0);
 					int hoiNhac = JOptionPane.showConfirmDialog(this,
@@ -303,7 +307,7 @@ public class DSNhanVien_Gui extends JPanel implements ActionListener, MouseListe
 			}
 		} else if (o == btnSua) {
 			try {
-				NhanVien_Dao dsNV = RMIClient.lookup("NhanVien_Dao", NhanVien_Dao.class);
+				
 				int row = tableNhanVien.getSelectedRow();
 				String ma = txtMaNV.getText();
 				String ten = txtTenNV.getText();

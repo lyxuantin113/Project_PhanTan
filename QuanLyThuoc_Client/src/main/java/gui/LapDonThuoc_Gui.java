@@ -99,6 +99,12 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 //	JASPER REPORT
 	private HoaDon tempHoaDon;
 	private DonDat tempDonDat;
+	private ChiTietHoaDon_Dao cthdDao;
+	private DonDat_Dao ddDao;
+	private NhanVien_Dao nhanVienDao;
+	private Thuoc_Dao thuocDao;
+	private KhachHang_Dao khachHangDao;
+	private HoaDon_Dao hdDao;
 
 	public LapDonThuoc_Gui() throws RemoteException {
 //		JPANEL
@@ -351,6 +357,13 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 		btnLapHD.addActionListener(this);
 		btnLapDD.addActionListener(this);
 		tblHoaDon.addMouseListener(this);
+		
+		cthdDao = RMIClient.lookup("ChiTietHoaDon_Dao", ChiTietHoaDon_Dao.class);
+		ddDao = RMIClient.lookup("DonDat_Dao", DonDat_Dao.class);
+		nhanVienDao = RMIClient.lookup("NhanVien_Dao", NhanVien_Dao.class);
+		thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+		khachHangDao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
+		hdDao = RMIClient.lookup("HoaDon_Dao", HoaDon_Dao.class);
 
 		hienTableHoaDon();
 	}
@@ -358,9 +371,6 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 	private void hienTableHoaDon() throws RemoteException {
 		DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
 		model.setRowCount(0);
-
-		ChiTietHoaDon_Dao cthdDao = RMIClient.lookup("ChiTietHoaDon_Dao", ChiTietHoaDon_Dao.class);
-
 		List<ChiTietHoaDon> listChiTietHD = cthdDao.getList();
 		if (!listChiTietHD.isEmpty()) {
 			for (ChiTietHoaDon chiTietHoaDon : listChiTietHD) {
@@ -381,29 +391,54 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o == btnThem) {
-			if (this.checkQuatity() && hasThuoc() && checkHSD()) 
-				this.addOrderDetail();
+			try {
+				if (this.checkQuatity() && hasThuoc() && checkHSD()) 
+					this.addOrderDetail();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o == btnXoa) {
-			this.deleteOrderDetail();
+			try {
+				this.deleteOrderDetail();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 		}
 		if (o == btnLapHD) {
-			if (checkValidLap()) {
-				lapHoaDon();
-				inHoaDon();
-				xoaTrangTatCa();
+			try {
+				if (checkValidLap()) {
+					lapHoaDon();
+					inHoaDon();
+					xoaTrangTatCa();
+				}
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
 		if (o == btnLapDD) {
-			if (checkDate() && checkValidLap() && hasKhach()) {
-				lapDonDat();
-				inDonDat();
-				xoaTrangTatCa();
+			try {
+				if (checkDate() && checkValidLap() && hasKhach()) {
+					lapDonDat();
+					inDonDat();
+					xoaTrangTatCa();
+				}
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
 		if (o.equals(btnShowThuoc)) {
-			hienFrameThuoc();
+			try {
+				hienFrameThuoc();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (o.equals(btnChonFrame)) {
 			chonThuoc();
@@ -451,9 +486,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 
 	// KIỂM TRA VIỆC THÊM XÓA THUỐC VÀO ĐƠN
 
-	private boolean checkHSD() {
-		Thuoc_Dao thuocDao;
-		thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+	private boolean checkHSD() throws RemoteException {
 		Thuoc thuoc = thuocDao.timTheoMa(txtMaThuoc.getText());
 		if (thuoc.getHanSuDung().isBefore(LocalDate.now().minusDays(3))) {
 			JOptionPane.showMessageDialog(this, "Lưu ý: Thuốc đã quá hạn hoặc sắp hết hạn!");
@@ -462,14 +495,12 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 		return true;
 	}
 
-	public boolean checkQuatity() {
+	public boolean checkQuatity() throws RemoteException {
 		if (txtSoLuong.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "Lưu ý: Vui lòng nhập số lượng thuốc!");
 			return false;
 		}
 
-		Thuoc_Dao thuocDao;
-		thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
 		Thuoc thuoc = thuocDao.timTheoMa(txtMaThuoc.getText()); // Tim Thuoc
 		if (thuoc.getSoLuongTon() < Integer.parseInt(txtSoLuong.getText())) {
 			JOptionPane.showMessageDialog(this, "Lưu ý: Số lượng thuốc yêu cầu vượt quá thuốc tồn kho!");
@@ -522,14 +553,12 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 		return true;
 	}
 
-	public boolean checkValidLap() {
+	public boolean checkValidLap() throws RemoteException {
 		String maNV = txtMaNV.getText();
 		String tenKhach = txtTenKH.getText();
 		String sdt = txtSDT.getText();
 
-		NhanVien_Dao nvDao;
-		nvDao = RMIClient.lookup("NhanVien_Dao", NhanVien_Dao.class);
-		if (nvDao.getNhanVien(maNV) == null) {
+		if (nhanVienDao.getNhanVien(maNV) == null) {
 			JOptionPane.showMessageDialog(this, "Lưu ý: Mã nhân viên không tồn tại");
 			return false;
 		}
@@ -565,10 +594,8 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 		return true;
 	}
 
-	public void addOrderDetail() {
+	public void addOrderDetail() throws RemoteException{
 
-		Thuoc_Dao thuocDao;
-		thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
 		String maThuoc = txtMaThuoc.getText();
 		Thuoc thuoc = thuocDao.timTheoMa(maThuoc);
 		int soLuong = Integer.parseInt(txtSoLuong.getText());
@@ -628,7 +655,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 
 	}
 
-	public void deleteOrderDetail() {
+	public void deleteOrderDetail() throws RemoteException {
 		int selectedRow = tblHoaDon.getSelectedRow();
 		if (selectedRow != -1) {
 			modelHoaDon.removeRow(selectedRow);
@@ -638,8 +665,6 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 
 			double total = 0;
 			for (int i = 0; i < modelHoaDon.getRowCount(); i++) {
-				Thuoc_Dao thuocDao;
-				thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
 				String maThuoc = (String) tblHoaDon.getValueAt(i, 0);
 				Thuoc thuoc = thuocDao.timTheoMa(maThuoc);
 				int soLuong = Integer.parseInt(tblHoaDon.getValueAt(i, 6).toString());
@@ -658,7 +683,6 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 //	LẬP HÓA ĐƠN
 	private void lapHoaDon() {
 		try {
-			KhachHang_Dao khachHangDao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
 			List<KhachHang> listKH = khachHangDao.getDSKH();
 			String tenKH = txtTenKH.getText();
 			String sdtKH = txtSDT.getText();
@@ -689,14 +713,13 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 				khachHangDao.addKhachHang(kh);
 			}
 
-			NhanVien_Dao nhanVienDao = RMIClient.lookup("NhanVien_Dao", NhanVien_Dao.class);
+			
 			String maNV = txtMaNV.getText();
 			NhanVien nv = nhanVienDao.getNhanVien(maNV);
 
 			LocalDate ngayLapHD = LocalDate.parse(txtNgayLap.getText());
 			LocalDate ngayNhanHD = ngayLapHD;
 
-			HoaDon_Dao hoaDonDao = RMIClient.lookup("HoaDon_Dao", HoaDon_Dao.class);
 			HoaDon hoaDon = new HoaDon(kh, nv, ngayLapHD, ngayNhanHD, null);
 
 //			GÁN HÓA ĐƠN CHO CHI TIẾT
@@ -708,7 +731,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 			hoaDon.setListChiTiet(ds);
 			
 //			addHoaDon đã có add các ChiTiet
-			hoaDonDao.addHoaDon(hoaDon);
+			hdDao.addHoaDon(hoaDon);
 			int rowCount = modelHoaDon.getRowCount();
 			for (int i = rowCount - 1; i >= 0; i--) {
 				modelHoaDon.removeRow(i);
@@ -716,7 +739,6 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 
 //			Cập nhật số lượng trong kho
 			for (ChiTietHoaDon chiTietHoaDon : hoaDon.getListChiTiet()) {
-				Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
 				thuocDao.updateThuocQuatity(chiTietHoaDon.getMaThuoc().getMaThuoc(), chiTietHoaDon.getSoLuong());
 			}
 
@@ -736,7 +758,6 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 //	LẬP ĐƠN ĐẶT
 	private void lapDonDat() {
 		try {
-			KhachHang_Dao khachHangDao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
 			List<KhachHang> listKH = khachHangDao.getDSKH();
 			String tenKH = txtTenKH.getText();
 			String sdtKH = txtSDT.getText();
@@ -754,14 +775,13 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 				khachHangDao.addKhachHang(kh);
 			}
 
-			NhanVien_Dao nhanVienDao = RMIClient.lookup("NhanVien_Dao", NhanVien_Dao.class);
+			
 			String maNV = txtMaNV.getText();
 			NhanVien nv = nhanVienDao.getNhanVien(maNV);
 
 			LocalDate ngayLapHD = LocalDate.parse(txtNgayLap.getText());
 			LocalDate ngayNhanHD = LocalDate.parse(txtNgayNhan.getText());
 
-			DonDat_Dao donDatDao = RMIClient.lookup("DonDat_Dao", DonDat_Dao.class);
 			DonDat donDat = new DonDat(kh, nv, ngayLapHD, ngayNhanHD, null);
 			
 //			GÁN HÓA ĐƠN CHO CHI TIẾT
@@ -772,7 +792,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 			}
 			donDat.setListChiTiet(ds);
 			
-			donDatDao.addDonDat(donDat);
+			ddDao.addDonDat(donDat);
 
 			int rowCount = modelHoaDon.getRowCount();
 			for (int i = rowCount - 1; i >= 0; i--) {
@@ -781,7 +801,6 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 
 //			Cập nhật số lượng trong kho
 			for (ChiTietDonDat chiTietDonDat : donDat.getListChiTiet()) {
-				Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
 				thuocDao.updateThuocQuatity(chiTietDonDat.getMaThuoc().getMaThuoc(), chiTietDonDat.getSoLuong());
 			}
 
@@ -810,8 +829,9 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 			document.setMargins(50, 50, 10, 0);
 			// Nơi lưu file
 			String url = "";
+			// Lay ma hoa don de dat ten file
 			url = System.getProperty("user.dir") + "\\fileOutput\\";
-			url +=  "hoaDon.pdf";
+			url +=  tempHoaDon.getMaHoaDon() + ".pdf";
 			String filename = url;
 			PdfWriter.getInstance(document, new FileOutputStream(filename));
 			document.open();
@@ -1121,7 +1141,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 	}
 
 //	Frame Danh Sách Thuốc
-	public void hienFrameThuoc() {
+	public void hienFrameThuoc() throws RemoteException {
 		newFrame = new JFrame("Danh Sách Thuốc");
 		newFrame.setSize(1100, 400);
 		newFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -1200,18 +1220,21 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				txtTimFrame.setText("");
-				hienTableFrame();
+				try {
+					hienTableFrame();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnChonFrame.addActionListener(this);
 	}
 
-	public void hienTableFrame() {
+	public void hienTableFrame() throws RemoteException {
 		DefaultTableModel model = (DefaultTableModel) tblFrameThuoc.getModel();
 		model.setRowCount(0);
 		// Lấy danh sách thuốc từ database
-		Thuoc_Dao thuocDao;
-		thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
 		List<Thuoc> dsThuoc = thuocDao.findAll();
 		for (Thuoc thuoc : dsThuoc) {
 			Object[] rowData = { thuoc.getMaNCC(), thuoc.getMaThuoc(), thuoc.getTenThuoc(), thuoc.getLoaiThuoc(),
@@ -1225,10 +1248,9 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 //	TÌM THUỐC
 	private void timThuoc() throws RemoteException {
 		// Lấy thông tin tìm kiếm
+		String cachTim = (String) cbbTimFrame.getSelectedItem();
 		String thongTin = txtTimFrame.getText();
 		// Lấy cách tìm kiếm
-		String cachTim = (String) cbbTimFrame.getSelectedItem();
-		Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
 		List<Thuoc> dsThuoc = thuocDao.findAll();
 		if (thongTin.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin tìm kiếm.");
@@ -1335,14 +1357,29 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 		if (!processingDocumentEvent) {
 			processingDocumentEvent = true;
 			if (txtTenThuoc.getDocument().equals(e.getDocument())) {
-				updateDocByTen();
+				try {
+					updateDocByTen();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			} else {
-				updateDocByMa();
+				try {
+					updateDocByMa();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			processingDocumentEvent = false;
 		}
 
-		updateTenKHBySDT();
+		try {
+			updateTenKHBySDT();
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	@Override
@@ -1350,23 +1387,36 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 		if (!processingDocumentEvent) {
 			processingDocumentEvent = true;
 			if (txtTenThuoc.getDocument().equals(e.getDocument())) {
-				updateDocByTen();
+				try {
+					updateDocByTen();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			} else {
-				updateDocByMa();
+				try {
+					updateDocByMa();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			processingDocumentEvent = false;
 		}
 
-		updateTenKHBySDT();
+		try {
+			updateTenKHBySDT();
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
-	public void updateDocByMa() {
+	public void updateDocByMa() throws RemoteException {
 		if (processingDocumentEvent) {
 			String maThuoc = txtMaThuoc.getText();
-			Thuoc_Dao tDao;
-			tDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
-			if (tDao.timTheoMa(maThuoc) != null) {
-				Thuoc thuoc = tDao.timTheoMa(maThuoc);
+			if (thuocDao.timTheoMa(maThuoc) != null) {
+				Thuoc thuoc = thuocDao.timTheoMa(maThuoc);
 				txtTenThuoc.setText(thuoc.getTenThuoc());
 				txtLoaiThuoc.setText(thuoc.getLoaiThuoc());
 				txtDonVi.setText(thuoc.getDonVi());
@@ -1381,13 +1431,11 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 		}
 	}
 
-	public void updateDocByTen() {
+	public void updateDocByTen() throws RemoteException {
 		if (processingDocumentEvent) {
 			String tenThuoc = txtTenThuoc.getText();
-			Thuoc_Dao tDao;
-			tDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
-			if (tDao.findByName(tenThuoc) != null) {
-				Thuoc thuoc = tDao.findByName(tenThuoc);
+			if (thuocDao.findByName(tenThuoc) != null) {
+				Thuoc thuoc = thuocDao.findByName(tenThuoc);
 				txtMaThuoc.setText(thuoc.getMaThuoc());
 				txtLoaiThuoc.setText(thuoc.getLoaiThuoc());
 				txtDonVi.setText(thuoc.getDonVi());
@@ -1401,12 +1449,9 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 		}
 	}
 
-	public void updateTenKHBySDT() {
-		KhachHang_Dao khDao;
-		khDao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
-
-		if (khDao.findBySDT(txtSDT.getText()) != null) {
-			KhachHang kh = khDao.findBySDT(txtSDT.getText());
+	public void updateTenKHBySDT() throws RemoteException {
+		if (khachHangDao.findBySDT(txtSDT.getText()) != null) {
+			KhachHang kh = khachHangDao.findBySDT(txtSDT.getText());
 			txtTenKH.setText(kh.getTenKhachHang());
 			txtTenKH.setEditable(false);
 		} else {

@@ -69,8 +69,6 @@ public class XemThongKe_Gui extends JPanel implements ActionListener {
 	private Box boxBtn;
 	private JButton btnXemThongKe;
 
-//	private ThongKe_Dao dsTK = new ThongKe_Ipml();
-//	private HoaDon_Dao dsHD = RMIClient.lookup("HoaDon_Dao", HoaDon_Dao.class);
 	private Box boxBoLocBtn;
 	private JLabel lblKhachHang;
 	private JLabel lblNhanVien;

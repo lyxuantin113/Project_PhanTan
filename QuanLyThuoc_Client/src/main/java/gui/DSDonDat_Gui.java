@@ -46,6 +46,7 @@ public class DSDonDat_Gui extends JPanel implements ActionListener, MouseListene
 	private KhachHang_Dao khachHangDao;
 	private DonDat_Dao donDatDao;
 	private ChiTietDonDat_Dao ctddDao;
+	private HoaDon_Dao hoaDonDao;
 	private DefaultTableModel modelDonDat;
 	private JTextField tfTim;
 
@@ -174,7 +175,8 @@ public class DSDonDat_Gui extends JPanel implements ActionListener, MouseListene
 		khachHangDao = RMIClient.lookup("KhachHang_Dao", KhachHang_Dao.class);
 		donDatDao = RMIClient.lookup("DonDat_Dao", DonDat_Dao.class);
 		ctddDao = RMIClient.lookup("ChiTietDonDat_Dao", ChiTietDonDat_Dao.class);
-		
+		hoaDonDao = RMIClient.lookup("HoaDon_Dao", HoaDon_Dao.class);
+
 		tblThuoc.addMouseListener(this);
 		tableDonDat.addMouseListener(this);
 		btnTim.addActionListener(this);
@@ -185,23 +187,28 @@ public class DSDonDat_Gui extends JPanel implements ActionListener, MouseListene
 	}
 
 	private void hienTableDonDat() {
-		DefaultTableModel model = (DefaultTableModel) tableDonDat.getModel();
-		model.setRowCount(0);
+		try {
+			DefaultTableModel model = (DefaultTableModel) tableDonDat.getModel();
+			model.setRowCount(0);
 
-		List<DonDat> listDonDat = donDatDao.readFromTable();
-		if (listDonDat != null) {
-			for (DonDat donDat : listDonDat) {
-				Object[] rowData = { donDat.getMaDonDat(), donDat.getMaNhanVien().getMaNhanVien(), donDat.getMaKhachHang().getTenKhachHang(),
-						donDat.getMaKhachHang().getSoDienThoai(), donDat.getNgayLap(), donDat.getNgayNhan(),
-						donDatDao.tinhTongTien(donDat) };
+			List<DonDat> listDonDat = donDatDao.readFromTable();
+			if (listDonDat != null) {
+				for (DonDat donDat : listDonDat) {
+					Object[] rowData = { donDat.getMaDonDat(), donDat.getMaNhanVien().getMaNhanVien(), donDat.getMaKhachHang().getTenKhachHang(),
+							donDat.getMaKhachHang().getSoDienThoai(), donDat.getNgayLap(), donDat.getNgayNhan(),
+							donDatDao.tinhTongTien(donDat) };
 
-				model.addRow(rowData); // Thêm hàng vào model
+					model.addRow(rowData); // Thêm hàng vào model
+				}
 			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 	}
 
-	private void hienTableChiTietDonDat(int rowSelected) {
+	private void hienTableChiTietDonDat(int rowSelected) throws RemoteException{
 		String maHoaDon = modelDonDat.getValueAt(rowSelected, 0).toString();
 
 		DefaultTableModel model = (DefaultTableModel) tblThuoc.getModel();
@@ -223,7 +230,12 @@ public class DSDonDat_Gui extends JPanel implements ActionListener, MouseListene
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnTim)) {
-			timKiem();
+			try {
+				timKiem();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			tfTim.setText("");
 			tfTim.requestFocus();
 		}
@@ -252,7 +264,6 @@ public class DSDonDat_Gui extends JPanel implements ActionListener, MouseListene
 			if (choice == JOptionPane.YES_OPTION) {
 				DonDat donDat = donDatDao.findByID(modelDonDat.getValueAt(rowSelected, 0).toString());
 
-				HoaDon_Dao hoaDonDao = RMIClient.lookup("HoaDon_Dao", HoaDon_Dao.class);
 				HoaDon hoaDon = new HoaDon(donDat.getMaDonDat(), donDat.getMaKhachHang(), donDat.getMaNhanVien(),
 						donDat.getNgayLap(), donDat.getNgayNhan());
 
@@ -276,7 +287,7 @@ public class DSDonDat_Gui extends JPanel implements ActionListener, MouseListene
 		}
 	}
 
-	public void timKiem() {
+	public void timKiem() throws RemoteException{
 		String typeSearch = cbbTim.getSelectedItem().toString();
 		String textFind = tfTim.getText();
 
@@ -351,7 +362,12 @@ public class DSDonDat_Gui extends JPanel implements ActionListener, MouseListene
 	public void mouseClicked(MouseEvent e) {
 		int rowSelectedDon = tableDonDat.getSelectedRow();
 		if (rowSelectedDon != -1) {
-			hienTableChiTietDonDat(rowSelectedDon);
+			try {
+				hienTableChiTietDonDat(rowSelectedDon);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 

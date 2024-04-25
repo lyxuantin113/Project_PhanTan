@@ -133,7 +133,6 @@ public class DangNhap_Gui extends JFrame implements ActionListener {
 
 			// Kiểm tra đăng nhập
 			try {
-//				TaiKhoan_Dao dstk = new TaiKhoan_Impl();
 				TaiKhoan_Dao dstk = RMIClient.lookup("TaiKhoan_Dao", TaiKhoan_Dao.class);
 				if (dstk.kiemTraDangNhap(taiKhoan, matKhau)) {
 					JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");

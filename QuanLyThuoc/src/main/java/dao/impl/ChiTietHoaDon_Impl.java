@@ -29,39 +29,34 @@ public class ChiTietHoaDon_Impl extends UnicastRemoteObject implements ChiTietHo
 
 	@Override
 	public List<ChiTietHoaDon> findByID(String maHoaDon) {
-		return em.createNamedQuery("ChiTietHoaDon.findByID", ChiTietHoaDon.class)
-				.setParameter("maHoaDon", maHoaDon)
+		return em.createNamedQuery("ChiTietHoaDon.findByID", ChiTietHoaDon.class).setParameter("maHoaDon", maHoaDon)
 				.getResultList();
 	}
 
 	@Override
 	public void addChiTietHoaDon(HoaDon hoaDon) {
-	    EntityTransaction tx = em.getTransaction();
-	    try {
-	        tx.begin();
-	        for (ChiTietHoaDon chiTietHoaDon : hoaDon.getListChiTiet()) {
-	            if (!em.contains(chiTietHoaDon)) {  // Kiểm tra xem chiTietHoaDon đã được quản lý bởi em hay chưa
-	                chiTietHoaDon.setMaHoaDon(hoaDon);  // Thiết lập hoaDon cho chiTietHoaDon
-	            }
-	            em.persist(chiTietHoaDon);
-	        }
-	        tx.commit();
-	    } catch (Exception e) {
-	        tx.rollback();
-	        e.printStackTrace();
-	    }
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			for (ChiTietHoaDon chiTietHoaDon : hoaDon.getListChiTiet()) {
+				em.persist(chiTietHoaDon);
+				ds.add(chiTietHoaDon);
+			}
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
+
 	}
-
-
 
 	@Override
 	public boolean deleteOne(ChiTietHoaDon chiTietHoaDon) {
 		int checkUpdate = em.createNamedQuery("ChiTietHoaDon.deleteOne", ChiTietHoaDon.class)
-				.setParameter("maThuoc", chiTietHoaDon.getMaThuoc().getMaThuoc())
-				.executeUpdate();
+				.setParameter("maThuoc", chiTietHoaDon.getMaThuoc().getMaThuoc()).executeUpdate();
 		return checkUpdate > 0;
 	}
-	
+
 	@Override
 	public List<ChiTietHoaDon> getList() {
 		return ds;

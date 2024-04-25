@@ -1,19 +1,20 @@
 package dao;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import entity.NhanVien;
 import entity.TaiKhoan;
 
 
-public interface TaiKhoan_Dao {
+public interface TaiKhoan_Dao extends Remote {
 	public boolean createTaiKhoan(TaiKhoan tk) throws RemoteException;
 	
 	public boolean deleteTaiKhoan(String maNV)  throws RemoteException;
 
-	public TaiKhoan getTKById(String maNV);
+	public TaiKhoan getTKById(String maNV) throws RemoteException;
 	
-	public NhanVien getNVByAccount(String taiKhoan, String matKhau);
+	public NhanVien getNVByAccount(String taiKhoan, String matKhau) throws RemoteException;
 	
-	public boolean kiemTraDangNhap(String taiKhoan, String matKhau);
+	public boolean kiemTraDangNhap(String taiKhoan, String matKhau) throws RemoteException;
 }

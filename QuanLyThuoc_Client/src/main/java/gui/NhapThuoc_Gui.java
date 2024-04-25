@@ -555,7 +555,7 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 		String donVi = cbbDonVi.getSelectedItem().toString();
 		Double thanhTien = gia * sl;
 		
-		Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+		Thuoc_Dao thuocDao =  RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
 		Thuoc thuoc = thuocDao.timTheoMa(maThuoc);
 		
 		PhieuNhapThuoc_Dao pntDao = RMIClient.lookup("PhieuNhapThuoc_Dao", PhieuNhapThuoc_Dao.class);
@@ -691,7 +691,7 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 	}
 
 	private void addMaThuoc(String maNCC) throws RemoteException {
-		Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+		Thuoc_Dao thuocDao =  RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
 		for (Thuoc thuoc : thuocDao.getDSTByNCC(maNCC)) {
 			cbbMaThuoc.addItem(thuoc.getMaThuoc());
 		}
@@ -716,7 +716,7 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 
 	private void capNhatGiaNhap() throws RemoteException {
 		// Lấy giá nhập theo mã thuốc
-		Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+		Thuoc_Dao thuocDao =  RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
 		Thuoc thuoc = thuocDao.readFromTable(cbbMaThuoc.getSelectedItem().toString());
 		txtGiaNhap.setText(String.valueOf(thuoc.getGiaNhap()));
 		txtGiaNhap.setEnabled(false);
@@ -748,7 +748,7 @@ public class NhapThuoc_Gui extends JPanel implements ActionListener {
 			String maCTPNT = txtMaCTPNT.getText();
 			Double thanhTien = giaNhap * soLuong;
 			// Thêm vào database
-			Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+			Thuoc_Dao thuocDao =  RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
 			Thuoc thuoc = thuocDao.timTheoMa(ma);
 			
 			PhieuNhapThuoc_Dao pntDao = RMIClient.lookup("PhieuNhapThuoc_Dao", PhieuNhapThuoc_Dao.class);

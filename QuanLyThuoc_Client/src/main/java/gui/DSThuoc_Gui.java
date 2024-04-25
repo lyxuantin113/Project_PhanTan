@@ -46,6 +46,11 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 	private JComboBox<String> cbbNCC;
 	private JButton btnSua;
 	private JButton btnLamMoi;
+	private DonDat_Dao donDatDao;
+	private HoaDon_Dao hoaDonDao;
+	private NhaCungCap_Dao nhaCungCapDao;
+	private PhieuNhapThuoc_Dao phieuNhapThuocDao;
+	private Thuoc_Dao thuocDao;
 
 	public DSThuoc_Gui() throws RemoteException {
 		setSize(1070, 600);
@@ -288,6 +293,13 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 				cbbNCC.setSelectedItem(table.getValueAt(row, 0).toString());
 			}
 		});
+		
+		donDatDao = RMIClient.lookup("DonDat_Dao", DonDat_Dao.class);
+		hoaDonDao = RMIClient.lookup("HoaDon_Dao", HoaDon_Dao.class);
+		nhaCungCapDao = RMIClient.lookup("NhaCungCap_Dao", NhaCungCap_Dao.class);
+		phieuNhapThuocDao = RMIClient.lookup("PhieuNhapThuoc_Dao", PhieuNhapThuoc_Dao.class);
+		thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+		
 		hienTable();
 //		ConnectDB.connect();
 	}
@@ -296,7 +308,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		// Lấy danh sách thuốc từ database
-		Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+		
 		
 		List<Thuoc> dsThuoc = thuocDao.findAll();
 		for (Thuoc thuoc : dsThuoc) {
@@ -306,9 +318,9 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 			model.addRow(rowData);
 		}
 		// add combobox
-		NhaCungCap_Dao nccDao = RMIClient.lookup("NhaCungCap_Dao", NhaCungCap_Dao.class);
+
 		cbbNCC.removeAllItems();
-		List<NhaCungCap> dsNCC = nccDao.readFromTable();
+		List<NhaCungCap> dsNCC = nhaCungCapDao.readFromTable();
 		for (NhaCungCap ncc : dsNCC) {
 			cbbNCC.addItem(ncc.getMaNCC());
 		}
@@ -379,7 +391,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 
 		
 		Thuoc thuoc = new Thuoc(maThuoc, tenThuoc, loaiThuoc, donVi, hsd, giaNhap, giaBan, soLuongTon, nuocSX, maNCC);
-		Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+		
 		int hoi = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn sửa không?", "Chú ý",
 				JOptionPane.YES_NO_OPTION);
 		if (hoi == JOptionPane.YES_OPTION) {
@@ -417,7 +429,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 		if (hoi == JOptionPane.YES_OPTION) {
 			if (!checkTonTai()) {
 				String maThuoc = txtMa.getText();
-				Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+				
 				thuocDao.deleteThuoc(maThuoc);
 				JOptionPane.showMessageDialog(this, "Xóa thành công");
 				xoaTrang();
@@ -429,10 +441,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 
 	private boolean checkTonTai() throws RemoteException {
 		String maThuoc = txtMa.getText();
-		Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
-		HoaDon_Dao hoaDonDao = RMIClient.lookup("HoaDon_Dao", HoaDon_Dao.class);
-		DonDat_Dao donDatDao = RMIClient.lookup("DonDat_Dao", DonDat_Dao.class);
-		PhieuNhapThuoc_Dao phieuNhapThuocDao = RMIClient.lookup("PhieuNhapThuoc_Dao", PhieuNhapThuoc_Dao.class);
+
 		
 		if (!phieuNhapThuocDao.checkThuoc(maThuoc)) {
 			JOptionPane.showMessageDialog(this, "Không thể xóa thuốc này vì có phiếu nhập thuốc chưa nhận tồn tại thuốc này");
@@ -473,7 +482,7 @@ public class DSThuoc_Gui extends JPanel implements ActionListener {
 		String maNCC = cbbNCC.getSelectedItem().toString();
 		
 		Thuoc thuoc = new Thuoc(maThuoc, tenThuoc, loaiThuoc, donVi, hsd, giaNhap, giaBan, soLuongTon, nuocSX, maNCC);
-		Thuoc_Dao thuocDao = RMIClient.lookup("Thuoc_Dao", Thuoc_Dao.class);
+		
 		if (thuocDao.checkThuoc(maThuoc)) {
 			JOptionPane.showMessageDialog(this, "Mã thuốc đã tồn tại");
 			return;

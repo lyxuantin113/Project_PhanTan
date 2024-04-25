@@ -27,7 +27,12 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "PhieuNhapThuoc.delete", query = "DELETE FROM PhieuNhapThuoc pnt WHERE pnt.maPhieuNhap = :maPhieuNhap"),
     
 })
-public class PhieuNhapThuoc {
+public class PhieuNhapThuoc implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5171379139274438347L;
+
 	@Id
 	@Column(name = "maPhieuNhap")
 	private String maPhieuNhap;

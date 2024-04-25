@@ -19,7 +19,12 @@ import lombok.ToString;
 		@NamedQuery(name = "DonDat.checkThuoc", query = "SELECT dd FROM DonDat dd JOIN dd.listChiTiet ct WHERE ct.maThuoc.maThuoc = :maThuoc AND dd.ngayNhan > CURRENT_DATE()"),
 		@NamedQuery(name = "DonDat.deleteByID", query = "DELETE FROM DonDat dd WHERE dd.maDonDat = :maDonDat"),
 })
-public class DonDat {
+public class DonDat implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -720071556995931835L;
+
 	private static final String PREFIX = "DD";
 
 	@Id

@@ -192,7 +192,7 @@ public class DSHoaDon_Gui extends JPanel implements ActionListener, MouseListene
 		hienTableHoaDon();
 	}
 
-	public void hienTableHoaDon() {
+	public void hienTableHoaDon() throws RemoteException{
 		DefaultTableModel model = (DefaultTableModel) tableHoaDon.getModel();
 		model.setRowCount(0);
 
@@ -208,7 +208,7 @@ public class DSHoaDon_Gui extends JPanel implements ActionListener, MouseListene
 		}
 	}
 
-	private void hienTableChiTietHoaDon(int rowSelected) {
+	private void hienTableChiTietHoaDon(int rowSelected) throws RemoteException {
 		String maHoaDon = modelHoaDon.getValueAt(rowSelected, 0).toString();
 
 		DefaultTableModel model = (DefaultTableModel) tableThuoc.getModel();
@@ -230,19 +230,29 @@ public class DSHoaDon_Gui extends JPanel implements ActionListener, MouseListene
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnTim)) {
-			timKiem();
+			try {
+				timKiem();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			tfTim.setText("");
 			tfTim.requestFocus();
 		}
 		if (o.equals(btnReset)) {
-			hienTableHoaDon();
+			try {
+				hienTableHoaDon();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			tfTim.setText("");
 			DefaultTableModel model = (DefaultTableModel) tableThuoc.getModel();
 			model.setRowCount(0);
 		}
 	}
 
-	public void timKiem() {
+	public void timKiem() throws RemoteException{
 		String typeSearch = cbbTim.getSelectedItem().toString();
 		String textFind = tfTim.getText();
 
@@ -317,7 +327,12 @@ public class DSHoaDon_Gui extends JPanel implements ActionListener, MouseListene
 	public void mouseClicked(MouseEvent e) {
 		int rowSelectedDon = tableHoaDon.getSelectedRow();
 		if (rowSelectedDon != -1) {
-			hienTableChiTietHoaDon(rowSelectedDon);
+			try {
+				hienTableChiTietHoaDon(rowSelectedDon);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
