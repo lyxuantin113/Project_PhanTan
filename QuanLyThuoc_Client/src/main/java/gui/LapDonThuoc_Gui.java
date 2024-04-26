@@ -392,7 +392,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 		Object o = e.getSource();
 		if (o == btnThem) {
 			try {
-				if (this.checkQuatity() && hasThuoc() && checkHSD()) 
+				if (this.checkQuatity() && hasThuoc() ) //&& checkHSD()
 					this.addOrderDetail();
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block
@@ -829,9 +829,8 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 			document.setMargins(50, 50, 10, 0);
 			// Nơi lưu file
 			String url = "";
-			// Lay ma hoa don de dat ten file
 			url = System.getProperty("user.dir") + "\\fileOutput\\";
-			url +=  tempHoaDon.getMaHoaDon() + ".pdf";
+			url +=  "hoaDon.pdf";
 			String filename = url;
 			PdfWriter.getInstance(document, new FileOutputStream(filename));
 			document.open();
@@ -887,7 +886,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
             
 //          Table tên NV, KH
 			
-            String nv = "Tên nhân viên: " + tempHoaDon.getMaNhanVien().getTenNhanVien();
+			String nv = "Tên nhân viên: " + tempHoaDon.getMaNhanVien().getTenNhanVien();
 			Paragraph nvPara = new Paragraph(nv, unicodeFontObject);
 			nvPara.setAlignment(Element.ALIGN_LEFT);
 
@@ -926,18 +925,17 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 			table.addCell(new PdfPCell(new Phrase("Số lượng", unicodeFontObject)));
 			table.addCell(new PdfPCell(new Phrase("Thành tiền", unicodeFontObject)));
 			// Thêm dữ liệu
-			DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
-			for (int i = 0; i < model.getRowCount(); i++) {
-				String tenThuoc = model.getValueAt(i, 1).toString();
-				String donGia = model.getValueAt(i, 3).toString();
-				String donVi = model.getValueAt(i, 4).toString();
-				String soluong = model.getValueAt(i, 6).toString();
-				String thanhTien = model.getValueAt(i, 7).toString();
+			for (ChiTietHoaDon cthd : tempHoaDon.getListChiTiet()) {
+				String tenThuoc = cthd.getMaThuoc().getTenThuoc();
+				String donGia = cthd.getMaThuoc().getGiaBan()+"";
+				String donVi = cthd.getMaThuoc().getDonVi();
+				String soluong = cthd.getSoLuong()+"";
+				double thanhTien = cthd.getMaThuoc().getGiaBan() * cthd.getSoLuong();
 				table.addCell(new PdfPCell(new Paragraph(tenThuoc, unicodeFontObject)));
 				table.addCell(new PdfPCell(new Paragraph(donGia, unicodeFontObject)));
 				table.addCell(new PdfPCell(new Paragraph(donVi, unicodeFontObject)));
 				table.addCell(new PdfPCell(new Paragraph(soluong, unicodeFontObject)));
-				table.addCell(new PdfPCell(new Paragraph(thanhTien, unicodeFontObject)));
+				table.addCell(new PdfPCell(new Paragraph(thanhTien+"", unicodeFontObject)));
 			}
 			for (PdfPRow row : table.getRows()) {
 				for (PdfPCell cell : row.getCells()) {
@@ -971,8 +969,10 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 		} catch (DocumentException | FileNotFoundException | MalformedURLException e1) {
 			// TODO: handle exception
 			e1.printStackTrace();
+			System.out.println("1");
 		} catch (IOException e1) {
 			e1.printStackTrace();
+			System.out.println("2");
 		}
 	}
 
@@ -1316,7 +1316,7 @@ public class LapDonThuoc_Gui extends JPanel implements ActionListener, MouseList
 
 		if (rowSelectedDon != -1) {
 			txtMaThuoc.setText((String) tblHoaDon.getValueAt(rowSelectedDon, 0));
-			txtSoLuong.setText((String) tblHoaDon.getValueAt(rowSelectedDon, 6));
+			txtSoLuong.setText(String.valueOf(tblHoaDon.getValueAt(rowSelectedDon, 6)));
 			txtTenThuoc.setText((String) tblHoaDon.getValueAt(rowSelectedDon, 1));
 			txtLoaiThuoc.setText((String) tblHoaDon.getValueAt(rowSelectedDon, 2));
 			txtDonVi.setText((String) tblHoaDon.getValueAt(rowSelectedDon, 4));
